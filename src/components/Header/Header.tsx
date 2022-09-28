@@ -11,8 +11,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import {HEADER_LOGO, PAGES, SETTINGS} from "../../constants/Constants";
+import MediaQuery from 'react-responsive';
+import Logo from "./Logo/Logo";
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -37,7 +38,9 @@ function Header() {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <MediaQuery minWidth={900}>
+                        <Logo />
+                    </MediaQuery>
                     <Typography
                         variant="h6"
                         noWrap
@@ -92,7 +95,9 @@ function Header() {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <MediaQuery maxWidth={899}>
+                        <Logo />
+                    </MediaQuery>
                     <Typography
                         variant="h5"
                         noWrap
