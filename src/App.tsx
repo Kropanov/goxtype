@@ -1,8 +1,9 @@
 import React from 'react';
-import Header from "./components/Header/Header";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { BrowserRouter as Router} from 'react-router-dom';
+import MainContent from "./components/MainContent/MainContent";
 
 function App() {
 
@@ -20,8 +21,10 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Header />
+            <Router>
+                <CssBaseline />
+                <MainContent />
+            </Router>
         </ThemeProvider>
     );
 }
