@@ -13,10 +13,12 @@ import {HEADER_LOGO, PAGES} from "../../constants/Constants";
 import MediaQuery from 'react-responsive';
 import Logo from "./Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
+import {useRouter} from "../../hooks/Router/Router";
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [auth, setAuth] = useState<boolean>(false);
+    const router = useRouter();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -27,7 +29,11 @@ function Header() {
     };
 
     const handleUserLogin = () => {
-        setAuth(true);
+        router.push("authorization");
+    };
+
+    const handleUserSignUp = () => {
+        router.push("registration");
     };
 
     return (
@@ -127,12 +133,20 @@ function Header() {
                         ?
                             <UserMenu/>
                         :
+                        <>
                             <Button
                                 onClick={handleUserLogin}
                                 color="inherit"
                             >
                                 Login
                             </Button>
+                            <Button
+                                onClick={handleUserSignUp}
+                                color="inherit"
+                            >
+                                Sign Up
+                            </Button>
+                        </>
                     }
                 </Toolbar>
             </Container>
