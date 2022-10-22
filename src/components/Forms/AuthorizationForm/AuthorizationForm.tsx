@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Container } from '@mui/material';
+import LogIn from "./LogIn/LogIn";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -59,7 +60,7 @@ export default function AuthorizationForm({tab}: AuthorizationProps) {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    Log in
+                    <LogIn />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     Sign up
