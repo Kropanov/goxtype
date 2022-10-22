@@ -42,8 +42,7 @@ type AuthorizationProps = {
     tab: number
 };
 
-export default function Authorization({tab}: AuthorizationProps) {
-    // TODO: Add Styles, Split into components, Make code refactoring
+export default function AuthorizationForm({tab}: AuthorizationProps) {
     const [value, setValue] = React.useState(tab);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
