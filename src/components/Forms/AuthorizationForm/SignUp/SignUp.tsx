@@ -5,7 +5,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {useRouter} from "../../../../hooks/Router/Router";
 
-export default function LogIn() {
+export default function SignUp() {
     const router = useRouter();
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
@@ -18,9 +18,9 @@ export default function LogIn() {
     };
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
-        console.log('This thing was submitted!');
-        router.push('/main');
         e.preventDefault();
+        console.log('This thing was submitted!');
+        router.push('/');
     };
 
     return (
@@ -50,6 +50,25 @@ export default function LogIn() {
                         </InputAdornment>
                     }
                 />
+                <OutlinedInput
+                    sx={{ marginTop: '20px'}}
+                    type={showPassword ? 'text' : 'password'}
+                    id="password-repeat"
+                    autoComplete="current-password"
+                    placeholder="Confirm Password"
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                />
             </Box>
             <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
                 <Button
@@ -57,7 +76,7 @@ export default function LogIn() {
                     variant="outlined"
                     type="submit"
                 >
-                    Log In
+                    Create An Account
                 </Button>
             </Box>
         </form>

@@ -138,7 +138,7 @@ function Header() {
                                 onClick={handleUserLogin}
                                 color="inherit"
                             >
-                                Login
+                                Log In
                             </Button>
                             <Button
                                 onClick={handleUserSignUp}
