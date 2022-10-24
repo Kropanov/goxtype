@@ -1,9 +1,22 @@
 import React from 'react';
 import Logotype from "../../../images/Logo.png";
 
-function Logo() {
+type LogoProps = {
+    width?: number,
+    height?: number
+};
+
+function Logo(props: LogoProps) {
+
+    const {width, height} = props;
+
     return (
-        <img src={Logotype} alt="logo" width="24" height="24"/>
+        <img
+            src={Logotype}
+            alt="logo"
+            width={width != null ? width : 24}
+            height={height != null ? height : 24}
+        />
     );
 }
 
