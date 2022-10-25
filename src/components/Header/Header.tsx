@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {HEADER_LOGO, PAGES} from "../../constants/Constants";
 import MediaQuery from 'react-responsive';
-import Logo from "./Logo/Logo";
+import Logo from "../Common/Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
 import {useRouter} from "../../hooks/Router/Router";
 
