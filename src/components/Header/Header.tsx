@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import {HEADER_LOGO, PAGES} from "../../constants/Constants";
+import {SITE_NAME, PAGES, LOG_IN, SIGN_UP} from "../../constants/Constants";
 import MediaQuery from 'react-responsive';
 import Logo from "../Common/Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
@@ -58,7 +58,7 @@ function Header() {
                             textDecoration: 'none',
                         }}
                     >
-                        {HEADER_LOGO}
+                        {SITE_NAME}
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -116,7 +116,7 @@ function Header() {
                             textDecoration: 'none',
                         }}
                     >
-                        {HEADER_LOGO}
+                        {SITE_NAME}
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {PAGES.map((page) => (
@@ -138,13 +138,13 @@ function Header() {
                                 onClick={handleUserLogin}
                                 color="inherit"
                             >
-                                Log In
+                                {LOG_IN}
                             </Button>
                             <Button
                                 onClick={handleUserSignUp}
                                 color="inherit"
                             >
-                                Sign Up
+                                {SIGN_UP}
                             </Button>
                         </>
                     }

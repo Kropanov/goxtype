@@ -2,8 +2,7 @@ import React from 'react';
 import Box from "@mui/material/Box";
 import Logo from "../../../Common/Logo/Logo";
 import Typography from "@mui/material/Typography";
-import {HEADER_LOGO} from "../../../../constants/Constants";
-
+import {SITE_NAME} from "../../../../constants/Constants";
 
 type TitleProps = {
     message: string,
@@ -39,7 +38,7 @@ export default function Title(props: TitleProps) {
                         textDecoration: 'none',
                     }}
                 >
-                    {HEADER_LOGO}
+                    {SITE_NAME}
                 </Typography>
             </Box>
             <Typography

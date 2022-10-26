@@ -3,34 +3,20 @@ import React from 'react';
 import {Button, IconButton, InputAdornment, OutlinedInput, TextField} from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {useRouter} from "../../../../hooks/Router/Router";
 import Title from "../Title/Title";
 import {SIGN_UP} from "../../../../constants/Constants";
+import useSignUp from "../../../../hooks/SignUp/SignUp";
 
 export default function SignUp() {
 
-    // Todo: create separate hook when refactoring
-    const router = useRouter();
-    const [showPassword, setShowPassword] = React.useState<boolean>(false);
-    const [showConfirmPassword, setShowConfirmPassword] = React.useState<boolean>(false);
-
-    const handleClickShowPassword = () => {
-        setShowPassword((prev) => (!prev));
-    };
-
-    const handleClickShowConfirmPassword = () => {
-        setShowConfirmPassword((prev) => (!prev));
-    };
-
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
-
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        console.log('This thing was submitted!');
-        router.push('/');
-    };
+    const {
+        showPassword,
+        showConfirmPassword,
+        handleClickShowPassword,
+        handleClickShowConfirmPassword,
+        handleMouseDownPassword,
+        handleSubmit,
+    } = useSignUp();
 
     return (
         <>
