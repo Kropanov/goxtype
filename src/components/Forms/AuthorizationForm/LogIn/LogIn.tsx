@@ -1,19 +1,25 @@
 import Box from '@mui/material/Box';
 import React from 'react';
-import {Button, IconButton, InputAdornment, OutlinedInput, TextField} from "@mui/material";
+import {Button, IconButton, InputAdornment, Link, OutlinedInput, TextField} from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {LOG_IN} from "../../../../constants/Constants";
 import Title from "../Title/Title";
 import useLogIn from "../../../../hooks/LogIn/LogIn";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 export default function LogIn() {
 
     const {
         showPassword,
+        checked,
+        handleChange,
         handleClickShowPassword,
         handleMouseDownPassword,
-        handleSubmit
+        handleSubmit,
+        handleClickShowForgotPassword
     } = useLogIn();
 
     return (
@@ -45,6 +51,28 @@ export default function LogIn() {
                             </InputAdornment>
                         }
                     />
+                </Box>
+                <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                    <FormGroup>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={checked}
+                                    onChange={handleChange}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                    name={'forgot_password'}
+                                />
+                            }
+                            label="Remember me"
+                        />
+                    </FormGroup>
+                    <Link
+                        component="button"
+                        variant="body2"
+                        onClick={handleClickShowForgotPassword}
+                    >
+                        Forgot your password?
+                    </Link>
                 </Box>
                 <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Button

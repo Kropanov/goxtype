@@ -4,6 +4,11 @@ import React from "react";
 export default function useLogIn() {
     const router = useRouter();
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
+    const [checked, setChecked] = React.useState(true);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked(event.target.checked);
+    };
 
     const handleClickShowPassword = () => {
         setShowPassword((prev) => (!prev));
@@ -19,10 +24,18 @@ export default function useLogIn() {
         e.preventDefault();
     };
 
+    const handleClickShowForgotPassword = (e: { preventDefault: () => void; }) => {
+        router.push('/auth/forgot_password');
+        e.preventDefault();
+    };
+
     return {
         showPassword,
+        checked,
+        handleChange,
         handleClickShowPassword,
         handleMouseDownPassword,
-        handleSubmit
+        handleSubmit,
+        handleClickShowForgotPassword
     };
 }

@@ -9,6 +9,7 @@ export default function MainContent() {
         <>
             <Header />
             <Routes>
+                {/*Todo: Rewrite calling the authorization form using Modal window */}
                 <Route path="authorization" element={<AuthorizationForm tab={AUTH} />}/>
                 <Route path="registration" element={<AuthorizationForm tab={REG} />}/>
                 <Route path="*" element={<h1>404 not found</h1>}/>
