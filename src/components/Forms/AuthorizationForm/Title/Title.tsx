@@ -60,7 +60,7 @@ export default function Title(props: TitleProps) {
             <Typography
                 variant="h6"
                 noWrap
-                component="a"
+                component="p"
                 sx={{
                     mb: 3,
                     display: { md: 'flex' },

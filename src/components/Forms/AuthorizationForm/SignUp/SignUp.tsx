@@ -6,6 +6,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Title from "../Title/Title";
 import {SIGN_UP} from "../../../../constants/Constants";
 import useSignUp from "../../../../hooks/SignUp/SignUp";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 export default function SignUp() {
 
@@ -77,6 +78,7 @@ export default function SignUp() {
                     </Button>
                 </Box>
             </form>
+            <SocialLogin />
         </>
     );
 }

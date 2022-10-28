@@ -9,6 +9,7 @@ import useLogIn from "../../../../hooks/LogIn/LogIn";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 export default function LogIn() {
 
@@ -76,7 +77,7 @@ export default function LogIn() {
                 </Box>
                 <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Button
-                        sx={{ margin: '20px 0 0'}}
+                        sx={{ margin: '10px 0'}}
                         variant="outlined"
                         type="submit"
                     >
@@ -84,6 +85,7 @@ export default function LogIn() {
                     </Button>
                 </Box>
             </form>
+            <SocialLogin />
         </>
     );
 }
