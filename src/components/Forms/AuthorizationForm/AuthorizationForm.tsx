@@ -3,7 +3,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Container } from '@mui/material';
 import LogIn from "./LogIn/LogIn";
 import SignUp from "./SignUp/SignUp";
 
@@ -52,21 +51,19 @@ export default function AuthorizationForm({tab}: AuthorizationProps) {
     };
 
     return (
-        <Container sx={{marginTop: 10}} maxWidth="sm">
-            <Box sx={{ border: 1, borderColor: 'divider' }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab label="Log in" {...a11yProps(0)} />
-                        <Tab label="Sign up" {...a11yProps(1)} />
-                    </Tabs>
-                </Box>
-                <TabPanel value={value} index={0}>
-                    <LogIn />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <SignUp />
-                </TabPanel>
+        <>
+            <Box>
+                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Tab label="Log in" {...a11yProps(0)} />
+                    <Tab label="Sign up" {...a11yProps(1)} />
+                </Tabs>
             </Box>
-        </Container>
+            <TabPanel value={value} index={0}>
+                <LogIn />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <SignUp />
+            </TabPanel>
+        </>
     );
 }

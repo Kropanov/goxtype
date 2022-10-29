@@ -2,6 +2,7 @@ export const PAGES = ['Practice', 'Testing', 'Blog', 'Contact', 'Support'];
 export const SETTINGS = ['Profile', 'Progress', 'Account', 'Logout'];
 export const SITE_NAME = "GOXTYPE";
 
+// for define user form
 export const AUTH = 0;
 export const REG = 1;
 

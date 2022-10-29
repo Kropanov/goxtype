@@ -10,15 +10,22 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 export default function SocialLogin() {
     return (
         <>
-            <Typography variant="subtitle2" gutterBottom component="span">
+            <Typography
+                sx={{
+                    borderBottom: 1,
+                    borderColor: 'divider',
+                }}
+                variant="subtitle2"
+                gutterBottom component="div"
+            >
                 or connect with
             </Typography>
             <Box
                 sx={{
-                    borderTop: 1,
-                    borderColor: 'divider',
                     display: 'flex',
                     justifyContent: 'center',
+                    mb: 1,
+                    mt: 1,
                 }}
             >
                 <IconButton aria-label="Facebook">

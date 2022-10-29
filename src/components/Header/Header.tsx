@@ -9,16 +9,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import {SITE_NAME, PAGES, LOG_IN, SIGN_UP} from "../../constants/Constants";
+import {SITE_NAME, PAGES} from "../../constants/Constants";
 import MediaQuery from 'react-responsive';
 import Logo from "../Common/Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
-import {useRouter} from "../../hooks/Router/Router";
+import AuthModal from "../Modals/AuthModal/AuthModal";
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const [auth, setAuth] = useState<boolean>(false);
-    const router = useRouter();
+    const [auth] = useState<boolean>(false);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -26,14 +25,6 @@ function Header() {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-    };
-
-    const handleUserLogin = () => {
-        router.push("authorization");
-    };
-
-    const handleUserSignUp = () => {
-        router.push("registration");
     };
 
     return (
@@ -129,25 +120,7 @@ function Header() {
                             </Button>
                         ))}
                     </Box>
-                    { auth
-                        ?
-                            <UserMenu/>
-                        :
-                        <>
-                            <Button
-                                onClick={handleUserLogin}
-                                color="inherit"
-                            >
-                                {LOG_IN}
-                            </Button>
-                            <Button
-                                onClick={handleUserSignUp}
-                                color="inherit"
-                            >
-                                {SIGN_UP}
-                            </Button>
-                        </>
-                    }
+                    { auth ? <UserMenu/> : <AuthModal /> }
                 </Toolbar>
             </Container>
         </AppBar>
