@@ -9,14 +9,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import {HEADER_LOGO, PAGES} from "../../constants/Constants";
+import {SITE_NAME, PAGES} from "../../constants/Constants";
 import MediaQuery from 'react-responsive';
-import Logo from "./Logo/Logo";
+import Logo from "../Common/Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
+import AuthModal from "../Modals/AuthModal/AuthModal";
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const [auth, setAuth] = useState<boolean>(false);
+    const [auth] = useState<boolean>(false);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -24,10 +25,6 @@ function Header() {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-    };
-
-    const handleUserLogin = () => {
-        setAuth(true);
     };
 
     return (
@@ -52,7 +49,7 @@ function Header() {
                             textDecoration: 'none',
                         }}
                     >
-                        {HEADER_LOGO}
+                        {SITE_NAME}
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -110,7 +107,7 @@ function Header() {
                             textDecoration: 'none',
                         }}
                     >
-                        {HEADER_LOGO}
+                        {SITE_NAME}
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {PAGES.map((page) => (
@@ -123,17 +120,7 @@ function Header() {
                             </Button>
                         ))}
                     </Box>
-                    { auth
-                        ?
-                            <UserMenu/>
-                        :
-                            <Button
-                                onClick={handleUserLogin}
-                                color="inherit"
-                            >
-                                Login
-                            </Button>
-                    }
+                    { auth ? <UserMenu/> : <AuthModal /> }
                 </Toolbar>
             </Container>
         </AppBar>

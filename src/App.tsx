@@ -1,8 +1,9 @@
-import React from 'react';
-import Header from "./components/Header/Header";
+import React, {useEffect} from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { BrowserRouter as Router} from 'react-router-dom';
+import MainContent from "./components/MainContent/MainContent";
 
 function App() {
 
@@ -18,10 +19,21 @@ function App() {
         [prefersDarkMode],
     );
 
+    useEffect(() => {
+        const favicon = document.getElementById('favicon') as HTMLLinkElement;
+        if (prefersDarkMode) {
+            favicon.href = "favicon.ico";
+        }  else {
+            favicon.href = "favicon-black.ico";
+        }
+    }, [prefersDarkMode]);
+
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Header />
+            <Router>
+                <CssBaseline />
+                <MainContent />
+            </Router>
         </ThemeProvider>
     );
 }
