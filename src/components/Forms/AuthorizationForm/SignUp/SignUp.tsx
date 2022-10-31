@@ -21,7 +21,7 @@ export default function SignUp() {
 
     return (
         <>
-            <Title message={"Please sign up to use platform"} procedure={SIGN_UP} />
+            <Title message={"Please sign up to use platform"} stage={SIGN_UP} />
             <form onSubmit={handleSubmit}>
                 <Box sx={{display: 'flex', flexDirection: 'column'}}>
                     <TextField

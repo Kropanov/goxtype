@@ -25,7 +25,7 @@ export default function LogIn() {
 
     return (
         <>
-            <Title message={"Please log in to use platform"} procedure={LOG_IN} />
+            <Title message={"Please log in to use platform"} stage={LOG_IN} />
             <form onSubmit={handleSubmit}>
                 <Box sx={{display: 'flex', flexDirection: 'column'}}>
                     <TextField

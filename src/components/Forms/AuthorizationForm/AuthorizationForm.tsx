@@ -52,7 +52,7 @@ export default function AuthorizationForm({tab}: AuthorizationProps) {
 
     return (
         <>
-            <Box>
+            <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Log in" {...a11yProps(0)} />
                     <Tab label="Sign up" {...a11yProps(1)} />

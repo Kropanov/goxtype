@@ -6,11 +6,11 @@ import {SITE_NAME} from "../../../../constants/Constants";
 
 type TitleProps = {
     message: string,
-    procedure: string,
+    stage: string,
 };
 
 export default function Title(props: TitleProps) {
-    const {message, procedure} = props;
+    const {message, stage} = props;
 
     return (
         <>
@@ -23,7 +23,7 @@ export default function Title(props: TitleProps) {
                     justifyContent: 'center',
                 }}
             >
-                <Logo width={40} height={40} />
+                <Logo authForm={true} width={40} height={40} />
                 <Typography
                     variant="h6"
                     noWrap
@@ -49,16 +49,15 @@ export default function Title(props: TitleProps) {
                     display: { md: 'flex' },
                     fontFamily: 'monospace',
                     justifyContent: 'center',
-                    fontSize: '2rem',
                     fontWeight: 700,
                     color: 'inherit',
                     textDecoration: 'none',
                 }}
             >
-                {procedure}
+                {stage}
             </Typography>
             <Typography
-                variant="h6"
+                variant="subtitle2"
                 noWrap
                 component="p"
                 sx={{
@@ -66,7 +65,6 @@ export default function Title(props: TitleProps) {
                     display: { md: 'flex' },
                     fontFamily: 'monospace',
                     justifyContent: 'center',
-                    fontSize: '20px',
                     color: 'inherit',
                     textDecoration: 'none',
                 }}
