@@ -38,12 +38,14 @@ export default function AuthModal() {
         <div>
             <Button
                 color="inherit"
+                sx={{mr: 1}}
                 onClick={handleOpenLogIn}
             >
                 {LOG_IN}
             </Button>
             <Button
                 color="inherit"
+                variant="outlined"
                 onClick={handleOpenSignUp}
             >
                 {SIGN_UP}
