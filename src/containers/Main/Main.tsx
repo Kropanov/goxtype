@@ -14,7 +14,7 @@ export default function Main() {
         <>
             <Container maxWidth="md">
                 <Grid container spacing={2}>
-                    <Grid item xs={12} lg={6}>
+                    <Grid item xs={12} lg={7}>
                         <Box sx={{
                             display: 'flex',
                             width: '100%',
@@ -31,7 +31,8 @@ export default function Main() {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                     flexDirection: 'column',
-                                    p: 3
+                                    pb: 2, pt: 3,
+                                    pr: 5, pl: 5,
                                 }}
                             >
                                 <Typography
@@ -53,7 +54,7 @@ export default function Main() {
                             </Paper>
                         </Box>
                     </Grid>
-                    <Grid  item xs={12} lg={6}>
+                    <Grid item xs={12} lg={5}>
                         <Box
                             sx={{
                                 display: 'flex',
@@ -71,7 +72,7 @@ export default function Main() {
                     </Grid>
                 </Grid>
             </Container>
-            <Container sx={{ py: 6 }} maxWidth="md">
+            <Container maxWidth="md">
                 <Grid container spacing={4}>
                     {cards.map((card) => (
                         <Grid item key={card} xs={12} sm={6} md={4}>
@@ -81,10 +82,6 @@ export default function Main() {
                                 <Paper elevation={4}>
                                     <CardMedia
                                         component="img"
-                                        // sx={{
-                                        //     // 16:9
-                                        //     pt: '56.25%',
-                                        // }}
                                         image="https://source.unsplash.com/random"
                                         alt="random"
                                     />
