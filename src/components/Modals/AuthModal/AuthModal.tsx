@@ -14,7 +14,7 @@ const style = {
     width: '500px',
     transform: 'translate(-50%, -50%)',
     bgcolor: 'background.paper',
-    boxShadow: '0 6px 16px 0 rgb(0 0 0 / 20%)'
+    boxShadow: '0px 0px 53px -1px rgba(34, 60, 80, 1)'
 };
 
 export default function AuthModal() {
