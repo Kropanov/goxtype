@@ -6,8 +6,13 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {Card, CardActions, CardContent, CardMedia, Paper} from "@mui/material";
+import {Challenges} from "../../types/Types";
 
-const cards = [1, 2, 3];
+export const CHALLENGES: Array<Challenges> = [
+    {id: 1, complexity: 'Easy', color: "darkgreen"},
+    {id: 2, complexity: 'Medium', color: "orange"},
+    {id: 3, complexity: 'Hard', color: "red"},
+];
 
 export default function Main() {
     return (
@@ -74,8 +79,8 @@ export default function Main() {
             </Container>
             <Container maxWidth="md">
                 <Grid container spacing={4}>
-                    {cards.map((card) => (
-                        <Grid item key={card} xs={12} sm={6} md={4}>
+                    {CHALLENGES.map((challenge) => (
+                        <Grid item key={challenge.id} xs={12} sm={6} md={4}>
                             <Card
                                 sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                             >
@@ -86,8 +91,8 @@ export default function Main() {
                                         alt="random"
                                     />
                                     <CardContent sx={{ flexGrow: 1 }}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            Heading
+                                        <Typography gutterBottom color={challenge.color} variant="h5" component="h2">
+                                            {challenge.complexity}
                                         </Typography>
                                         <Typography>
                                             This is a media card. You can use this section to describe the
@@ -95,8 +100,7 @@ export default function Main() {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small">View</Button>
-                                        <Button size="small">Edit</Button>
+                                        <Button variant="outlined" size="small">Solve Challenge</Button>
                                     </CardActions>
                                 </Paper>
                             </Card>
