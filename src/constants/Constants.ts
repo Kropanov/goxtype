@@ -1,4 +1,6 @@
-export const PAGES = ['Practice', 'Testing', 'Blog', 'Contact', 'Support'];
+import {Challenge} from "../types/Types";
+
+export const PAGES = ['Practice', 'Blog', 'Contact', 'Support'];
 export const SETTINGS = ['Profile', 'Progress', 'Account', 'Logout'];
 export const SITE_NAME = "GOXTYPE";
 
@@ -8,3 +10,9 @@ export const REG = 1;
 
 export const LOG_IN = "Log In";
 export const SIGN_UP = "Sign Up";
+
+export const CHALLENGES: Array<Challenge> = [
+    {id: 1, complexity: 'Easy', color: "darkgreen"},
+    {id: 2, complexity: 'Medium', color: "orange"},
+    {id: 3, complexity: 'Hard', color: "red"},
+];

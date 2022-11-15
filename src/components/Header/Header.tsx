@@ -14,6 +14,7 @@ import MediaQuery from 'react-responsive';
 import Logo from "../Common/Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
 import AuthModal from "../Modals/AuthModal/AuthModal";
+import {Link} from "react-router-dom";
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -34,23 +35,25 @@ function Header() {
                     <MediaQuery minWidth={900}>
                         <Logo />
                     </MediaQuery>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        {SITE_NAME}
-                    </Typography>
+
+                    <Link to="/">
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="p"
+                            sx={{
+                                mr: 2,
+                                display: { xs: 'none', md: 'flex' },
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            {SITE_NAME}
+                        </Typography>
+                    </Link>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
