@@ -8,7 +8,11 @@ import {SIGN_UP} from "../../../../constants/Constants";
 import useSignUp from "../../../../hooks/SignUp/SignUp";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
-export default function SignUp() {
+type SignUpProps = {
+    AuthModalClose: () => void;
+};
+
+export default function SignUp({AuthModalClose}: SignUpProps) {
 
     const {
         showPassword,
@@ -17,7 +21,7 @@ export default function SignUp() {
         handleClickShowConfirmPassword,
         handleMouseDownPassword,
         handleSubmit,
-    } = useSignUp();
+    } = useSignUp(AuthModalClose);
 
     return (
         <>

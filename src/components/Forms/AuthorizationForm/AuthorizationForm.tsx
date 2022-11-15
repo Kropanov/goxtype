@@ -40,10 +40,13 @@ function a11yProps(index: number) {
 }
 
 type AuthorizationProps = {
-    tab: number
+    tab: number;
+    AuthModalClose: () => void;
+    handleSuccessAuth: () => void;
 };
 
-export default function AuthorizationForm({tab}: AuthorizationProps) {
+export default function AuthorizationForm(props: AuthorizationProps) {
+    const {tab, AuthModalClose, handleSuccessAuth} = props;
     const [value, setValue] = React.useState(tab);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -59,10 +62,16 @@ export default function AuthorizationForm({tab}: AuthorizationProps) {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <LogIn />
+                <LogIn
+                    AuthModalClose={AuthModalClose}
+                    handleSuccessAuth={handleSuccessAuth}
+                />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <SignUp />
+                <SignUp
+                    AuthModalClose={AuthModalClose}
+                    // handleSuccessAuth={handleSuccessAuth}
+                />
             </TabPanel>
         </>
     );

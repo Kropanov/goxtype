@@ -18,7 +18,7 @@ import {Link} from "react-router-dom";
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const [auth] = useState<boolean>(false);
+    const [auth, setAuth] = useState<boolean>(false);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -27,6 +27,8 @@ function Header() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    const AuthProps = {handleSuccessAuth: () => setAuth(true)};
 
     return (
         <AppBar position="static">
@@ -123,7 +125,11 @@ function Header() {
                             </Button>
                         ))}
                     </Box>
-                    { auth ? <UserMenu/> : <AuthModal /> }
+                    { auth
+                        ?  <UserMenu/>
+                        :
+                        <AuthModal {...AuthProps} />
+                    }
                 </Toolbar>
             </Container>
         </AppBar>

@@ -1,7 +1,7 @@
 import {useRouter} from "../Router/Router";
 import React from "react";
 
-export default function useSignUp() {
+export default function useSignUp(AuthModalClose: () => void) {
     const router = useRouter();
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = React.useState<boolean>(false);
@@ -21,6 +21,7 @@ export default function useSignUp() {
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         console.log('This thing was submitted!');
+        AuthModalClose();
         router.push('/');
     };
 

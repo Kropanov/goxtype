@@ -17,7 +17,12 @@ const style = {
     boxShadow: '0px 0px 53px -1px rgba(34, 60, 80, 1)'
 };
 
-export default function AuthModal() {
+type AuthModalProps = {
+    handleSuccessAuth: () => void;
+};
+
+export default function AuthModal(props: AuthModalProps) {
+    const {handleSuccessAuth} = props;
     const [open, setOpen] = useState(false);
     const [stage, setStage] = useState(AUTH);
 
@@ -63,7 +68,11 @@ export default function AuthModal() {
             >
                 <Fade in={open}>
                     <Box sx={style}>
-                        <AuthorizationForm tab={stage} />
+                        <AuthorizationForm
+                            tab={stage}
+                            AuthModalClose={handleClose}
+                            handleSuccessAuth={handleSuccessAuth}
+                        />
                     </Box>
                 </Fade>
             </Modal>
