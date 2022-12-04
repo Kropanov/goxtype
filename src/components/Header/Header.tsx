@@ -118,8 +118,9 @@ function Header() {
                         {PAGES.map((page) => (
                             <Button
                                 key={page}
+                                color="inherit"
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, display: 'block' }}
                             >
                                 {page}
                             </Button>
