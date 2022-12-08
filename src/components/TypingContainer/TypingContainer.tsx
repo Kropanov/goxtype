@@ -1,7 +1,10 @@
 import React from 'react';
+import TextContainer from "./TextContainer/TextContainer";
 
 export default function TypingContainer() {
     return (
-      <h1>Typing Container</h1>
+        <>
+            <TextContainer />
+        </>
     );
 }
