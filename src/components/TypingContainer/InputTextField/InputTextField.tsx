@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {TextField} from "@mui/material";
 
-export default function InputTextField() {
+type InputTextFieldProps = {
+    onChangeValue: (event:  React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    textFieldValue: string;
+};
 
-    const [textFieldValue, setTextFieldValue] = useState("");
-
-    const onChangeTextFieldValue = (event:  React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setTextFieldValue(event.target.value);
-    };
+export default function InputTextField(props: InputTextFieldProps) {
+    const {onChangeValue, textFieldValue} = props;
 
     useEffect(() => {
         console.log(textFieldValue);
@@ -17,7 +17,7 @@ export default function InputTextField() {
         <TextField
             fullWidth
             value={textFieldValue}
-            onChange={(event) => onChangeTextFieldValue(event)}
+            onChange={(event) => onChangeValue(event)}
             label="Please enter text"
         />
     );
