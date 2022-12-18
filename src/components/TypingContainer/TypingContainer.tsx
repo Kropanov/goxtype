@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import TextContainer from "./TextContainer/TextContainer";
 import InputTextField from "./InputTextField/InputTextField";
-import {Char} from "../../types/Types";
+import {Char, TextFieldColor} from "../../types/Types";
 
 const string = "Lorem ipsum dolor sit amet, Q";
 
@@ -11,6 +11,7 @@ export default function TypingContainer() {
     const [index, setIndex] = useState<number>(0);
     const [currentChar, setCurrentChar] = useState<string>("");
     const [textFieldValue, setTextFieldValue] = useState("");
+    const [textFieldColor, setTextFieldColor] = useState<TextFieldColor>("info");
 
     useEffect(() => {
         (() => {
@@ -26,7 +27,7 @@ export default function TypingContainer() {
         })();
     }, []);
 
-    const setColor = (index: number) => {
+    const changeCharColor  = (index: number) => {
         const item = {...text[index], colored: true};
         const result = [...text];
         result[index] = item;
@@ -37,9 +38,8 @@ export default function TypingContainer() {
         setTextFieldValue(event.target.value);
 
         if (event.target.value === currentChar) {
-            setColor(index);
+            changeCharColor(index);
             setIndex((prev) => prev + 1);
-            console.log("index", index);
 
             if (index+1 === text.length) {
                 return;
@@ -56,6 +56,7 @@ export default function TypingContainer() {
             <InputTextField
                 onChangeValue={(event) => handleChangeValue(event)}
                 textFieldValue={textFieldValue}
+                textFieldColor={textFieldColor}
             />
         </>
     );

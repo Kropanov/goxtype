@@ -1,13 +1,15 @@
 import React, {useEffect} from 'react';
 import {TextField} from "@mui/material";
+import {TextFieldColor} from "../../../types/Types";
 
 type InputTextFieldProps = {
     onChangeValue: (event:  React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     textFieldValue: string;
+    textFieldColor: TextFieldColor;
 };
 
 export default function InputTextField(props: InputTextFieldProps) {
-    const {onChangeValue, textFieldValue} = props;
+    const {onChangeValue, textFieldValue, textFieldColor} = props;
 
     useEffect(() => {
         console.log(textFieldValue);
@@ -17,6 +19,7 @@ export default function InputTextField(props: InputTextFieldProps) {
         <TextField
             fullWidth
             value={textFieldValue}
+            color={textFieldColor}
             onChange={(event) => onChangeValue(event)}
             label="Please enter text"
         />
