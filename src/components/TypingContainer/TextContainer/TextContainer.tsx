@@ -15,7 +15,7 @@ export default function TextContainer(props: TextContainerProps) {
                 text.map((item, index) => (
                     <span
                         key={index}
-                        className={item.colored ? classes.green : classes.white}
+                        className={item.colored ? classes.green : undefined}
                     >
                         {item.char}
                     </span>

@@ -17,6 +17,7 @@ export default function InputTextField(props: InputTextFieldProps) {
 
     return (
         <TextField
+            autoComplete="off"
             fullWidth
             value={textFieldValue}
             color={textFieldColor}
