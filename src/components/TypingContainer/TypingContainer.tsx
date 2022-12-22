@@ -11,7 +11,7 @@ export default function TypingContainer() {
     const [index, setIndex] = useState<number>(0);
     const [currentChar, setCurrentChar] = useState<string>("");
     const [textFieldValue, setTextFieldValue] = useState("");
-    const [textFieldColor, setTextFieldColor] = useState<TextFieldColor>("info");
+    const [textFieldColor, setTextFieldColor] = useState<TextFieldColor>("primary");
 
     useEffect(() => {
         (() => {
@@ -47,6 +47,11 @@ export default function TypingContainer() {
 
             setCurrentChar(text[index+1].char);
             setTextFieldValue("");
+        } else if (event.target.value === "") {
+            setTextFieldColor("primary");
+        }
+        else {
+            setTextFieldColor("error");
         }
     };
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {TextField} from "@mui/material";
 import {TextFieldColor} from "../../../types/Types";
 
@@ -10,10 +10,6 @@ type InputTextFieldProps = {
 
 export default function InputTextField(props: InputTextFieldProps) {
     const {onChangeValue, textFieldValue, textFieldColor} = props;
-
-    useEffect(() => {
-        console.log(textFieldValue);
-    }, [textFieldValue]);
 
     return (
         <TextField
