@@ -1,6 +1,6 @@
 import {Challenge} from "../types/Types";
 
-export const PAGES = ['Practice', 'Blog', 'Contact', 'Support'];
+export const PAGES = ['practice', 'blog', 'contact', 'support'];
 export const SETTINGS = ['Profile', 'Progress', 'Account', 'Logout'];
 export const SITE_NAME = "GOXTYPE";
 

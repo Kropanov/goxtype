@@ -14,7 +14,7 @@ import MediaQuery from 'react-responsive';
 import Logo from "../Common/Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
 import AuthModal from "../Modals/AuthModal/AuthModal";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -87,40 +87,45 @@ function Header() {
                             }}
                         >
                             {PAGES.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
+                                <NavLink key={page} to={`${page}`}>
+                                    <MenuItem onClick={handleCloseNavMenu}>
+                                        <Typography textAlign="center">{page[0].toUpperCase() + page.slice(1)}</Typography>
+                                    </MenuItem>
+                                </NavLink>
                             ))}
                         </Menu>
                     </Box>
                     <MediaQuery maxWidth={899}>
                         <Logo />
                     </MediaQuery>
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        {SITE_NAME}
-                    </Typography>
+                        <Typography
+                            variant="h5"
+                            noWrap
+                            component="h5"
+                            sx={{
+                                mr: 2,
+                                display: { xs: 'flex', md: 'none' },
+                                flexGrow: 1,
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            <Link to="/">
+                                {SITE_NAME}
+                            </Link>
+                        </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {PAGES.map((page) => (
                             <Button
                                 key={page}
+                                to={`${page}`}
+                                component={NavLink}
                                 color="inherit"
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, display: 'block' }}
+                                sx={{ my: 2, display: 'display' }}
                             >
                                 {page}
                             </Button>
