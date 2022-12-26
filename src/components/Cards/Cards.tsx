@@ -8,7 +8,7 @@ import {CHALLENGES} from "../../constants/Constants";
 
 export default function Cards() {
     return (
-        <Container maxWidth="md">
+        <Container sx={{mb: 5}} maxWidth="md">
             <Grid container spacing={4}>
                 {CHALLENGES.map((challenge) => (
                     <Grid item key={challenge.id} xs={12} sm={6} md={4}>
