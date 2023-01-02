@@ -40,11 +40,8 @@ export function Footer() {
     return (
         <Box sx={{ mt: "auto"}}>
             <Paper elevation={4}>
-                <Grid sx={{ pt: 5, pb: 5}} container justifyContent="center">
-                    <Grid
-                        item
-                        xs={3}
-                    >
+                <Grid sx={{ pt: 5, pb: 5}} container justifyContent={{sm: 'center', xs: 'center'}}>
+                    <Grid item lg={3} md={3} sm={12} xs={12}>
                         <Box
                             sx={{
                                 mb: 3,
@@ -73,27 +70,27 @@ export function Footer() {
                             </Typography>
                         </Box>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item lg={2} md sm='auto' xs={5}>
                         <List>
                             <ListItemButton>WEEBLY THEMES</ListItemButton>
                             <ListItemButton>PRE-SALE FAQS</ListItemButton>
                             <ListItemButton>SUBMIT A TICKET</ListItemButton>
                         </List>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item lg={2} md sm='auto' xs='auto'>
                         <List>
                             <ListItemButton>SERVICES</ListItemButton>
                             <ListItemButton>THEME TWEAK</ListItemButton>
                         </List>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item lg={2} md sm='auto' xs={5}>
                         <List>
                             <ListItemButton>SHOWCASE</ListItemButton>
                             <ListItemButton>WIDGETKIT</ListItemButton>
                             <ListItemButton>SUPPORT</ListItemButton>
                         </List>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item lg={2} md sm='auto' xs='auto'>
                         <List>
                             <ListItemButton>ABOUT US</ListItemButton>
                             <ListItemButton>CONTACT US</ListItemButton>
