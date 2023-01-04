@@ -4,10 +4,10 @@ import Box from "@mui/material/Box";
 import {Paper} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Code from "../../../images/Code.svg";
+import Code from "../../images/Code.svg";
 import Container from "@mui/material/Container";
 
-export default function HeadingTypingTest() {
+export default function TypingTest() {
     return (
         <Container maxWidth="md">
             <Grid container spacing={2}>

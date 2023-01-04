@@ -6,18 +6,18 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 type LogoProps = {
     width?: number,
     height?: number,
-    authForm?: boolean
+    blackLogo?: boolean
 };
 
 function Logo(props: LogoProps) {
 
-    const {width, height, authForm} = props;
+    const {width, height, blackLogo} = props;
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
     const mode =  prefersDarkMode ? Logotype : BlackLogotype;
 
     return (
         <img
-            src={authForm ? mode : Logotype}
+            src={blackLogo ? mode : Logotype}
             alt="logo"
             width={width != null ? width : 24}
             height={height != null ? height : 24}
