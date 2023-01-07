@@ -10,3 +10,10 @@ export type Char = {
 };
 
 export type TextFieldColor = "error" | "primary" | "secondary" | "info" | "success" | "warning" | undefined;
+
+export type IconType = {
+    element: JSX.Element;
+    label: string;
+};
+
+export type IconsType = IconType[];

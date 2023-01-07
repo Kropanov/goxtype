@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Grid, Typography} from "@mui/material";
-import SocialIcons from "../../Common/SocialIcons/SocialIcons";
+import SocialIcons from "../../Icons/SocialIcons/SocialIcons";
 
 export default function SocialNetworks() {
     return (

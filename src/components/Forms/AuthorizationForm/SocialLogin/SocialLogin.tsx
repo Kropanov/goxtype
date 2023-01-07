@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import SocialIcons from "../../../Common/SocialIcons/SocialIcons";
+import SocialIcons from "../../../Icons/SocialIcons/SocialIcons";
 
 export default function SocialLogin() {
     return (
