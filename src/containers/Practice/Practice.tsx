@@ -3,11 +3,13 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import TypingContainer from "../../components/TypingContainer/TypingContainer";
 import {Box, Paper} from "@mui/material";
-import {MINUTE} from "../../constants/Constants";
+import {MIDDLE_QUANTITY_CHAR_IN_WORD, MINUTE} from "../../constants/Constants";
 
 export default function Practice() {
 
     const [charactersPerMinute, setCharactersPerMinute] = useState(0);
+    const [wordsPerMinute, setWordsPerMinute] = useState(0);
+
     const [numberOfCharacters, setNumberOfCharacters] = useState(0);
     const [timeInSeconds, setTimeInSeconds] = useState(0);
 
@@ -22,6 +24,7 @@ export default function Practice() {
 
     useEffect(()=>{
         setCharactersPerMinute( Math.floor(numberOfCharacters / (timeInSeconds / MINUTE)) );
+        setWordsPerMinute( Math.floor( (numberOfCharacters / MIDDLE_QUANTITY_CHAR_IN_WORD) / (timeInSeconds / MINUTE) ) );
     }, [timeInSeconds, numberOfCharacters]);
 
     const handleChangeNumberOfCharacters = () => {
@@ -38,7 +41,10 @@ export default function Practice() {
                     <Container sx={{mt: 2, mb: 4}}>
                         <Paper elevation={4}>
                             <Box sx={{p: 2}}>
-                                CPM: {charactersPerMinute}
+                                CPM: { charactersPerMinute ? charactersPerMinute : 0}
+                            </Box>
+                            <Box sx={{p: 2}}>
+                                WPM: { wordsPerMinute ? wordsPerMinute : 0}
                             </Box>
                         </Paper>
                     </Container>
