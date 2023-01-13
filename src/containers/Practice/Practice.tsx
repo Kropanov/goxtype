@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import TypingContainer from "../../components/TypingContainer/TypingContainer";
-import {Box, Paper} from "@mui/material";
+import {Box} from "@mui/material";
 import {MIDDLE_QUANTITY_CHAR_IN_WORD, MINUTE} from "../../constants/Constants";
+import Typography from "@mui/material/Typography";
 
 export default function Practice() {
 
@@ -17,15 +18,23 @@ export default function Practice() {
         const myInterval = setInterval(() => {
             setTimeInSeconds((prevState) => prevState + 1);
         }, 1000);
-        return ()=> {
+        return () => {
             clearInterval(myInterval);
         };
-    });
+    }, []);
 
     useEffect(()=>{
+        calculateCharactersPerMinute();
+        calculateWordsPerMinute();
+    }, [timeInSeconds]);
+
+    const calculateCharactersPerMinute = () => {
         setCharactersPerMinute( Math.floor(numberOfCharacters / (timeInSeconds / MINUTE)) );
+    };
+
+    const calculateWordsPerMinute = () => {
         setWordsPerMinute( Math.floor( (numberOfCharacters / MIDDLE_QUANTITY_CHAR_IN_WORD) / (timeInSeconds / MINUTE) ) );
-    }, [timeInSeconds, numberOfCharacters]);
+    };
 
     const handleChangeNumberOfCharacters = () => {
         setNumberOfCharacters((prevState) => prevState + 1);
@@ -38,15 +47,60 @@ export default function Practice() {
                     <TypingContainer setNumberOfChar={handleChangeNumberOfCharacters} />
                 </Grid>
                 <Grid item lg={12}>
-                    <Container sx={{mt: 2, mb: 4}}>
-                        <Paper elevation={4}>
-                            <Box sx={{p: 2}}>
-                                CPM: { charactersPerMinute ? charactersPerMinute : 0}
+                    <Container sx={{mt: 2, mb: 4, p: 2}}>
+                            {/* ToDo: this code should be in other component */}
+                            <Box>
+                                <Typography
+                                    sx={{
+                                        borderBottom: 1,
+                                        borderColor: 'divider',
+                                    }}
+                                    variant="subtitle2"
+                                    gutterBottom component="div"
+                                >
+                                    CPM: { charactersPerMinute ? charactersPerMinute : 0}
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        borderBottom: 1,
+                                        borderColor: 'divider',
+                                    }}
+                                    variant="subtitle2"
+                                    gutterBottom component="div"
+                                >
+                                    WPM: { wordsPerMinute ? wordsPerMinute : 0}
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        borderBottom: 1,
+                                        borderColor: 'divider',
+                                    }}
+                                    variant="subtitle2"
+                                    gutterBottom component="div"
+                                >
+                                    Accuracy: 100%
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        borderBottom: 1,
+                                        borderColor: 'divider',
+                                    }}
+                                    variant="subtitle2"
+                                    gutterBottom component="div"
+                                >
+                                    Error count: 0
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        borderBottom: 1,
+                                        borderColor: 'divider',
+                                    }}
+                                    variant="subtitle2"
+                                    gutterBottom component="div"
+                                >
+                                    Character count: {numberOfCharacters}
+                                </Typography>
                             </Box>
-                            <Box sx={{p: 2}}>
-                                WPM: { wordsPerMinute ? wordsPerMinute : 0}
-                            </Box>
-                        </Paper>
                     </Container>
                 </Grid>
             </Grid>

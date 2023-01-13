@@ -10,6 +10,7 @@ export default function TypingContainer({ setNumberOfChar }: { setNumberOfChar: 
     const [text, setText] = useState<Char[]>([]);
     const [index, setIndex] = useState<number>(0);
     const [currentChar, setCurrentChar] = useState<string>("");
+
     const [textFieldValue, setTextFieldValue] = useState("");
     const [textFieldColor, setTextFieldColor] = useState<TextFieldColor>("primary");
 
@@ -34,7 +35,7 @@ export default function TypingContainer({ setNumberOfChar }: { setNumberOfChar: 
         setText(result);
     };
 
-    // ToDo: rework this
+    // ToDo: rework this function. You should do it in other small functions
     const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setTextFieldValue(event.target.value);
 
