@@ -6,8 +6,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Code from "../../images/Code.svg";
 import Container from "@mui/material/Container";
+import {useRouter} from "../../hooks/Router/Router";
 
 export default function TypingTest() {
+    const router = useRouter();
     return (
         <Container maxWidth="md">
             <Grid container spacing={2}>
@@ -47,7 +49,12 @@ export default function TypingTest() {
                             >
                                 Take a test to determine the level of your typing!
                             </Typography>
-                            <Button variant="contained">Let's get started!</Button>
+                            <Button
+                                variant="contained"
+                                onClick={() => router.push("/practice")}
+                            >
+                                Let's get started!
+                            </Button>
                         </Paper>
                     </Box>
                 </Grid>

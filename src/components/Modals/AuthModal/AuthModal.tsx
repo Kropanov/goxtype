@@ -6,6 +6,7 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import {AUTH, LOG_IN, REG, SIGN_UP} from "../../../constants/Constants";
 import AuthorizationForm from "../../Forms/AuthorizationForm/AuthorizationForm";
+import {Paper} from "@mui/material";
 
 const style = {
     position: 'absolute',
@@ -13,8 +14,6 @@ const style = {
     left: '50%',
     width: '500px',
     transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
-    boxShadow: '0px 0px 53px -1px rgba(34, 60, 80, 1)'
 };
 
 type AuthModalProps = {
@@ -68,11 +67,13 @@ export default function AuthModal(props: AuthModalProps) {
             >
                 <Fade in={open}>
                     <Box sx={style}>
-                        <AuthorizationForm
-                            tab={stage}
-                            AuthModalClose={handleClose}
-                            handleSuccessAuth={handleSuccessAuth}
-                        />
+                        <Paper>
+                            <AuthorizationForm
+                                tab={stage}
+                                AuthModalClose={handleClose}
+                                handleSuccessAuth={handleSuccessAuth}
+                            />
+                        </Paper>
                     </Box>
                 </Fade>
             </Modal>
