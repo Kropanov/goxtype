@@ -19,4 +19,4 @@ export const CHALLENGES: Array<Challenge> = [
 ];
 
 export const MINUTE = 60;
-export const MIDDLE_QUANTITY_CHAR_IN_WORD = 5;
+export const MIDDLE_QUANTITY_CHAR = 5;

@@ -6,12 +6,14 @@ import {Char, TextFieldColor} from "../../types/Types";
 const string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 type TypingContainerProps = {
-    setNumberOfChar: () => void;
+    setCurrentCharCount: () => void;
     setTextErrorCount: () => void;
 };
 
+type EventType = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+
 export default function TypingContainer(props: TypingContainerProps) {
-    const {setNumberOfChar, setTextErrorCount} = props;
+    const {setCurrentCharCount, setTextErrorCount} = props;
 
     const [text, setText] = useState<Char[]>([]);
     const [index, setIndex] = useState<number>(0);
@@ -34,42 +36,69 @@ export default function TypingContainer(props: TypingContainerProps) {
         })();
     }, []);
 
-    const changeCharColor  = (index: number) => {
+    const changeCharColor = (index: number) => {
         const item = {...text[index], colored: true};
         const result = [...text];
         result[index] = item;
         setText(result);
     };
 
-    // ToDo: rework this function. You should do it in other small functions
-    const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const isEqualTextValue = (event: EventType) => {
+        return event.target.value === currentChar;
+    };
+
+    const isLastChar = () => {
+        return index+1 === text.length;
+    };
+
+    const chooseNextChar = () => {
+        setIndex((prev) => prev + 1);
+    };
+
+    const cleanTextField = () => {
+        setTextFieldValue("");
+    };
+
+    const updateCurrentTextFieldState = () => {
+        setCurrentChar(text[index+1].char);
+        cleanTextField();
+    };
+
+    const setupTextFieldWithCorrectValue = () => {
+        setCurrentCharCount();
+        changeCharColor(index);
+        setTextFieldColor("primary");
+        chooseNextChar();
+    };
+
+    const calledTypingError = () => {
+        if (textFieldColor === "error") return;
+        setTextErrorCount();
+        setTextFieldColor("error");
+    };
+
+    const handleChangeTextValue = (event: EventType) => {
         setTextFieldValue(event.target.value);
 
-        if (event.target.value === currentChar) {
-            setNumberOfChar();
-            changeCharColor(index);
-            setTextFieldColor("primary");
-            setIndex((prev) => prev + 1);
-
-            if (index+1 === text.length) {
-                return;
-            }
-
-            setCurrentChar(text[index+1].char);
-            setTextFieldValue("");
-        } else {
-            if (textFieldColor !== "error") {
-                setTextErrorCount();
-            }
-            setTextFieldColor("error");
+        if (!isEqualTextValue(event)) {
+            calledTypingError();
+            return;
         }
+
+        setupTextFieldWithCorrectValue();
+
+        if (isLastChar()) {
+            return;
+        }
+
+        updateCurrentTextFieldState();
     };
 
     return (
         <>
             <TextContainer text={text} />
             <InputTextField
-                onChangeValue={(event) => handleChangeValue(event)}
+                onChangeValue={(event) => handleChangeTextValue(event)}
                 textFieldValue={textFieldValue}
                 textFieldColor={textFieldColor}
             />

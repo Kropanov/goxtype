@@ -3,7 +3,6 @@ import classes from "./TextContainer.module.scss";
 import {Char} from "../../../types/Types";
 import {
     Container,
-    Paper,
     Box,
 } from "@mui/material";
 import SettingsIcons from "../../Icons/SettingsIcons/SettingsIcons";
