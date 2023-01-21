@@ -7,6 +7,7 @@ import {SETTINGS} from "../../constants/Constants";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import {Link} from "react-router-dom";
 
 export default function UserMenu() {
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -42,10 +43,12 @@ export default function UserMenu() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
             >
-                {SETTINGS.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
+                {SETTINGS.map((item, index) => (
+                    <Link key={index} to={`${item[0].toLowerCase() + item.slice(1)}`}>
+                        <MenuItem onClick={handleCloseUserMenu}>
+                            <Typography textAlign="center">{item}</Typography>
+                        </MenuItem>
+                    </Link>
                 ))}
             </Menu>
         </Box>
