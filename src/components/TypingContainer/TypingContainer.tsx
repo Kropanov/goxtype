@@ -36,46 +36,6 @@ export default function TypingContainer(props: TypingContainerProps) {
         })();
     }, []);
 
-    const changeCharColor = (index: number) => {
-        const item = {...text[index], colored: true};
-        const result = [...text];
-        result[index] = item;
-        setText(result);
-    };
-
-    const isEqualTextValue = (event: EventType) => {
-        return event.target.value === currentChar;
-    };
-
-    const isLastChar = () => {
-        return index+1 === text.length;
-    };
-
-    const chooseNextChar = () => {
-        setIndex((prev) => prev + 1);
-    };
-
-    const cleanTextField = () => {
-        setTextFieldValue("");
-    };
-
-    const updateCurrentTextFieldState = () => {
-        setCurrentChar(text[index+1].char);
-        cleanTextField();
-    };
-
-    const setupTextFieldWithCorrectValue = () => {
-        setCurrentCharCount();
-        changeCharColor(index);
-        setTextFieldColor("primary");
-        chooseNextChar();
-    };
-
-    const calledTypingError = () => {
-        if (textFieldColor === "error") return;
-        setTextErrorCount();
-        setTextFieldColor("error");
-    };
 
     const handleChangeTextValue = (event: EventType) => {
         setTextFieldValue(event.target.value);
@@ -92,6 +52,47 @@ export default function TypingContainer(props: TypingContainerProps) {
         }
 
         updateCurrentTextFieldState();
+    };
+
+    const isEqualTextValue = (event: EventType) => {
+        return event.target.value === currentChar;
+    };
+
+    const calledTypingError = () => {
+        if (textFieldColor === "error") return;
+        setTextErrorCount();
+        setTextFieldColor("error");
+    };
+
+    const setupTextFieldWithCorrectValue = () => {
+        setCurrentCharCount();
+        changeCharColor(index);
+        setTextFieldColor("primary");
+        chooseNextChar();
+    };
+
+    const changeCharColor = (index: number) => {
+        const item = {...text[index], colored: true};
+        const result = [...text];
+        result[index] = item;
+        setText(result);
+    };
+
+    const chooseNextChar = () => {
+        setIndex((prev) => prev + 1);
+    };
+
+    const isLastChar = () => {
+        return index+1 === text.length;
+    };
+
+    const updateCurrentTextFieldState = () => {
+        setCurrentChar(text[index+1].char);
+        cleanTextField();
+    };
+
+    const cleanTextField = () => {
+        setTextFieldValue("");
     };
 
     return (
