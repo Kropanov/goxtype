@@ -8,6 +8,7 @@ import {
     Tab
 } from "@mui/material";
 import TabPanel from "../../components/Common/TabPanel/TabPanel";
+import Typography from "@mui/material/Typography";
 
 
 export default function UserProfile() {
@@ -33,10 +34,25 @@ export default function UserProfile() {
                             sx={{
                                 width: {lg: 296, md: 196, sm: 165, xs: 120},
                                 height: {lg: 296, md: 196, sm: 165, xs: 120},
-                                mb: 3,
+                                mb: 2,
                                 mt: 3
                             }}
                         />
+                        <Typography
+                            variant="h5"
+                            noWrap
+                            component="h5"
+                            sx={{
+                                mr: 2,
+                                display: {  xs: 'flex' },
+                                margin: "auto",
+                                fontWeight: 700,
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            Iakov Pyzhov
+                        </Typography>
                     </Grid>
                 </Grid>
                 <Grid item sm={8} xs={12}>
