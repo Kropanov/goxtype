@@ -25,15 +25,16 @@ export default function UserProfile() {
                 <Grid item sm={4} xs={12}>
                     <Grid
                         container
-                        justifyContent="center"
+                        justifyContent={{sm: "center", xs: 'space-around'}}
                         alignItems="center"
+                        direction={{xs: "column"}}
                     >
                         <Avatar
                             alt="Remy Sharp"
                             src="https://source.unsplash.com/random"
                             sx={{
-                                width: {lg: 296, md: 196, sm: 165, xs: 120},
-                                height: {lg: 296, md: 196, sm: 165, xs: 120},
+                                width: {lg: 296, md: 216, sm: 165, xs: 120},
+                                height: {lg: 296, md: 216, sm: 165, xs: 120},
                                 mb: 2,
                                 mt: 3
                             }}
@@ -45,13 +46,13 @@ export default function UserProfile() {
                             sx={{
                                 mr: 2,
                                 display: {  xs: 'flex' },
-                                margin: "auto",
                                 fontWeight: 700,
+                                margin: 'auto',
                                 color: 'inherit',
                                 textDecoration: 'none',
                             }}
                         >
-                            Iakov Pyzhov
+                            User Name
                         </Typography>
                     </Grid>
                 </Grid>
@@ -59,19 +60,19 @@ export default function UserProfile() {
                     <Box sx={{ width: '100%', mb: 3, mt: {sm: 3, xs: 0} }}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                <Tab label="Item One" />
-                                <Tab label="Item Two" />
-                                <Tab label="Item Three" />
+                                <Tab label="Review" />
+                                <Tab label="Library" />
+                                <Tab label="Settings" />
                             </Tabs>
                         </Box>
                         <TabPanel value={value} index={0}>
-                            Item One
+                            Review
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            Item Two
+                            Library
                         </TabPanel>
                         <TabPanel value={value} index={2}>
-                            Item Three
+                            Settings
                         </TabPanel>
                     </Box>
                 </Grid>
