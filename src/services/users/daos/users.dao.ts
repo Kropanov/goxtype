@@ -3,7 +3,6 @@ import {PutUserDto} from "../dto/put.user.dto";
 import {PatchUserDto} from "../dto/patch.user.dto";
 
 class UsersDao {
-
     async addUser(user: CreateUserDto) {
         return;
     }
@@ -17,15 +16,15 @@ class UsersDao {
     }
 
     async putUserById(userId: string, user: PutUserDto) {
-        return;
+        return "User changed!";
     }
 
     async patchUserById(userId: string, user: PatchUserDto) {
-        return;
+        return "User was patched";
     }
 
     async removeUserById(userId: string) {
-        return;
+        return "User removed!";
     }
 
     async getUserByEmail(email: string) {
