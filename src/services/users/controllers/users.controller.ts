@@ -3,7 +3,7 @@ import usersService from "../service/users.service.js";
 
 class UsersController {
     async listUsers(req: express.Request, res: express.Response) {
-        const users = await usersService.list();
+        const users = await usersService.list(100, 0);
         res.status(200).send(users);
     }
 

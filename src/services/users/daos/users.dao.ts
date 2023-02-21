@@ -1,34 +1,60 @@
 import {CreateUserDto} from "../dto/create.user.dto";
 import {PutUserDto} from "../dto/put.user.dto";
 import {PatchUserDto} from "../dto/patch.user.dto";
+import MongooseService from "../../common/service/mongoose.service.js";
+
+const Schema = MongooseService.getMongoose().Schema;
+
+const userSchema = new Schema({
+    email: String,
+    password: { type: String },
+    firstName: String,
+    lastName: String,
+    permissionFlags: Number,
+});
+
+const User = MongooseService.getMongoose().model("Users", userSchema);
 
 class UsersDao {
-    async addUser(user: CreateUserDto) {
-        return;
+    async addUser(userFields: CreateUserDto) {
+        const user = new User({
+            ...userFields,
+            permissionFlags: 1,
+        });
+        await user.save();
+        return user._id;
     }
 
-    async getUsers() {
-        return "So many Users...";
+    async getUsers(limit = 25, page = 0) {
+        return User.find()
+            .limit(limit)
+            .skip(limit * page)
+            .exec();
     }
 
     async getUserById(userId: string) {
-        return {};
+        return User.findOne({ _id: userId }).populate('User').exec();
     }
 
-    async putUserById(userId: string, user: PutUserDto) {
-        return "User changed!";
-    }
+    async updateUserById(
+        userId: string,
+        userFields: PatchUserDto | PutUserDto
+    ) {
+        const existingUser = await User.findOneAndUpdate(
+            { _id: userId },
+            { $set: userFields },
+            { new: true }
+        ).exec();
 
-    async patchUserById(userId: string, user: PatchUserDto) {
-        return "User was patched";
+        return existingUser;
     }
 
     async removeUserById(userId: string) {
-        return "User removed!";
+        return User.deleteOne({ _id: userId }).exec();
     }
 
     async getUserByEmail(email: string) {
-        return {id: ""};
+        return User.findOne({ email: email }).exec();
     }
 }
 
