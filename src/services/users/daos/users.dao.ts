@@ -8,11 +8,11 @@ class UsersDao {
     }
 
     async getUsers() {
-        return;
+        return "So many Users...";
     }
 
     async getUserById(userId: string) {
-        return;
+        return {};
     }
 
     async putUserById(userId: string, user: PutUserDto) {
@@ -28,7 +28,7 @@ class UsersDao {
     }
 
     async getUserByEmail(email: string) {
-        return;
+        return {id: ""};
     }
 }
 
