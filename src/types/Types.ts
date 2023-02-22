@@ -16,4 +16,6 @@ export type IconType = {
     label: string;
 };
 
+export type Severity = "error" | "info" | "success" | "warning";
+
 export type IconsType = IconType[];
