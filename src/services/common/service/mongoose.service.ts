@@ -17,6 +17,7 @@ class MongooseService {
         return mongoose;
     }
 
+    // ToDo: rework this method
     connectWithRetry = () => {
         mongoose.set('strictQuery', true);
         mongoose
