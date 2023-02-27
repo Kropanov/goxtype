@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {MIDDLE_QUANTITY_CHAR, MINUTE} from "../../constants/Constants";
+import {scrollPageUp} from "../../func";
 
 export default function usePractice() {
 
@@ -12,7 +13,8 @@ export default function usePractice() {
     const [timeInSeconds, setTimeInSeconds] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
 
-    useEffect(()=>{
+    useEffect(() => {
+        scrollPageUp();
         const myInterval = setInterval(() => {
             setTimeInSeconds((prevState) => prevState + 1);
         }, 1000);

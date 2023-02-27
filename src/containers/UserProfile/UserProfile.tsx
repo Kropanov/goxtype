@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
     Container,
     Avatar,
@@ -11,12 +11,17 @@ import TabPanel from "../../components/Common/TabPanel/TabPanel";
 import Typography from "@mui/material/Typography";
 import {NotificationContext} from "../../components/Notification/NotificationContext/NotificationContext";
 import {SHOW_NOTIFICATION} from "../../constants/Constants";
+import {scrollPageUp} from "../../func";
 
 
 export default function UserProfile() {
 
     const [value, setValue] = useState(0);
     const {dispatch} = useContext(NotificationContext);
+
+    useEffect(() => {
+        scrollPageUp();
+    }, []);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);

@@ -7,7 +7,6 @@ type NotificationProviderProps = {
     children: React.ReactNode
 };
 
-
 function NotificationProvider(props: NotificationProviderProps) {
 
     const initialState = {
