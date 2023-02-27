@@ -1,12 +1,19 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: "./config.env" });
 import mongoose from 'mongoose';
+
+const DATABASE = process.env.DATABASE || "";
+const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || "";
+
+const DB = DATABASE.replace(
+    "<password>",
+    DATABASE_PASSWORD
+);
 
 class MongooseService {
     private count = 0;
     private mongooseOptions = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
         serverSelectionTimeoutMS: 5000,
-        useFindAndModify: false,
     };
 
     constructor() {
@@ -21,7 +28,7 @@ class MongooseService {
     connectWithRetry = () => {
         mongoose.set('strictQuery', true);
         mongoose
-            .connect('', this.mongooseOptions)
+            .connect(DB, this.mongooseOptions)
             .then(() => {
                 console.log('MongoDB is connected!');
             })
