@@ -20,3 +20,6 @@ export const CHALLENGES: Array<Challenge> = [
 
 export const MINUTE = 60;
 export const MIDDLE_QUANTITY_CHAR = 5;
+
+export const SHOW_NOTIFICATION = "SHOW_NOTIFICATION";
+export const HIDE_NOTIFICATION = "HIDE_NOTIFICATION";

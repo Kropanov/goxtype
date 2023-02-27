@@ -1,25 +1,24 @@
-import React, {useMemo, useState} from 'react';
-import { NotificationContext } from './NotificationContext';
+import React, {useMemo, useReducer} from 'react';
+import { NotificationContext } from '../NotificationContext/NotificationContext';
 import Notification from "../Notification";
-import {Severity} from "../../../types/Types";
+import reducer from "../NotificationReducer/NotificationReducer";
 
 type NotificationProviderProps = {
     children: React.ReactNode
 };
 
-type NotificationStateProps = {
-    severity: Severity;
-    message: string;
-    open: boolean;
-};
 
 function NotificationProvider(props: NotificationProviderProps) {
-    const [notificationState, setNotificationState] = useState<NotificationStateProps>({
+
+    const initialState = {
         severity: "success",
-        message: "!",
+        message: "",
         open: false
-    });
-    const value = useMemo(() => ({notificationState, setNotificationState}), [notificationState]);
+    };
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    const value = useMemo(() => ({state, dispatch}), [state]);
     return (
         <NotificationContext.Provider value={value}>
             {props.children}

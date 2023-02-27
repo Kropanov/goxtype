@@ -1,10 +1,11 @@
 import React, {useContext, useEffect} from 'react';
 import Alert from '@mui/material/Alert';
 import {Collapse, Paper} from "@mui/material";
-import {NotificationContext} from "./NotificationProvider/NotificationContext";
+import {NotificationContext} from "./NotificationContext/NotificationContext";
+import {HIDE_NOTIFICATION} from "../../constants/Constants";
 
 function Notification() {
-    const {notificationState, setNotificationState} = useContext(NotificationContext);
+    const {state, dispatch} = useContext(NotificationContext);
 
     useEffect(() => {
         const timeId = setTimeout(() => {
@@ -17,14 +18,14 @@ function Notification() {
     });
 
     const handleCloseAlert = () => {
-        setNotificationState({...notificationState, open: false});
+        dispatch({type: HIDE_NOTIFICATION});
     };
 
     return (
         <Paper sx={{position: 'fixed', right: 10, bottom: 10}}>
-            <Collapse in={notificationState.open}>
-                <Alert variant="filled" severity={notificationState.severity} onClose={handleCloseAlert}>
-                    {notificationState.message}
+            <Collapse in={state.open}>
+                <Alert severity={state.severity} onClose={handleCloseAlert}>
+                    {state.message}
                 </Alert>
             </Collapse>
         </Paper>

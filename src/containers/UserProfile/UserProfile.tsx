@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {
     Container,
     Avatar,
@@ -9,11 +9,14 @@ import {
 } from "@mui/material";
 import TabPanel from "../../components/Common/TabPanel/TabPanel";
 import Typography from "@mui/material/Typography";
+import {NotificationContext} from "../../components/Notification/NotificationContext/NotificationContext";
+import {SHOW_NOTIFICATION} from "../../constants/Constants";
 
 
 export default function UserProfile() {
 
     const [value, setValue] = useState(0);
+    const {dispatch} = useContext(NotificationContext);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -32,6 +35,11 @@ export default function UserProfile() {
                         <Avatar
                             alt="Remy Sharp"
                             src="https://source.unsplash.com/random"
+                            // ToDo: only for testing, remove this piece of code after that
+                            onClick={() => dispatch({type: SHOW_NOTIFICATION, payload: {
+                                severity: "info",
+                                message: "This is your avatar, Dear User!",
+                            }}) }
                             sx={{
                                 width: {lg: 296, md: 216, sm: 165, xs: 120},
                                 height: {lg: 296, md: 216, sm: 165, xs: 120},
