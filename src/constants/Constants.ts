@@ -4,10 +4,10 @@ export const PAGES = ['practice', 'blog', 'contact', 'support'];
 export const SETTINGS = ['Profile', 'Progress', 'Account', 'Logout'];
 export const SITE_NAME = "GOXTYPE";
 
-// for define user form ( AUTH - form of log in, Reg - form of sign up )
-// ToDo: rework these variables
-export const AUTH = 0;
-export const REG = 1;
+export enum FORM_TABS {
+    AUTH,
+    REG
+}
 
 export const LOG_IN = "Log In";
 export const SIGN_UP = "Sign Up";
