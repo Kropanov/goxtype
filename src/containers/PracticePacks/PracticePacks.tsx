@@ -1,38 +1,62 @@
 import React from "react";
-import {Box, Button, Container, Grid, Paper, Skeleton, Typography} from "@mui/material";
+import {
+    Avatar,
+    Button,
+    Card, CardActions, CardContent, CardHeader, CardMedia,
+    Container,
+    IconButton,
+    Typography
+} from "@mui/material";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import PackImage from "../../images/english-pack-big-ben.jpg";
 
 export default function PracticePacks() {
     return (
         // ToDo: May be you should rework this because cards seems better
         <Container maxWidth="md">
-            <Box sx={{ height: 80, m: 2}}>
-                <Paper elevation={5}>
-                    <Grid
-                        container
-                        direction="row"
-                        justifyContent="space-around"
-                        alignItems="center"
+            <Card sx={{m: 2}}>
+                <CardHeader
+                    avatar={
+                        <Avatar aria-label="recipe">
+                            <img src="https://source.unsplash.com/random" alt="Avatar"/>
+                        </Avatar>
+                    }
+                    action={
+                        <IconButton aria-label="settings">
+                        </IconButton>
+                    }
+                    title="Brave Heart"
+                    subheader="March 7, 2023"
+                />
+                <CardMedia
+                    component="img"
+                    height="194"
+                    image={PackImage}
+                    alt="Pack Image"
+                />
+                <CardContent>
+                    <Typography sx={{mb: 1}} variant="h5" color="text.primary">
+                        English pack
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        This impressive paella is a perfect party dish and a fun meal to cook
+                        together with your guests. Add 1 cup of frozen peas along with the mussels,
+                        if you like.
+                    </Typography>
+                </CardContent>
+                <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites">
+                        <BookmarkIcon />
+                    </IconButton>
+                    <Button
+                        color="primary"
+                        variant="outlined"
+                        sx={{ml: 'auto'}}
                     >
-                        <h1>1</h1>
-                        <Typography variant="h6">
-                            Different Languages
-                        </Typography>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                        >
-                            Start Practice
-                        </Button>
-                    </Grid>
-                </Paper>
-            </Box>
-            <Skeleton sx={{m: 2}} animation="wave" variant="rounded" height={80} />
-            <Skeleton sx={{m: 2}} animation="wave" variant="rounded" height={80} />
-            <Skeleton sx={{m: 2}} animation="wave" variant="rounded" height={80} />
-            <Skeleton sx={{m: 2}} animation="wave" variant="rounded" height={80} />
-            <Skeleton sx={{m: 2}} animation="wave" variant="rounded" height={80} />
-            <Skeleton sx={{m: 2}} animation="wave" variant="rounded" height={80} />
-            <Skeleton sx={{m: 2}} animation="wave" variant="rounded" height={80} />
+                        Start Practice
+                    </Button>
+                </CardActions>
+            </Card>
         </Container>
     );
 }

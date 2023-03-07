@@ -86,10 +86,12 @@ function Header() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {PAGES.map((page) => (
-                                <NavLink key={page} to={`${page}`}>
+                            {PAGES.map((page, index) => (
+                                <NavLink key={index} to={`${page.uri}`}>
                                     <MenuItem onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page[0].toUpperCase() + page.slice(1)}</Typography>
+                                        <Typography textAlign="center">
+                                            {page.name[0].toUpperCase() + page.name.slice(1)}
+                                        </Typography>
                                     </MenuItem>
                                 </NavLink>
                             ))}
@@ -118,16 +120,16 @@ function Header() {
                             </Link>
                         </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {PAGES.map((page) => (
+                        {PAGES.map((page, index) => (
                             <Button
-                                key={page}
-                                to={`${page}`}
+                                key={index}
+                                to={`${page.uri}`}
                                 component={NavLink}
                                 color="inherit"
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, display: 'display' }}
                             >
-                                {page}
+                                {page.name}
                             </Button>
                         ))}
                     </Box>
