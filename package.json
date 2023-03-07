@@ -2,6 +2,7 @@
   "name": "goxtype",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -11,13 +12,18 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.11.59",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
     "eslint": "8.22.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
+    "express": "^4.18.2",
+    "express-validator": "^6.15.0",
+    "form-data": "^4.0.0",
+    "mongoose": "^6.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-responsive": "^9.0.0",
@@ -28,6 +34,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "serve": "nodemon",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -50,5 +57,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.14.0",
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1"
+  },
+  "proxy": "http://localhost:3001"
 }
