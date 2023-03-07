@@ -1,19 +1,7 @@
 import {CreateUserDto} from "../dto/create.user.dto";
 import {PutUserDto} from "../dto/put.user.dto";
 import {PatchUserDto} from "../dto/patch.user.dto";
-import MongooseService from "../../common/service/mongoose.service.js";
-
-const Schema = MongooseService.getMongoose().Schema;
-
-const userSchema = new Schema({
-    email: String,
-    password: { type: String },
-    firstName: String,
-    lastName: String,
-    permissionFlags: Number,
-});
-
-const User = MongooseService.getMongoose().model("Users", userSchema);
+import User from "../models/users.models.js";
 
 class UsersDao {
     async addUser(userFields: CreateUserDto) {
