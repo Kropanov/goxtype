@@ -1,6 +1,7 @@
 import express from "express";
 import usersService from "../service/users.service.js";
 
+// ToDo: refactoring this class
 class usersMiddleware {
     async validateSameEmailDoesntExist(
         req: express.Request,
