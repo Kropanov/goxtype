@@ -10,17 +10,14 @@ import {
     IconButton,
     Typography
 } from "@mui/material";
-import PackImage from "../../images/english-pack-big-ben.jpg";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import {toDefaultDate} from "../../func";
 import {PackType} from "../../types/Types";
-import UsersService from "../../services/users/service/users.service.js";
 
 export default function Pack(props: PackType) {
 
-    const {author, image, date, data, name, description} = props;
+    const {author, image, date, name, description} = props;
     const [packDate, setPackDate] = useState(date);
-    const [userName, setUserName] = useState("Ghoste");
 
     useEffect(() => {
         (async () => {
@@ -47,7 +44,7 @@ export default function Pack(props: PackType) {
             <CardMedia
                 component="img"
                 height="194"
-                image={PackImage}
+                image={image} // ToDo: images directory should be in public dir, may be
                 alt="Pack Image"
             />
             <CardContent>
