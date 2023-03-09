@@ -9,9 +9,11 @@ import {PackRoutes} from "../packs/routes/packs.routes.js";
 const app: Express = express();
 const routes: Array<CommonRoutesConfig> = [];
 app.use(bodyParser.json());
+app.use(express.static('public'))
 
 routes.push(new UserRoutes(app));
 routes.push(new PackRoutes(app));
+
 
 const PORT = process.env.PORT || 3001;
 app.listen( PORT, () => {
