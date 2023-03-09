@@ -8,11 +8,11 @@ class PacksService implements CRUD {
     }
 
     deleteById(id: string): Promise<string> {
-        return Promise.resolve("");
+        return PacksDao.removePackById(id);
     }
 
     list(limit: number, page: number): Promise<any> {
-        return Promise.resolve(undefined);
+        return PacksDao.getPacks(limit, page);
     }
 
     patchById(id: string, resource: any): Promise<string> {

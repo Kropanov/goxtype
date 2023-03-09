@@ -8,7 +8,12 @@ export class PackRoutes extends CommonRoutesConfig {
     }
 
     configureRoutes(): express.Application {
-        this.app.route("/practice-packs").post(PacksController.createPack);
+        this.app.route("/practice-packs/:userId")
+            .delete(PacksController.removePack);
+
+        this.app.route("/practice-packs")
+            .post(PacksController.createPack)
+            .get(PacksController.listPacks);
         return this.app;
     }
 }
