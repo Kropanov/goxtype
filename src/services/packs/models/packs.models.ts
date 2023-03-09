@@ -5,6 +5,9 @@ const Schema = MongooseService.getMongoose().Schema;
 const packSchema = new Schema({
     name: String,
     author: String,
+    date: Date,
+    image: String,
+    description: String,
     data: [{
         text: String,
     }]
