@@ -1,3 +1,4 @@
+// ToDo: File will gone to component directory
 export type Challenge = {
     id: number;
     complexity: string;
@@ -25,3 +26,14 @@ export type NotificationState = {
     message: string;
     open: boolean;
 };
+
+export type PackType = {
+    name: string;
+    author: string;
+    date: string;
+    image: string;
+    description: string;
+    data: text;
+};
+
+type text = {text: string};
