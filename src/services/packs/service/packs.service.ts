@@ -23,8 +23,8 @@ class PacksService implements CRUD {
         return Promise.resolve("");
     }
 
-    readById(id: string): Promise<any> {
-        return Promise.resolve(undefined);
+    readById(id: string) {
+        return PacksDao.readPackById(id);
     }
 
 }

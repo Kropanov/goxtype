@@ -16,6 +16,11 @@ class PacksController {
         const message = await PacksService.deleteById(req.body.id);
         res.status(200).send(message);
     }
+
+    async getPackById(req: express.Request, res: express.Response) {
+        const pack = await PacksService.readById(req.body.id);
+        res.status(200).send(pack);
+    }
 }
 
 export default new PacksController();
