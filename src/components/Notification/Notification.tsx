@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import Alert from '@mui/material/Alert';
-import {Collapse, Paper} from "@mui/material";
+import {Box, Collapse, Paper} from "@mui/material";
 import {NotificationContext} from "./NotificationContext/NotificationContext";
 import {HIDE_NOTIFICATION} from "../../constants/Constants";
 
@@ -10,7 +10,7 @@ function Notification() {
     useEffect(() => {
         const timeId = setTimeout(() => {
             handleCloseAlert();
-        }, 3000);
+        }, 5000);
 
         return () => {
             clearTimeout(timeId);
@@ -22,13 +22,13 @@ function Notification() {
     };
 
     return (
-        <Paper sx={{position: 'fixed', right: 10, bottom: 10}}>
+        <Box sx={{position: 'fixed', right: {sm: 10}, bottom: {sm: 10}}}>
             <Collapse in={state.open}>
                 <Alert variant="filled" severity={state.severity} onClose={handleCloseAlert}>
                     {state.message}
                 </Alert>
             </Collapse>
-        </Paper>
+        </Box>
     );
 }
 

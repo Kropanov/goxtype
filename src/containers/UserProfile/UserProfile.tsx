@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import {NotificationContext} from "../../components/Notification/NotificationContext/NotificationContext";
 import {SHOW_NOTIFICATION} from "../../constants/Constants";
 import {scrollPageUp} from "../../func";
+import Settings from "../../components/Settings/Settings";
 
 export default function UserProfile() {
 
@@ -47,7 +48,7 @@ export default function UserProfile() {
                             sx={{
                                 width: {lg: 296, md: 216, sm: 165, xs: 120},
                                 height: {lg: 296, md: 216, sm: 165, xs: 120},
-                                mb: 2,
+                                mb: 1,
                                 mt: 3
                             }}
                         />
@@ -56,7 +57,6 @@ export default function UserProfile() {
                             noWrap
                             component="h5"
                             sx={{
-                                mr: 2,
                                 display: {  xs: 'flex' },
                                 fontWeight: 700,
                                 margin: 'auto',
@@ -64,7 +64,7 @@ export default function UserProfile() {
                                 textDecoration: 'none',
                             }}
                         >
-                            User Name
+                            Brave Heart
                         </Typography>
                     </Grid>
                 </Grid>
@@ -80,7 +80,7 @@ export default function UserProfile() {
                             Library will be added soon!
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            Settings
+                            <Settings />
                         </TabPanel>
                     </Box>
                 </Grid>
