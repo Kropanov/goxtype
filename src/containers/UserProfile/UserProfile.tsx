@@ -13,7 +13,6 @@ import {NotificationContext} from "../../components/Notification/NotificationCon
 import {SHOW_NOTIFICATION} from "../../constants/Constants";
 import {scrollPageUp} from "../../func";
 
-
 export default function UserProfile() {
 
     const [value, setValue] = useState(0);
@@ -26,16 +25,6 @@ export default function UserProfile() {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
-    // ToDo: For testing api. Don't forget this
-    // React.useEffect(() => {
-    //     try {
-    //         fetch("/user")
-    //             .then((res) => res.json())
-    //             .then((data) => console.log(data.message));
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // }, []);
 
     return (
         <Container>

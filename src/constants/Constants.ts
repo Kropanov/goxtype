@@ -1,4 +1,4 @@
-import {Challenge} from "../types/Types";
+import {Challenge} from "../components/Types/Types";
 
 export const PAGES = [
     {name: "practice", uri: "practice-packs"},

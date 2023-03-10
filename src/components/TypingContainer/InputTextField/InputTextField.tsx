@@ -1,6 +1,6 @@
 import React from 'react';
 import {TextField} from "@mui/material";
-import {TextFieldColor} from "../../../types/Types";
+import {TextFieldColor} from "../../Types/Types";
 
 type InputTextFieldProps = {
     onChangeValue: (event:  React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;

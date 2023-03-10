@@ -1,4 +1,3 @@
-// ToDo: File will gone to component directory
 export type Challenge = {
     id: number;
     complexity: string;
@@ -33,7 +32,7 @@ export type PackType = {
     date: string;
     image: string;
     description: string;
-    data: text;
+    data: Text[];
 };
 
-type text = {text: string};
+type Text = {text: string};

@@ -1,21 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {Container, Skeleton} from "@mui/material";
 import Pack from "../../components/Pack/Pack";
-import {PackType} from "../../types/Types";
+import {PackType} from "../../components/Types/Types";
 
 export default function PracticePacks() {
-    // ToDo rename variables
-    const [value, setValue] = useState<PackType[]>([]);
+    const [packs, setPacks] = useState<PackType[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
             const response = await fetch("/practice-packs").then(res => res.json());
-            setValue(response);
-            // ToDo: remove after testing
-            setTimeout(() => {
-                setLoading(false);
-            }, 2000);
+            setPacks(response);
+            setLoading(false);
         })();
     }, []);
 
@@ -23,12 +19,10 @@ export default function PracticePacks() {
         <Container maxWidth="md">
             {
                 loading ?
-                    <>
-                        {/*// ToDo: fix that ! :( */}
-                        <Skeleton sx={{m: 2}} animation="wave" variant="rounded" height={400} />
-                        <Skeleton sx={{m: 2}} animation="wave" variant="rounded" height={400} />
-                    </>
-                : value.map((item, index) => (
+                    [1, 2].map((num) => (
+                        <Skeleton key={num} sx={{m: 2}} animation="wave" variant="rounded" height={400} />
+                    ) )
+                : packs.map((item, index) => (
                     <Pack
                         key={index}
                         name={item.name}

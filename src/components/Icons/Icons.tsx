@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from './Icon/Icon';
-import {IconsType} from '../../types/Types';
+import {IconsType} from '../Types/Types';
 
 type IconsProps = {
     data: IconsType;

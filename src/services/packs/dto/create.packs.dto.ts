@@ -1,4 +1,4 @@
-import {PacksDto} from "./packs.dto";
+import {Text} from "./packs.dto";
 
 export interface CreatePacksDto {
     name: string;
@@ -6,5 +6,5 @@ export interface CreatePacksDto {
     date: number;
     image: string;
     description: string;
-    data: PacksDto[];
+    data: Text[];
 }
