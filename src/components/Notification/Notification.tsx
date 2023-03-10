@@ -24,7 +24,7 @@ function Notification() {
     return (
         <Paper sx={{position: 'fixed', right: 10, bottom: 10}}>
             <Collapse in={state.open}>
-                <Alert severity={state.severity} onClose={handleCloseAlert}>
+                <Alert variant="filled" severity={state.severity} onClose={handleCloseAlert}>
                     {state.message}
                 </Alert>
             </Collapse>
