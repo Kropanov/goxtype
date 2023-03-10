@@ -27,7 +27,7 @@ export default function UserProfile() {
     };
 
     return (
-        <Container>
+        <Container sx={{minHeight: "800px"}}>
             <Grid container>
                 <Grid item sm={4} xs={12}>
                     <Grid
@@ -72,18 +72,14 @@ export default function UserProfile() {
                     <Box sx={{ width: '100%', mb: 3, mt: {sm: 3, xs: 0} }}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                <Tab label="Review" />
                                 <Tab label="Library" />
                                 <Tab label="Settings" />
                             </Tabs>
                         </Box>
                         <TabPanel value={value} index={0}>
-                            Review
+                            Library will be added soon!
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            Library
-                        </TabPanel>
-                        <TabPanel value={value} index={2}>
                             Settings
                         </TabPanel>
                     </Box>
