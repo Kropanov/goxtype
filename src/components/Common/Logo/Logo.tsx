@@ -1,6 +1,4 @@
 import React from 'react';
-import Logotype from "../../../images/Logo.png";
-import BlackLogotype from "../../../images/BlackLogo.png";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 type LogoProps = {
@@ -13,11 +11,12 @@ function Logo(props: LogoProps) {
 
     const {width, height, blackLogo} = props;
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-    const mode =  prefersDarkMode ? Logotype : BlackLogotype;
+    // ToDo: we need to change some logic in this piece of code
+    const mode =  prefersDarkMode ? "Logo.png" : "BlackLogo.png";
 
     return (
         <img
-            src={blackLogo ? mode : Logotype}
+            src={blackLogo ? mode : "Logo.png"}
             alt="logo"
             width={width != null ? width : 24}
             height={height != null ? height : 24}

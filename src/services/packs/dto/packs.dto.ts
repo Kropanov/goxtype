@@ -1,3 +1,3 @@
-export interface PacksDto {
+export interface Text {
     text: string;
 }

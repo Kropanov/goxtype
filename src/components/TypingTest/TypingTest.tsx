@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import {Paper} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Code from "../../images/Code.svg";
 import Container from "@mui/material/Container";
 import {useRouter} from "../../hooks/Router/Router";
 
@@ -69,7 +68,7 @@ export default function TypingTest() {
                     >
                         <img
                             style={{margin: "2rem"}}
-                            src={Code}
+                            src="Code.svg"
                             alt="Code"
                         />
                     </Box>

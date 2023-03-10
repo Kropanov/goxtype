@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import {toDefaultDate} from "../../func";
-import {PackType} from "../../types/Types";
+import {PackType} from "../Types/Types";
 
 export default function Pack(props: PackType) {
 
@@ -20,9 +20,6 @@ export default function Pack(props: PackType) {
     const [packDate, setPackDate] = useState(date);
 
     useEffect(() => {
-        (async () => {
-            console.log();
-        })();
         setPackDate(toDefaultDate(packDate));
     }, []);
 
@@ -44,7 +41,7 @@ export default function Pack(props: PackType) {
             <CardMedia
                 component="img"
                 height="194"
-                image={image} // ToDo: images directory should be in public dir, may be
+                image={image}
                 alt="Pack Image"
             />
             <CardContent>

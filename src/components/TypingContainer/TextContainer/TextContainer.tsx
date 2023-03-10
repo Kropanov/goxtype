@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./TextContainer.module.scss";
-import {Char} from "../../../types/Types";
+import {Char} from "../../Types/Types";
 import {
     Container,
     Box,

@@ -1,4 +1,4 @@
-import {NotificationState} from "../../../types/Types";
+import {NotificationState} from "../../Types/Types";
 import {HIDE_NOTIFICATION, SHOW_NOTIFICATION} from "../../../constants/Constants";
 
 // eslint-disable-next-line
