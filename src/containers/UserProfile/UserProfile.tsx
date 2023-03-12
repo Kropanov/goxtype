@@ -28,7 +28,7 @@ export default function UserProfile() {
     };
 
     return (
-        <Container sx={{minHeight: "800px"}}>
+        <Container sx={{minHeight: "900px"}}>
             <Grid container>
                 <Grid item sm={4} xs={12}>
                     <Grid

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import Alert from '@mui/material/Alert';
-import {Box, Collapse, Paper} from "@mui/material";
+import {Box, Collapse} from "@mui/material";
 import {NotificationContext} from "./NotificationContext/NotificationContext";
 import {HIDE_NOTIFICATION} from "../../constants/Constants";
 

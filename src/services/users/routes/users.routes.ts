@@ -9,6 +9,7 @@ export class UserRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
         super(app, 'UserRoutes');
     }
+
     configureRoutes(): express.Application {
         this.app
             .route(`/users`)
