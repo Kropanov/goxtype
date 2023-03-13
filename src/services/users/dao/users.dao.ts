@@ -10,7 +10,7 @@ class UsersDao {
             permissionFlags: 1,
         });
         await user.save();
-        return user._id;
+        return user;
     }
 
     async getUsers(limit = 25, page = 0) {
