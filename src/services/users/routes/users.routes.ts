@@ -12,19 +12,16 @@ export class UserRoutes extends CommonRoutesConfig {
 
     configureRoutes(): express.Application {
         this.app
-            .route(`/signup`)
+            .route(`/users`)
+            .get(UsersController.listUsers)
             .post(
                 body('email').isEmail(),
                 body('password')
-                    .isLength({ min: 5 })
-                    .withMessage('Must include password (5+ characters)'),
+                .isLength({ min: 5 })
+                .withMessage('Must include password (5+ characters)'),
                 BodyValidationMiddleware.verifyBodyFieldsErrors,
                 UsersMiddleware.validateSameEmailDoesntExist,
                 UsersController.createUser);
-
-        this.app
-            .route(`/users`)
-            .get(UsersController.listUsers);
 
         this.app.param(`userId`, UsersMiddleware.extractUserId);
         this.app
