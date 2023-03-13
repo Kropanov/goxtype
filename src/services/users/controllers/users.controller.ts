@@ -1,6 +1,5 @@
 import express from 'express';
 import argon2 from 'argon2';
-import jwt from 'jsonwebtoken';
 import UsersService from "../service/users.service.js";
 
 class UsersController {
@@ -17,16 +16,7 @@ class UsersController {
     async createUser(req: express.Request, res: express.Response) {
         req.body.password = await argon2.hash(req.body.password);
         const user = await UsersService.create(req.body);
-        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET || "", {
-            expiresIn: process.env.JWT_EXPIRES_IN
-        });
-        res.status(201).send({
-            status: "success",
-            token,
-            data: {
-                user
-            }
-        });
+        res.status(201).send({status: "success", data: {user}});
     }
 
     async patch(req: express.Request, res: express.Response) {
