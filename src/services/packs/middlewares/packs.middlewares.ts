@@ -1,7 +1,7 @@
 // import express from "express";
 //
 export class PacksMiddleware {
-    // ToDo: write middlewares after writing read operation
+    // ToDo: create middlewares
     // async validateUserExists(
     //     req: express.Request,
     //     res: express.Response,

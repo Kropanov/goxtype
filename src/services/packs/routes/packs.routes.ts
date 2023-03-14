@@ -1,6 +1,6 @@
 import express from "express";
 import {CommonRoutesConfig} from "../../common/routes/routes.config.js";
-import PacksController from "../controllers/packs.controller.js";
+import PacksController from "../controllers/packs.controllers.js";
 
 export class PackRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {

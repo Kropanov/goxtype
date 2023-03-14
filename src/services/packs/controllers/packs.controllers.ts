@@ -4,22 +4,33 @@ import PacksService from "../service/packs.service.js";
 class PacksController {
     async createPack(req: express.Request, res: express.Response) {
         const packId = await PacksService.create(req.body);
-        res.status(201).send({ id: packId });
+        res.status(201).send({
+            id: packId
+        });
     }
 
     async listPacks(req: express.Request, res: express.Response) {
         const packs = await PacksService.list(100, 0);
-        res.status(200).send(packs);
+        res.status(200).send({
+            status: "success",
+            data: packs
+        });
     }
 
     async removePack(req: express.Request, res: express.Response) {
         const message = await PacksService.deleteById(req.body.id);
-        res.status(200).send(message);
+        res.status(200).send({
+            status: "success",
+            message
+        });
     }
 
     async getPackById(req: express.Request, res: express.Response) {
         const pack = await PacksService.readById(req.body.id);
-        res.status(200).send(pack);
+        res.status(200).send({
+            status: "success",
+            data: pack
+        });
     }
 }
 
