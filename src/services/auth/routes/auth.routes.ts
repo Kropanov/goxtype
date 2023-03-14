@@ -4,6 +4,7 @@ import {CommonRoutesConfig} from "../../common/routes/routes.config.js";
 import BodyValidationMiddleware from "../../common/middlewares/body.validation.js";
 import AuthMiddlewares from "../middlewares/auth.middlewares.js";
 import AuthController from "../controllers/auth.controllers.js";
+import UsersMiddleware from "../../users/middlewares/users.middlewares.js";
 
 export class AuthRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -18,11 +19,12 @@ export class AuthRoutes extends CommonRoutesConfig {
             AuthMiddlewares.verifyUserPassword,
             AuthController.login
         ]);
-        // TODO: when user's being created then email can existing
+
         this.app.post(`/signup`, [
             body('email').isEmail(),
             body('password').isString(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
+            UsersMiddleware.validateSameEmailDoesntExist,
             AuthController.signup
         ]);
 

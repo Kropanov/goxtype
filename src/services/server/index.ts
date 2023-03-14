@@ -1,5 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config({ path: "./config.env" });
 import express, { Express } from 'express';
 import bodyParser from "body-parser";
 import {UserRoutes} from "../users/routes/users.routes.js";
@@ -10,7 +8,7 @@ import {AuthRoutes} from "../auth/routes/auth.routes.js";
 const app: Express = express();
 const routes: Array<CommonRoutesConfig> = [];
 app.use(bodyParser.json());
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 routes.push(new UserRoutes(app));
 routes.push(new PackRoutes(app));

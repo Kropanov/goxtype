@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config({ path: "./config.env" });
 import mongoose from 'mongoose';
-// ToDo: remove dotenv on the top
+
 const DATABASE = process.env.DATABASE || "";
 const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || "";
 
@@ -24,7 +24,6 @@ class MongooseService {
         return mongoose;
     }
 
-    // ToDo: rework this method
     connectWithRetry = () => {
         mongoose.set('strictQuery', true);
         mongoose

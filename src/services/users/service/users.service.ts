@@ -4,7 +4,7 @@ import {CreateUserDto} from "../dto/create.user.dto.js";
 import {PatchUserDto} from "../dto/patch.user.dto.js";
 import {PutUserDto} from "../dto/put.user.dto.js";
 
-// ToDo: pls fix any Types
+// TODO: fix any types
 class UsersService implements CRUD {
     async create(resource: CreateUserDto) {
         return UsersDao.addUser(resource);
