@@ -1,7 +1,7 @@
 import express from "express";
 import { CommonRoutesConfig} from "../../common/routes/routes.config.js";
 import UsersController from "../controllers/users.controller.js";
-import UsersMiddleware from "../middleware/users.middleware.js";
+import UsersMiddleware from "../middlewares/users.middlewares.js";
 import BodyValidationMiddleware from "../../common/middlewares/body.validation.js";
 import {body} from "express-validator";
 

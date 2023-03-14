@@ -1,14 +1,13 @@
 import express from "express";
-import usersService from "../service/users.service.js";
+import UsersService from "../service/users.service.js";
 
-// ToDo: refactoring this class
-class usersMiddleware {
+class UsersMiddleware {
     async validateSameEmailDoesntExist(
         req: express.Request,
         res: express.Response,
         next: express.NextFunction
     ) {
-        const user = await usersService.getUserByEmail(req.body.email);
+        const user = await UsersService.getUserByEmail(req.body.email);
         if (user) {
             res.status(400).send({ error: `User email already exists` });
         } else {
@@ -21,7 +20,7 @@ class usersMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) {
-        const user = await usersService.getUserByEmail(req.body.email);
+        const user = await UsersService.getUserByEmail(req.body.email);
         if (user && user.id === req.params.userId) {
             next();
         } else {
@@ -47,7 +46,7 @@ class usersMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) {
-        const user = await usersService.readById(req.params.userId);
+        const user = await UsersService.readById(req.params.userId);
         if (user) {
             next();
         } else {
@@ -67,4 +66,4 @@ class usersMiddleware {
     }
 }
 
-export default new usersMiddleware();
+export default new UsersMiddleware();
