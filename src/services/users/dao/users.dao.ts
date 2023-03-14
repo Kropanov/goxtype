@@ -7,7 +7,7 @@ class UsersDao {
     async addUser(userFields: CreateUserDto) {
         const user = new User({
             ...userFields,
-            permissionFlags: 1,
+            permissionLevel: 1,
         });
         await user.save();
         return user;
@@ -28,13 +28,11 @@ class UsersDao {
         userId: string,
         userFields: PatchUserDto | PutUserDto
     ) {
-        const existingUser = await User.findOneAndUpdate(
-            { _id: userId },
-            { $set: userFields },
-            { new: true }
+        return await User.findOneAndUpdate(
+            {_id: userId},
+            {$set: userFields},
+            {new: true}
         ).exec();
-
-        return existingUser;
     }
 
     async removeUserById(userId: string) {

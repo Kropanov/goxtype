@@ -5,9 +5,8 @@ const Schema = MongooseService.getMongoose().Schema;
 const userSchema = new Schema({
     email: String,
     password: String,
-    firstName: String,
-    lastName: String,
-    permissionFlags: Number,
+    name: String,
+    permissionLevel: Number,
 });
 
 const User = MongooseService.getMongoose().model("Users", userSchema);

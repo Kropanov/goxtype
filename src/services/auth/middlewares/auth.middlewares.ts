@@ -18,7 +18,7 @@ class AuthMiddlewares {
                 req.body = {
                     userId: user._id,
                     email: user.email,
-                    permissionFlags: user.permissionFlags,
+                    permissionFlags: user.permissionLevel,
                 };
                 return next();
             }
