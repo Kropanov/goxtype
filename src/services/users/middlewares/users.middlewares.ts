@@ -9,7 +9,10 @@ class UsersMiddleware {
     ) {
         const user = await UsersService.getUserByEmail(req.body.email);
         if (user) {
-            res.status(400).send({ error: `User email already exists` });
+            res.status(400).send({
+                status: "fail",
+                message: "User email already exists!"
+            });
         } else {
             next();
         }
@@ -24,7 +27,10 @@ class UsersMiddleware {
         if (user && user.id === req.params.userId) {
             next();
         } else {
-            res.status(400).send({ error: `Invalid email` });
+            res.status(400).send({
+                status: "fail",
+                message: "Invalid email!"
+            });
         }
     }
 
@@ -51,7 +57,8 @@ class UsersMiddleware {
             next();
         } else {
             res.status(404).send({
-                error: `User ${req.params.userId} not found`,
+                status: "fail",
+                message: `User ${req.params.userId} not found`,
             });
         }
     }

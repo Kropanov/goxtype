@@ -19,9 +19,7 @@ class AuthController {
         res.status(201).send({
             status: "success",
             token,
-            data: {
-                user
-            }
+            data: user
         });
     }
 }
