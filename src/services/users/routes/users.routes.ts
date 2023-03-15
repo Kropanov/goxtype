@@ -2,6 +2,7 @@ import express from "express";
 import { CommonRoutesConfig} from "../../common/routes/routes.config.js";
 import UsersController from "../controllers/users.controller.js";
 import UsersMiddleware from "../middlewares/users.middlewares.js";
+import AuthMiddlewares from "../../auth/middlewares/auth.middlewares.js";
 import BodyValidationMiddleware from "../../common/middlewares/body.validation.js";
 import {body} from "express-validator";
 
@@ -26,7 +27,7 @@ export class UserRoutes extends CommonRoutesConfig {
         this.app.param(`userId`, UsersMiddleware.extractUserId);
         this.app
             .route(`/users/:userId`)
-            .all(UsersMiddleware.validateUserExists)
+            .all(AuthMiddlewares.protectRoutes, UsersMiddleware.validateUserExists)
             .get(UsersController.getUserById)
             .delete(UsersController.removeUser);
 
