@@ -40,7 +40,7 @@ class UsersDao {
     }
 
     async getUserByEmail(email: string) {
-        return User.findOne({ email: email }).exec();
+        return User.findOne({ email: email }).select("+password").exec();
     }
 }
 
