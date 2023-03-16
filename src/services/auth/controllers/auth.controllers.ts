@@ -8,7 +8,13 @@ class AuthController {
         const token = JWTService.createJWT(req.body.userId);
         res.status(200).send({
             status: "success",
-            token
+            token,
+            // TODO: Data will be here temporarily, we need only token actually
+            data: {
+                name: req.body.name,
+                email: req.body.email,
+                permissionLevel: req.body.permissionLevel,
+            }
         });
     }
 
@@ -20,7 +26,9 @@ class AuthController {
             status: "success",
             token,
             data: {
-                name: user.name
+                name: user.name,
+                email: user.email,
+                permissionLevel: user.permissionLevel,
             }
         });
     }
