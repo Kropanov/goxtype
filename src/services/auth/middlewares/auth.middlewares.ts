@@ -1,6 +1,6 @@
 import express from 'express';
 import argon2 from "argon2";
-import UsersService from "../../users/service/users.service.js";
+import UserService from "../../users/service/users.service.js";
 
 class AuthMiddleware {
     async verifyUserPassword(
@@ -8,7 +8,7 @@ class AuthMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) {
-        const user = await UsersService.getUserByEmail(
+        const user = await UserService.getUserByEmail(
             req.body.email
         );
 
@@ -29,7 +29,6 @@ class AuthMiddleware {
         });
     }
 
-    // TODO: add this method to user routes
     async protectRoutes(
         req: express.Request,
         res: express.Response,
@@ -44,7 +43,6 @@ class AuthMiddleware {
             });
         }
         // TODO: don't forget, continue work
-
         return next();
     }
 }
