@@ -1,6 +1,6 @@
 import {Text} from "./packs.dto";
 
-export interface CreatePacksDto {
+export interface CreatePackDto {
     name: string;
     author: string;
     date: number;

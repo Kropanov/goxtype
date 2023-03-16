@@ -2,8 +2,7 @@ import express from 'express';
 import argon2 from "argon2";
 import UsersService from "../../users/service/users.service.js";
 
-// ToDo rename AuthMiddlewares
-class AuthMiddlewares {
+class AuthMiddleware {
     async verifyUserPassword(
         req: express.Request,
         res: express.Response,
@@ -50,4 +49,4 @@ class AuthMiddlewares {
     }
 }
 
-export default new AuthMiddlewares();
+export default new AuthMiddleware();

@@ -2,7 +2,7 @@ import express from "express";
 import {body} from "express-validator";
 import {CommonRoutesConfig} from "../../common/routes/routes.config.js";
 import BodyValidationMiddleware from "../../common/middlewares/body.validation.js";
-import AuthMiddlewares from "../middlewares/auth.middlewares.js";
+import AuthMiddleware from "../middlewares/auth.middlewares.js";
 import AuthController from "../controllers/auth.controllers.js";
 import UsersMiddleware from "../../users/middlewares/users.middlewares.js";
 
@@ -16,7 +16,7 @@ export class AuthRoutes extends CommonRoutesConfig {
             body('email').isEmail(),
             body('password').isString(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
-            AuthMiddlewares.verifyUserPassword,
+            AuthMiddleware.verifyUserPassword,
             AuthController.login
         ]);
 

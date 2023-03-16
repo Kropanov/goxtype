@@ -1,8 +1,8 @@
 import express from "express";
 import { CommonRoutesConfig} from "../../common/routes/routes.config.js";
-import UsersController from "../controllers/users.controller.js";
-import UsersMiddleware from "../middlewares/users.middlewares.js";
-import AuthMiddlewares from "../../auth/middlewares/auth.middlewares.js";
+import UserController from "../controllers/users.controller.js";
+import UserMiddleware from "../middlewares/users.middlewares.js";
+import AuthMiddleware from "../../auth/middlewares/auth.middlewares.js";
 import BodyValidationMiddleware from "../../common/middlewares/body.validation.js";
 import {body} from "express-validator";
 
@@ -14,22 +14,22 @@ export class UserRoutes extends CommonRoutesConfig {
     configureRoutes(): express.Application {
         this.app
             .route(`/users`)
-            .get(UsersController.listUsers)
+            .get(UserController.listUsers)
             .post(
                 body('email').isEmail(),
                 body('password')
                 .isLength({ min: 5 })
                 .withMessage('Must include password (5+ characters)'),
                 BodyValidationMiddleware.verifyBodyFieldsErrors,
-                UsersMiddleware.validateSameEmailDoesntExist,
-                UsersController.createUser);
+                UserMiddleware.validateSameEmailDoesntExist,
+                UserController.createUser);
 
-        this.app.param(`userId`, UsersMiddleware.extractUserId);
+        this.app.param(`userId`, UserMiddleware.extractUserId);
         this.app
             .route(`/users/:userId`)
-            .all(AuthMiddlewares.protectRoutes, UsersMiddleware.validateUserExists)
-            .get(UsersController.getUserById)
-            .delete(UsersController.removeUser);
+            .all(AuthMiddleware.protectRoutes, UserMiddleware.validateUserExists)
+            .get(UserController.getUserById)
+            .delete(UserController.removeUser);
 
         this.app.put(`/users/:userId`, [
             body('email').isEmail(),
@@ -40,8 +40,8 @@ export class UserRoutes extends CommonRoutesConfig {
             body('lastName').isString(),
             body('permissionFlags').isInt(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
-            UsersMiddleware.validateSameEmailBelongToSameUser,
-            UsersController.put,
+            UserMiddleware.validateSameEmailBelongToSameUser,
+            UserController.put,
         ]);
 
         this.app.patch(`/users/:userId`, [
@@ -54,8 +54,8 @@ export class UserRoutes extends CommonRoutesConfig {
             body('lastName').isString().optional(),
             body('permissionFlags').isInt().optional(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
-            UsersMiddleware.validatePatchEmail,
-            UsersController.patch
+            UserMiddleware.validatePatchEmail,
+            UserController.patch
         ]);
 
         return this.app;
