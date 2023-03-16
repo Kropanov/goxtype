@@ -17,8 +17,9 @@ class AuthMiddleware {
             if (await argon2.verify(passwordHash, req.body.password)) {
                 req.body = {
                     userId: user._id,
+                    name: user.name,
                     email: user.email,
-                    permissionFlags: user.permissionLevel,
+                    permissionLevel: user.permissionLevel,
                 };
                 return next();
             }
@@ -29,6 +30,7 @@ class AuthMiddleware {
         });
     }
 
+    // TODO: may be we need to reconstruction this method on few methods and create class for that manipulation
     async protectRoutes(
         req: express.Request,
         res: express.Response,
