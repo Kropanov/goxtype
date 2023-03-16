@@ -1,10 +1,10 @@
 import express from 'express';
 import argon2 from 'argon2';
-import UsersService from "../service/users.service.js";
+import UserService from "../service/users.service.js";
 
-class UsersController {
+class UserController {
     async listUsers(req: express.Request, res: express.Response) {
-        const users = await UsersService.list(100, 0);
+        const users = await UserService.list(100, 0);
         res.status(200).send({
             status: "success",
             data: users
@@ -12,7 +12,7 @@ class UsersController {
     }
 
     async getUserById(req: express.Request, res: express.Response) {
-        const user = await UsersService.readById(req.body.id);
+        const user = await UserService.readById(req.body.id);
         res.status(200).send({
             status: "success",
             data: user
@@ -21,7 +21,7 @@ class UsersController {
 
     async createUser(req: express.Request, res: express.Response) {
         req.body.password = await argon2.hash(req.body.password);
-        const user = await UsersService.create(req.body);
+        const user = await UserService.create(req.body);
         res.status(201).send({status: "success", data: user});
     }
 
@@ -29,7 +29,7 @@ class UsersController {
         if (req.body.password) {
             req.body.password = await argon2.hash(req.body.password);
         }
-        await UsersService.patchById(req.body.id, req.body);
+        await UserService.patchById(req.body.id, req.body);
         res.status(200).send({
             status: "success",
             message: "User was updated!"
@@ -38,7 +38,7 @@ class UsersController {
 
     async put(req: express.Request, res: express.Response) {
         req.body.password = await argon2.hash(req.body.password);
-        await UsersService.putById(req.body.id, req.body);
+        await UserService.putById(req.body.id, req.body);
         res.status(200).send({
             status: "success",
             message: "User was updated!"
@@ -46,7 +46,7 @@ class UsersController {
     }
 
     async removeUser(req: express.Request, res: express.Response) {
-        await UsersService.deleteById(req.body.id);
+        await UserService.deleteById(req.body.id);
         res.status(200).send({
             status: "success",
             message: "User was deleted!"
@@ -54,4 +54,4 @@ class UsersController {
     }
 }
 
-export default new UsersController();
+export default new UserController();

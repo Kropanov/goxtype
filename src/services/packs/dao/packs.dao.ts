@@ -1,9 +1,8 @@
-import {CreatePacksDto} from "../dto/create.packs.dto.js";
+import {CreatePackDto} from "../dto/create.packs.dto.js";
 import Pack from "../models/packs.models.js";
-import User from "../../users/models/users.models";
 
-class PacksDao {
-    async addPack(data: CreatePacksDto) {
+class PackDao {
+    async addPack(data: CreatePackDto) {
         const pack = new Pack(data);
         await pack.save();
         return pack._id;
@@ -26,4 +25,4 @@ class PacksDao {
     }
 }
 
-export default new PacksDao();
+export default new PackDao();

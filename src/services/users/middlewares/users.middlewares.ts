@@ -1,13 +1,13 @@
 import express from "express";
-import UsersService from "../service/users.service.js";
+import UserService from "../service/users.service.js";
 
-class UsersMiddleware {
+class UserMiddleware {
     async validateSameEmailDoesntExist(
         req: express.Request,
         res: express.Response,
         next: express.NextFunction
     ) {
-        const user = await UsersService.getUserByEmail(req.body.email);
+        const user = await UserService.getUserByEmail(req.body.email);
         if (user) {
             res.status(400).send({
                 status: "fail",
@@ -23,7 +23,7 @@ class UsersMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) {
-        const user = await UsersService.getUserByEmail(req.body.email);
+        const user = await UserService.getUserByEmail(req.body.email);
         if (user && user.id === req.params.userId) {
             next();
         } else {
@@ -52,7 +52,7 @@ class UsersMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) {
-        const user = await UsersService.readById(req.params.userId);
+        const user = await UserService.readById(req.params.userId);
         if (user) {
             next();
         } else {
@@ -73,4 +73,4 @@ class UsersMiddleware {
     }
 }
 
-export default new UsersMiddleware();
+export default new UserMiddleware();

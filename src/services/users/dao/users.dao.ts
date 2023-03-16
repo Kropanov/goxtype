@@ -3,8 +3,7 @@ import {PutUserDto} from "../dto/put.user.dto";
 import {PatchUserDto} from "../dto/patch.user.dto";
 import User from "../models/users.models.js";
 
-// TODO: remove character 's' from class names
-class UsersDao {
+class UserDao {
     async addUser(userFields: CreateUserDto) {
         const user = new User({
             ...userFields,
@@ -45,4 +44,4 @@ class UsersDao {
     }
 }
 
-export default new UsersDao();
+export default new UserDao();

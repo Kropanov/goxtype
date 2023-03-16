@@ -1,18 +1,18 @@
 import {CRUD} from "../../common/interfaces/crud.interface.js";
-import PacksDao from "../dao/packs.dao.js";
-import {CreatePacksDto} from "../dto/create.packs.dto.js";
+import PackDao from "../dao/packs.dao.js";
+import {CreatePackDto} from "../dto/create.packs.dto.js";
 
-class PacksService implements CRUD {
-    create(resource: CreatePacksDto): Promise<any> {
-        return PacksDao.addPack(resource);
+class PackService implements CRUD {
+    create(resource: CreatePackDto): Promise<any> {
+        return PackDao.addPack(resource);
     }
 
     deleteById(id: string): Promise<string> {
-        return PacksDao.removePackById(id);
+        return PackDao.removePackById(id);
     }
 
     list(limit: number, page: number): Promise<any> {
-        return PacksDao.getPacks(limit, page);
+        return PackDao.getPacks(limit, page);
     }
 
     patchById(id: string, resource: any): Promise<string> {
@@ -24,9 +24,9 @@ class PacksService implements CRUD {
     }
 
     readById(id: string) {
-        return PacksDao.readPackById(id);
+        return PackDao.readPackById(id);
     }
 
 }
 
-export default new PacksService();
+export default new PackService();

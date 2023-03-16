@@ -1,6 +1,6 @@
 import express from "express";
 import {CommonRoutesConfig} from "../../common/routes/routes.config.js";
-import PacksController from "../controllers/packs.controllers.js";
+import PackController from "../controllers/packs.controllers.js";
 
 export class PackRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -9,12 +9,12 @@ export class PackRoutes extends CommonRoutesConfig {
 
     configureRoutes(): express.Application {
         this.app.route("/practice-packs/:userId")
-            .delete(PacksController.removePack)
-            .get(PacksController.getPackById);
+            .delete(PackController.removePack)
+            .get(PackController.getPackById);
 
         this.app.route("/practice-packs")
-            .post(PacksController.createPack)
-            .get(PacksController.listPacks);
+            .post(PackController.createPack)
+            .get(PackController.listPacks);
         return this.app;
     }
 }
