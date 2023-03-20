@@ -10,14 +10,13 @@ import {
 import TabPanel from "../../components/Common/TabPanel/TabPanel";
 import Typography from "@mui/material/Typography";
 import {NotificationContext} from "../../components/Notification/NotificationContext/NotificationContext";
-import {SHOW_NOTIFICATION} from "../../constants/Constants";
 import {scrollPageUp} from "../../func";
 import Settings from "../../components/Settings/Settings";
 
 export default function UserProfile() {
 
     const [value, setValue] = useState(0);
-    const {dispatch} = useContext(NotificationContext);
+    const {setState} = useContext(NotificationContext);
 
     useEffect(() => {
         scrollPageUp();
@@ -41,10 +40,11 @@ export default function UserProfile() {
                             alt="Remy Sharp"
                             src="https://source.unsplash.com/random"
                             // TODO: only for testing, remove this piece of code after that
-                            onClick={() => dispatch({type: SHOW_NOTIFICATION, payload: {
+                            onClick={() => setState({
+                                open: true,
                                 severity: "info",
-                                message: "This is your avatar, Dear User!",
-                            }}) }
+                                message: "This is your avatar, Dear User!"
+                            }) }
                             sx={{
                                 width: {lg: 296, md: 216, sm: 165, xs: 120},
                                 height: {lg: 296, md: 216, sm: 165, xs: 120},
