@@ -11,7 +11,7 @@ function Logo(props: LogoProps) {
 
     const {width, height, blackLogo} = props;
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-    // ToDo: we need to change some logic in this piece of code
+    // TODO: we need to change some logic in this piece of code
     const mode =  prefersDarkMode ? "Logo.png" : "BlackLogo.png";
 
     return (

@@ -40,7 +40,7 @@ export default function UserProfile() {
                         <Avatar
                             alt="Remy Sharp"
                             src="https://source.unsplash.com/random"
-                            // ToDo: only for testing, remove this piece of code after that
+                            // TODO: only for testing, remove this piece of code after that
                             onClick={() => dispatch({type: SHOW_NOTIFICATION, payload: {
                                 severity: "info",
                                 message: "This is your avatar, Dear User!",

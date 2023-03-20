@@ -3,7 +3,7 @@ import {Grid, List, ListItemButton} from "@mui/material";
 import CompanyLogo from "../../Common/CompanyLogo/CompanyLogo";
 
 export default function Links() {
-    // ToDo: this isn't stunning code, so we need more code refactoring!
+    // TODO: this isn't stunning code, so we need more code refactoring!
     return (
         <Grid
             container
