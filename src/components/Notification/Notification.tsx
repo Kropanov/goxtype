@@ -1,34 +1,37 @@
-import React, {useContext, useEffect} from 'react';
-import Alert from '@mui/material/Alert';
-import {Box, Collapse} from "@mui/material";
+import {useContext} from 'react';
+import {Alert, Snackbar} from "@mui/material";
 import {NotificationContext} from "./NotificationContext/NotificationContext";
-import {HIDE_NOTIFICATION} from "../../constants/Constants";
 
 function Notification() {
-    const {state, dispatch} = useContext(NotificationContext);
+    const {state, setState} = useContext(NotificationContext);
+    const {open, severity, message} = state;
 
-    useEffect(() => {
-        const timeId = setTimeout(() => {
-            handleCloseAlert();
-        }, 5000);
-
-        return () => {
-            clearTimeout(timeId);
-        };
-    });
-
-    const handleCloseAlert = () => {
-        dispatch({type: HIDE_NOTIFICATION});
+    const handleClose = () => {
+        setState({
+            ...state,
+            open: false
+        });
     };
 
     return (
-        <Box sx={{position: 'fixed', right: {sm: 10}, bottom: {sm: 10}}}>
-            <Collapse in={state.open}>
-                <Alert variant="filled" severity={state.severity} onClose={handleCloseAlert}>
-                    {state.message}
-                </Alert>
-            </Collapse>
-        </Box>
+        <Snackbar
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+            }}
+            open={open}
+            onClose={handleClose}
+            autoHideDuration={5000}
+        >
+            <Alert 
+                variant="filled" 
+                onClose={handleClose}
+                severity={severity} 
+                sx={{ width: '100%' }}
+            >
+                {message}
+            </Alert>
+        </Snackbar>
     );
 }
 
