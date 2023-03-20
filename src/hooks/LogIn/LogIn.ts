@@ -1,12 +1,23 @@
 import {useRouter} from "../Router/Router";
-import React from "react";
+import React, {useState} from "react";
+import { SUCCESS } from "../../constants/Constants";
 
 export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: () => void) {
     const router = useRouter();
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
     const [checked, setChecked] = React.useState(true);
+    const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
+    const [passwordTextFieldValue, setPasswordTextFieldValue] = useState("");
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeEmailValue = (value: string) => {
+        setEmailTextFieldValue(value);
+    };
+
+    const handleChangePasswordValue = (value: string) => {
+        setPasswordTextFieldValue(value);
+    };
+
+    const handleChangeCheckBoxValue = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
     };
 
@@ -18,12 +29,27 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
         event.preventDefault();
     };
 
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
-        console.log('This thing was submitted!');
-        router.push('/');
-        AuthModalClose();
-        handleSuccessAuth();
+    const handleSubmitLoginForm = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
+        
+        const response = await fetch("/login", { 
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: emailTextFieldValue,
+                password: passwordTextFieldValue
+            })
+        } ).then(res => res.json());
+
+        console.log(response);
+        
+        if (response.status === SUCCESS) {
+            handleSuccessAuth();
+            AuthModalClose();
+        }
     };
 
     const handleClickShowForgotPassword = (e: { preventDefault: () => void; }) => {
@@ -33,12 +59,16 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
     };
 
     return {
-        showPassword,
         checked,
-        handleChange,
+        showPassword,
+        emailTextFieldValue,
+        passwordTextFieldValue,
+        handleChangeCheckBoxValue,
         handleClickShowPassword,
         handleMouseDownPassword,
-        handleSubmit,
-        handleClickShowForgotPassword
+        handleSubmitLoginForm,
+        handleClickShowForgotPassword,
+        handleChangeEmailValue,
+        handleChangePasswordValue
     };
 }

@@ -20,29 +20,37 @@ export default function LogIn(props: LogInProps) {
     const {AuthModalClose, handleSuccessAuth} = props;
 
     const {
-        showPassword,
         checked,
-        handleChange,
+        showPassword,
+        handleChangeCheckBoxValue,
+        passwordTextFieldValue,
+        emailTextFieldValue,
         handleClickShowPassword,
         handleMouseDownPassword,
-        handleSubmit,
-        handleClickShowForgotPassword
+        handleSubmitLoginForm,
+        handleClickShowForgotPassword,
+        handleChangeEmailValue,
+        handleChangePasswordValue,
     } = useLogIn(AuthModalClose, handleSuccessAuth);
 
     return (
         <>
             <Title message={"Please log in to use platform"} stage={LOG_IN} />
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmitLoginForm}>
                 <Box sx={{display: 'flex', flexDirection: 'column'}}>
                     <TextField
                         id="login"
                         label="Email / Login"
                         variant="outlined"
+                        value={emailTextFieldValue}
+                        onChange={(event) => handleChangeEmailValue(event.target.value)}
                     />
                     <OutlinedInput
                         sx={{ marginTop: '20px'}}
                         type={showPassword ? 'text' : 'password'}
                         id="password"
+                        value={passwordTextFieldValue}
+                        onChange={(event) => handleChangePasswordValue(event.target.value)}
                         autoComplete="current-password"
                         placeholder="Password"
                         endAdornment={
@@ -65,7 +73,7 @@ export default function LogIn(props: LogInProps) {
                             control={
                                 <Checkbox
                                     checked={checked}
-                                    onChange={handleChange}
+                                    onChange={handleChangeCheckBoxValue}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                     name={'forgot_password'}
                                 />
