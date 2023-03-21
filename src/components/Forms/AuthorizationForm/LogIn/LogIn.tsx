@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import React from 'react';
-import {Button, IconButton, InputAdornment, Link, OutlinedInput, TextField} from "@mui/material";
+import {Button, CircularProgress, Fade, IconButton, InputAdornment, LinearProgress, Link, OutlinedInput, TextField} from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {LOG_IN} from "../../../../constants/Constants";
@@ -21,6 +21,7 @@ export default function LogIn(props: LogInProps) {
 
     const {
         checked,
+        loading,
         showPassword,
         handleChangeCheckBoxValue,
         passwordTextFieldValue,
@@ -98,6 +99,17 @@ export default function LogIn(props: LogInProps) {
                         Log In
                     </Button>
                 </Box>
+                <Fade
+                    appear
+                    in={loading}
+                    style={{
+                        transitionDelay: loading ? '800ms' : '0ms',
+                    }}
+                >
+                    <Box sx={{ width: '100%' }}>
+                        <LinearProgress />
+                    </Box>
+                </Fade>
             </form>
             <SocialLogin />
         </>

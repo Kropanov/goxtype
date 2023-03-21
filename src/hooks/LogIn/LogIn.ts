@@ -10,6 +10,7 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
     const [checked, setChecked] = React.useState(true);
     const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
     const [passwordTextFieldValue, setPasswordTextFieldValue] = useState("");
+    const [loading, setLoading] = React.useState(false);
 
     const handleChangeEmailValue = (value: string) => {
         setEmailTextFieldValue(value);
@@ -31,8 +32,10 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
         event.preventDefault();
     };
 
+    // TODO: refactor this
     const handleSubmitLoginForm = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
+        setLoading(true);
         
         const response = await fetch("/login", { 
             method: "POST",
@@ -74,6 +77,8 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
             default:
                 break;
         }
+
+        setLoading(false);
     };
 
     const handleClickShowForgotPassword = (e: { preventDefault: () => void; }) => {
@@ -84,6 +89,7 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
 
     return {
         checked,
+        loading,
         showPassword,
         emailTextFieldValue,
         passwordTextFieldValue,
