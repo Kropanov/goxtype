@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import React from 'react';
-import {Button, CircularProgress, Fade, IconButton, InputAdornment, LinearProgress, Link, OutlinedInput, TextField} from "@mui/material";
+import {Button, Fade, IconButton, InputAdornment, LinearProgress, Link, OutlinedInput, TextField} from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {LOG_IN} from "../../../../constants/Constants";
