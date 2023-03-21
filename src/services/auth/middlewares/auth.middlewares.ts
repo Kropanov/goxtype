@@ -1,6 +1,12 @@
 import express from 'express';
 import argon2 from "argon2";
 import UserService from "../../users/service/users.service.js";
+import JWTService from '../../common/service/jwt.service.js';
+
+// TODO: Remove
+interface JwtPayload {
+    id: string
+}
 
 class AuthMiddleware {
     async verifyUserPassword(
@@ -44,7 +50,24 @@ class AuthMiddleware {
                 message: "Please login to get access!"
             });
         }
-        // TODO: don't forget, continue work
+         
+        // TODO: It doesn't seem good, should to refactor this
+        try {
+            const {id} = JWTService.verifyJWT(token) as JwtPayload;
+            const currentUser = await UserService.readById(id);
+            if (!currentUser) {
+                return res.status(401).send({
+                    status: "fail",
+                    message: "User was deleted!",
+                });
+            }
+        } catch (error) {
+            return res.status(401).send({
+                status: "fail",
+                message: "Please login again!"
+            }); 
+        }
+
         return next();
     }
 }
