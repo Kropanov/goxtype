@@ -1,9 +1,11 @@
 import {useRouter} from "../Router/Router";
-import React, {useState} from "react";
-import { SUCCESS } from "../../constants/Constants";
+import React, {useContext, useState} from "react";
+import { ERROR, FAIL, SUCCESS } from "../../constants/Constants";
+import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
 
 export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: () => void) {
     const router = useRouter();
+    const {setState} = useContext(NotificationContext);
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
     const [checked, setChecked] = React.useState(true);
     const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
@@ -43,12 +45,34 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
                 password: passwordTextFieldValue
             })
         } ).then(res => res.json());
-
-        console.log(response);
         
-        if (response.status === SUCCESS) {
-            handleSuccessAuth();
-            AuthModalClose();
+        // TODO: Please create special hook for setting notification state
+        switch (response.status) {
+            case SUCCESS:
+                handleSuccessAuth();
+                AuthModalClose();
+                setState({
+                    open: true,
+                    severity: "success",
+                    message: "You have been successfully authorizated!"
+                });
+                break;
+            case FAIL:
+                setState({
+                    open: true,
+                    severity: "warning",
+                    message: "Invalid email or/and password!"
+                });
+                break;
+            case ERROR:
+                setState({
+                    open: true,
+                    severity: "error",
+                    message: response.message && "Something went wrong!"
+                });
+                break;
+            default:
+                break;
         }
     };
 

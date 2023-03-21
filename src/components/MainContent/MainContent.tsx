@@ -5,10 +5,10 @@ import NotificationProvider from "../Notification/NotificationProvider/Notificat
 
 export default function MainContent() {
     return (
-        <Layout>
-            <NotificationProvider>
+        <NotificationProvider>
+            <Layout>
                 <Routing />
-            </NotificationProvider>
-        </Layout>
+            </Layout>
+        </NotificationProvider>
     );
 }
