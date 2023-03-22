@@ -1,16 +1,14 @@
 import {useContext} from 'react';
 import {Alert, Snackbar} from "@mui/material";
 import {NotificationContext} from "./NotificationContext/NotificationContext";
+import { NOTIFICATION } from '../../constants/Constants';
 
 function Notification() {
-    const {state, setState} = useContext(NotificationContext);
+    const {state, dispatch} = useContext(NotificationContext);
     const {open, severity, message} = state;
 
     const handleClose = () => {
-        setState({
-            ...state,
-            open: false
-        });
+        dispatch({type: NOTIFICATION.HIDE});
     };
 
     return (

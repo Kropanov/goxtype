@@ -12,11 +12,12 @@ import Typography from "@mui/material/Typography";
 import {NotificationContext} from "../../components/Notification/NotificationContext/NotificationContext";
 import {scrollPageUp} from "../../func";
 import Settings from "../../components/Settings/Settings";
+import { NOTIFICATION } from "../../constants/Constants";
 
 export default function UserProfile() {
 
     const [value, setValue] = useState(0);
-    const {setState} = useContext(NotificationContext);
+    const {dispatch} = useContext(NotificationContext);
 
     useEffect(() => {
         scrollPageUp();
@@ -40,11 +41,7 @@ export default function UserProfile() {
                             alt="Remy Sharp"
                             src="https://source.unsplash.com/random"
                             // TODO: only for testing, remove this piece of code after that
-                            onClick={() => setState({
-                                open: true,
-                                severity: "info",
-                                message: "This is your avatar, Dear User!"
-                            }) }
+                            onClick={() => dispatch({type: NOTIFICATION.PROFILE_TEST}) }
                             sx={{
                                 width: {lg: 296, md: 216, sm: 165, xs: 120},
                                 height: {lg: 296, md: 216, sm: 165, xs: 120},

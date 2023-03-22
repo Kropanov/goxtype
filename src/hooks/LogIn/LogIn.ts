@@ -1,11 +1,11 @@
 import {useRouter} from "../Router/Router";
 import React, {useContext, useState} from "react";
-import { ERROR, FAIL, SUCCESS } from "../../constants/Constants";
+import { ERROR, FAIL, NOTIFICATION, SUCCESS } from "../../constants/Constants";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
 
 export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: () => void) {
     const router = useRouter();
-    const {setState} = useContext(NotificationContext);
+    const {dispatch} = useContext(NotificationContext);
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
     const [checked, setChecked] = React.useState(true);
     const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
@@ -35,8 +35,14 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
     // TODO: refactor this
     const handleSubmitLoginForm = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
+
+        if (passwordTextFieldValue === "") {
+            dispatch({type: NOTIFICATION.EMPTY_FIELDS});
+            return;
+        }
+
         setLoading(true);
-        
+
         const response = await fetch("/login", { 
             method: "POST",
             headers: {
@@ -54,25 +60,13 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
             case SUCCESS:
                 handleSuccessAuth();
                 AuthModalClose();
-                setState({
-                    open: true,
-                    severity: "success",
-                    message: "You have been successfully authorizated!"
-                });
+                dispatch({type: NOTIFICATION.SUCCESS_AUTHORIZATION});
                 break;
             case FAIL:
-                setState({
-                    open: true,
-                    severity: "warning",
-                    message: "Invalid email or/and password!"
-                });
+                dispatch({type: NOTIFICATION.INVALID_EMAIL_PASSWORD});
                 break;
             case ERROR:
-                setState({
-                    open: true,
-                    severity: "error",
-                    message: response.message && "Something went wrong!"
-                });
+                dispatch({type: NOTIFICATION.ERROR});
                 break;
             default:
                 break;

@@ -20,7 +20,7 @@ export type Severity = "error" | "info" | "success" | "warning";
 
 export type IconsType = IconType[];
 
-export type NotificationState = {
+export type NotificationType = {
     severity: Severity;
     message: string;
     open: boolean;
