@@ -1,6 +1,7 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo, useReducer} from 'react';
 import { NotificationContext } from '../NotificationContext/NotificationContext';
 import Notification from "../Notification";
+import reducer from '../NotificationReducer/NotificationReducer';
 
 type NotificationProviderProps = {
     children: React.ReactNode
@@ -14,10 +15,9 @@ function NotificationProvider(props: NotificationProviderProps) {
         open: false
     };
 
-    // FIXME: rewrite this with useReducer
-    const [state, setState] = useState(initialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
-    const value = useMemo(() => ({state, setState}), [state]);
+    const value = useMemo(() => ({state, dispatch}), [state]);
     return (
         <NotificationContext.Provider value={value}>
             {props.children}

@@ -1,9 +1,9 @@
 import React, {useContext, useState} from "react";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
-import { ERROR, FAIL, SUCCESS } from "../../constants/Constants";
+import { ERROR, FAIL, NOTIFICATION, SUCCESS } from "../../constants/Constants";
 
 export default function useSignUp(AuthModalClose: () => void) {
-    const {setState} = useContext(NotificationContext);
+    const {dispatch} = useContext(NotificationContext);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
     const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
@@ -32,31 +32,25 @@ export default function useSignUp(AuthModalClose: () => void) {
         setShowConfirmPassword((prev) => (!prev));
     };
 
+    // TODO: refactor this function
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        setLoading(true);
 
         if (passwordTextFieldValue === "" || confirmPasswordTextFieldValue === "") {
-            setState({
-                open: true,
-                severity: "warning",
-                message: "Please fill the all fields!"
-            });
+            dispatch({type: NOTIFICATION.EMPTY_FIELDS});            
             return;
         }
 
         if (passwordTextFieldValue !== confirmPasswordTextFieldValue) {
-            setState({
-                open: true,
-                severity: "warning",
-                message: "Passwords don't match. Please, write again!"
-            });
+            dispatch({type: NOTIFICATION.FAIL_VALIDATION_PASSWORD});  
             return;
         }
+
+        setLoading(true);
 
         const response = await fetch("/signup", { 
             method: "POST",
@@ -70,33 +64,19 @@ export default function useSignUp(AuthModalClose: () => void) {
             })
         } ).then(res => res.json());
 
-        console.log(response);
-
         // TODO: Please create special hook for setting notification state
         switch (response.status) {
             case SUCCESS:
                 // TODO: maybe we should add this in future
                 // handleSuccessAuth();
                 AuthModalClose();
-                setState({
-                    open: true,
-                    severity: "success",
-                    message: "Registration was successful!"
-                });
+                dispatch({type: NOTIFICATION.SUCCESS_REGISTRATION});            
                 break;
             case FAIL:
-                setState({
-                    open: true,
-                    severity: "warning",
-                    message: "Invalid email or/and password!"
-                });
+                dispatch({type: NOTIFICATION.INVALID_EMAIL_PASSWORD});            
                 break;
             case ERROR:
-                setState({
-                    open: true,
-                    severity: "error",
-                    message: response.message && "Something went wrong!"
-                });
+                dispatch({type: NOTIFICATION.ERROR});            
                 break;
             default:
                 break;
