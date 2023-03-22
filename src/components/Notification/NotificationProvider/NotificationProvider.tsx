@@ -14,6 +14,7 @@ function NotificationProvider(props: NotificationProviderProps) {
         open: false
     };
 
+    // FIXME: rewrite this with useReducer
     const [state, setState] = useState(initialState);
 
     const value = useMemo(() => ({state, setState}), [state]);
