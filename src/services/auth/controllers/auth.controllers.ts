@@ -9,7 +9,7 @@ class AuthController {
         res.status(200).send({
             status: "success",
             token,
-            // TODO: Data will be here temporarily, we need only token actually
+            // FIXME: Data will be here temporarily, we need only token actually
             data: {
                 name: req.body.name,
                 email: req.body.email,
@@ -19,6 +19,7 @@ class AuthController {
     }
 
     async signup(req: express.Request, res: express.Response) {
+        // FIXME: hashing should be at another layer, not at controller level
         req.body.password = await argon2.hash(req.body.password);
         const user = await UserService.create(req.body);
         const token = JWTService.createJWT(user._id);
