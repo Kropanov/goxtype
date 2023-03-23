@@ -2,7 +2,6 @@ import express from 'express';
 import argon2 from 'argon2';
 import UserService from "../service/users.service.js";
 
-// FIXME: remove properties - status at response   
 class UserController {
     async listUsers(req: express.Request, res: express.Response) {
         const users = await UserService.list(100, 0);
