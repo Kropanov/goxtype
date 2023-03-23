@@ -1,6 +1,10 @@
 import {Types} from "mongoose";
 import jwt from "jsonwebtoken";
 
+export interface JWTPayload {
+    id: string
+}
+
 class JWTService {
     createJWT(id: Types.ObjectId) {
         return jwt.sign({id}, process.env.JWT_SECRET || "", {

@@ -1,12 +1,7 @@
 import express from 'express';
 import argon2 from "argon2";
 import UserService from "../../users/service/users.service.js";
-import JWTService from '../../common/service/jwt.service.js';
-
-// TODO: Remove
-interface JwtPayload {
-    id: string
-}
+import JWTService, { JWTPayload } from '../../common/service/jwt.service.js';
 
 class AuthMiddleware {
     async verifyUserPassword(
@@ -33,7 +28,6 @@ class AuthMiddleware {
         res.status(401).send({message: "Invalid email and/or password!"});
     }
 
-    // TODO: may be we need to reconstruction this method on few methods and create class for that manipulation
     async protectRoutes(
         req: express.Request,
         res: express.Response,
@@ -45,9 +39,8 @@ class AuthMiddleware {
             return res.status(401).send({message: "Please login to get access!"});
         }
          
-        // TODO: It doesn't seem good, should to refactor this
         try {
-            const {id} = JWTService.verifyJWT(token) as JwtPayload;
+            const {id} = JWTService.verifyJWT(token) as JWTPayload;
             const currentUser = await UserService.readById(id);
             if (!currentUser) {
                 return res.status(401).send({message: "User was deleted!"});
