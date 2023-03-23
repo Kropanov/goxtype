@@ -10,7 +10,6 @@ class UserMiddleware {
         const user = await UserService.getUserByEmail(req.body.email);
         if (user) {
             res.status(400).send({
-                status: "fail",
                 message: "User email already exists!"
             });
         } else {
@@ -28,13 +27,11 @@ class UserMiddleware {
             next();
         } else {
             res.status(400).send({
-                status: "fail",
                 message: "Invalid email!"
             });
         }
     }
 
-// Here we need to use an arrow function to bind `this` correctly
     validatePatchEmail = async (
         req: express.Request,
         res: express.Response,
@@ -57,7 +54,6 @@ class UserMiddleware {
             next();
         } else {
             res.status(404).send({
-                status: "fail",
                 message: `User ${req.params.userId} not found`,
             });
         }

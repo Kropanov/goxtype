@@ -21,11 +21,17 @@ function reducer(state: any, action: any) {
                 severity: "warning",
                 message: "Invalid email or/and password!"
             };
+        case NOTIFICATION.EMAIL_ALREADY_EXIST:
+            return {
+                open: true,
+                severity: "warning",
+                message: "User email already exists!"
+            };
         case NOTIFICATION.ERROR:
             return {
                 open: true,
                 severity: "error",
-                message: "Something went wrong!"
+                message: "Ops! Something went wrong!"
             };
         case NOTIFICATION.FAIL_VALIDATION_PASSWORD:
             return {

@@ -35,9 +35,5 @@ export enum NOTIFICATION {
     SUCCESS_AUTHORIZATION,
     INVALID_EMAIL_PASSWORD,
     FAIL_VALIDATION_PASSWORD,
+    EMAIL_ALREADY_EXIST
 }
-
-// TODO: Delete this variables and use status code by default
-export const SUCCESS = "success";
-export const FAIL = "fail";
-export const ERROR = "error";

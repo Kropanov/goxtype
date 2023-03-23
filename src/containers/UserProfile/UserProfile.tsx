@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import {
     Container,
     Avatar,
@@ -9,15 +9,12 @@ import {
 } from "@mui/material";
 import TabPanel from "../../components/Common/TabPanel/TabPanel";
 import Typography from "@mui/material/Typography";
-import {NotificationContext} from "../../components/Notification/NotificationContext/NotificationContext";
 import {scrollPageUp} from "../../func";
 import Settings from "../../components/Settings/Settings";
-import { NOTIFICATION } from "../../constants/Constants";
 
 export default function UserProfile() {
 
     const [value, setValue] = useState(0);
-    const {dispatch} = useContext(NotificationContext);
 
     useEffect(() => {
         scrollPageUp();
@@ -40,8 +37,6 @@ export default function UserProfile() {
                         <Avatar
                             alt="Remy Sharp"
                             src="https://source.unsplash.com/random"
-                            // TODO: only for testing, remove this piece of code after that
-                            onClick={() => dispatch({type: NOTIFICATION.PROFILE_TEST}) }
                             sx={{
                                 width: {lg: 296, md: 216, sm: 165, xs: 120},
                                 height: {lg: 296, md: 216, sm: 165, xs: 120},

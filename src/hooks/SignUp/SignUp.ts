@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
-import { ERROR, FAIL, NOTIFICATION, SUCCESS } from "../../constants/Constants";
+import { NOTIFICATION } from "../../constants/Constants";
 
 export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth: () => void) {
     const {dispatch} = useContext(NotificationContext);
@@ -32,7 +32,6 @@ export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth:
         setShowConfirmPassword((prev) => (!prev));
     };
 
-    // TODO: refactor this function
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
@@ -62,24 +61,24 @@ export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth:
                 email: emailTextFieldValue,
                 password: passwordTextFieldValue
             })
-        } ).then(res => res.json());
+        } );
 
-        // TODO: Please create special hook for setting notification state
+        // const result =  await response.json();
+
         switch (response.status) {
-            case SUCCESS:
+            case 201:
                 handleSuccessAuth();
                 AuthModalClose();
                 dispatch({type: NOTIFICATION.SUCCESS_REGISTRATION});            
                 break;
-            case FAIL:
-                dispatch({type: NOTIFICATION.INVALID_EMAIL_PASSWORD});            
-                break;
-            case ERROR:
-                dispatch({type: NOTIFICATION.ERROR});            
+            case 400:
+                dispatch({type: NOTIFICATION.EMAIL_ALREADY_EXIST});          
                 break;
             default:
+                dispatch({type: NOTIFICATION.ERROR});            
                 break;
         }
+        
         setLoading(false);
     };
 

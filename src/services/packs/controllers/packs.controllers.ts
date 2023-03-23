@@ -11,26 +11,17 @@ class PackController {
 
     async listPacks(req: express.Request, res: express.Response) {
         const packs = await PackService.list(100, 0);
-        res.status(200).send({
-            status: "success",
-            data: packs
-        });
+        res.status(200).send({data: packs});
     }
 
     async removePack(req: express.Request, res: express.Response) {
         const message = await PackService.deleteById(req.body.id);
-        res.status(200).send({
-            status: "success",
-            message
-        });
+        res.status(200).send({message});
     }
 
     async getPackById(req: express.Request, res: express.Response) {
         const pack = await PackService.readById(req.body.id);
-        res.status(200).send({
-            status: "success",
-            data: pack
-        });
+        res.status(200).send({data: pack});
     }
 }
 
