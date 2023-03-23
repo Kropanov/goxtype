@@ -6,32 +6,14 @@ import JWTService from "../../common/service/jwt.service.js";
 class AuthController {
     async login(req: express.Request, res: express.Response) {
         const token = JWTService.createJWT(req.body.userId);
-        res.status(200).send({
-            status: "success",
-            token,
-            // FIXME: Data will be here temporarily, we need only token actually
-            data: {
-                name: req.body.name,
-                email: req.body.email,
-                permissionLevel: req.body.permissionLevel,
-            }
-        });
+        res.status(201).send({token});
     }
 
     async signup(req: express.Request, res: express.Response) {
-        // FIXME: hashing should be at another layer, not at controller level
         req.body.password = await argon2.hash(req.body.password);
         const user = await UserService.create(req.body);
         const token = JWTService.createJWT(user._id);
-        res.status(201).send({
-            status: "success",
-            token,
-            data: {
-                name: user.name,
-                email: user.email,
-                permissionLevel: user.permissionLevel,
-            }
-        });
+        res.status(201).send({token});
     }
 }
 

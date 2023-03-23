@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {Container, Skeleton} from "@mui/material";
 import Pack from "../../components/Pack/Pack";
 import {PackType} from "../../components/Types/Types";
-import {SUCCESS} from "../../constants/Constants";
 
 export default function PracticePacks() {
     const [packs, setPacks] = useState<PackType[]>([]);
@@ -10,13 +9,13 @@ export default function PracticePacks() {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch("/practice-packs").then(res => res.json());
-            // TODO: will do like pro
-            switch (response.status) {
-                case SUCCESS:
-                    setPacks(response.data);
-                    break;
+            const response = await fetch("/practice-packs");
+            const result = await response.json();
+
+            if (response.ok) {
+                setPacks(result.data);
             }
+
             setLoading(false);
         })();
     }, []);

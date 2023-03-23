@@ -1,6 +1,6 @@
 import {useRouter} from "../Router/Router";
 import React, {useContext, useState} from "react";
-import { ERROR, FAIL, NOTIFICATION, SUCCESS } from "../../constants/Constants";
+import { NOTIFICATION } from "../../constants/Constants";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
 
 export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: () => void) {
@@ -53,22 +53,21 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
                 email: emailTextFieldValue,
                 password: passwordTextFieldValue
             })
-        } ).then(res => res.json());
+        } );
+
+        // const result =  await response.json();
         
-        // TODO: Please create special hook for setting notification state
         switch (response.status) {
-            case SUCCESS:
+            case 201:
                 handleSuccessAuth();
                 AuthModalClose();
                 dispatch({type: NOTIFICATION.SUCCESS_AUTHORIZATION});
                 break;
-            case FAIL:
+            case 401:
                 dispatch({type: NOTIFICATION.INVALID_EMAIL_PASSWORD});
                 break;
-            case ERROR:
-                dispatch({type: NOTIFICATION.ERROR});
-                break;
             default:
+                dispatch({type: NOTIFICATION.ERROR});
                 break;
         }
 

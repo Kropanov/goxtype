@@ -30,10 +30,7 @@ class AuthMiddleware {
                 return next();
             }
         }
-        res.status(401).send({
-            status: "fail",
-            message: "Invalid email and/or password!"
-        });
+        res.status(401).send({message: "Invalid email and/or password!"});
     }
 
     // TODO: may be we need to reconstruction this method on few methods and create class for that manipulation
@@ -45,10 +42,7 @@ class AuthMiddleware {
         const token = req.headers.authorization && req.headers.authorization.split(" ")[1];
 
         if (!token || !req.headers.authorization?.startsWith("Bearer")){
-            return res.status(401).send({
-                status: "fail",
-                message: "Please login to get access!"
-            });
+            return res.status(401).send({message: "Please login to get access!"});
         }
          
         // TODO: It doesn't seem good, should to refactor this
@@ -56,16 +50,10 @@ class AuthMiddleware {
             const {id} = JWTService.verifyJWT(token) as JwtPayload;
             const currentUser = await UserService.readById(id);
             if (!currentUser) {
-                return res.status(401).send({
-                    status: "fail",
-                    message: "User was deleted!",
-                });
+                return res.status(401).send({message: "User was deleted!"});
             }
         } catch (error) {
-            return res.status(401).send({
-                status: "fail",
-                message: "Please login again!"
-            }); 
+            return res.status(401).send({message: "Please login again!"}); 
         }
 
         return next();

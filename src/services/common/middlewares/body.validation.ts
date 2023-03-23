@@ -10,7 +10,6 @@ class BodyValidationMiddleware {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).send({
-                status: "error",
                 errors: errors.array()
             });
         }
