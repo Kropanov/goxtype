@@ -37,7 +37,7 @@ export default function AuthorizationForm(props: AuthorizationProps) {
             <TabPanel value={value} index={1}>
                 <SignUp
                     AuthModalClose={authModalClose}
-                    // handleSuccessAuth={handleSuccessAuth}
+                    handleSuccessAuth={handleSuccessAuth}
                 />
             </TabPanel>
         </>

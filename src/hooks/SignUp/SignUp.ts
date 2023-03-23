@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
 import { ERROR, FAIL, NOTIFICATION, SUCCESS } from "../../constants/Constants";
 
-export default function useSignUp(AuthModalClose: () => void) {
+export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth: () => void) {
     const {dispatch} = useContext(NotificationContext);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
@@ -67,8 +67,7 @@ export default function useSignUp(AuthModalClose: () => void) {
         // TODO: Please create special hook for setting notification state
         switch (response.status) {
             case SUCCESS:
-                // TODO: maybe we should add this in future
-                // handleSuccessAuth();
+                handleSuccessAuth();
                 AuthModalClose();
                 dispatch({type: NOTIFICATION.SUCCESS_REGISTRATION});            
                 break;
