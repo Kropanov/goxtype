@@ -6,6 +6,7 @@ import UserProfile from "../../containers/UserProfile/UserProfile";
 import PracticePacks from "../../containers/PracticePacks/PracticePacks";
 import PrivateRoute from '../../hoc/PrivateRoute/PrivateRoute';
 import Logout from '../Logout/Logout';
+import HandlerErrorComponent from '../HandlerErrorComponent/HandlerErrorComponent';
 
 export default function Routing() {
     return (
@@ -23,7 +24,7 @@ export default function Routing() {
                     <Logout />
                 </PrivateRoute>
             }/>
-            <Route path="*" element={<h1>404 not found</h1>}/>
+            <Route path="*" element={<HandlerErrorComponent />}/>
         </Routes>
     );
 }

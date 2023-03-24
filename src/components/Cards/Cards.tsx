@@ -19,7 +19,7 @@ export default function Cards() {
                                 <Paper elevation={4}>
                                     <CardMedia
                                         component="img"
-                                        image="https://source.unsplash.com/random"
+                                        image="challenge.jpg"
                                         alt="random"
                                     />
                                     <CardContent sx={{ flexGrow: 1 }}>
