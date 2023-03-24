@@ -1,5 +1,6 @@
 import {NOTIFICATION} from "../../../constants/Constants";
 
+// FIXME: refactor this 
 // eslint-disable-next-line
 function reducer(state: any, action: any) {
     switch (action.type) {
