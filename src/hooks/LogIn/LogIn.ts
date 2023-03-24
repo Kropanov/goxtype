@@ -1,11 +1,13 @@
 import {useRouter} from "../Router/Router";
 import React, {useContext, useState} from "react";
-import { NOTIFICATION } from "../../constants/Constants";
+import { NOTIFICATION, TOKEN_KEY } from "../../constants/Constants";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
+import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
 
 export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: () => void) {
     const router = useRouter();
     const {dispatch} = useContext(NotificationContext);
+    const {setIsAuthenticated} = useContext(AuthorizationContext);
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
     const [checked, setChecked] = React.useState(true);
     const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
@@ -54,9 +56,10 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
                 password: passwordTextFieldValue
             })
         } );
-
-        // const result =  await response.json();
         
+        setLoading(false);
+        
+        // FIXME: This shouldn work with the error nowq
         switch (response.status) {
             case 201:
                 handleSuccessAuth();
@@ -65,13 +68,15 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
                 break;
             case 401:
                 dispatch({type: NOTIFICATION.INVALID_EMAIL_PASSWORD});
-                break;
+                return;
             default:
                 dispatch({type: NOTIFICATION.ERROR});
                 break;
         }
-
-        setLoading(false);
+        
+        const result =  await response.json();
+        localStorage.setItem(TOKEN_KEY, result.token);
+        setIsAuthenticated(true);
     };
 
     const handleClickShowForgotPassword = (e: { preventDefault: () => void; }) => {

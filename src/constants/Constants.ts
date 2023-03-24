@@ -6,6 +6,7 @@ export const PAGES = [
     {name: "contact", uri: "contact"},
     {name: "support", uri: "support"},
 ];
+// FIXME: naming the variable
 export const SETTINGS = ['Profile', 'Progress', 'Account', 'Logout'];
 export const SITE_NAME = "GOXTYPE";
 
@@ -37,3 +38,5 @@ export enum NOTIFICATION {
     FAIL_VALIDATION_PASSWORD,
     EMAIL_ALREADY_EXIST
 }
+
+export const TOKEN_KEY = 'token';

@@ -1,9 +1,11 @@
 import React, {useContext, useState} from "react";
+import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
-import { NOTIFICATION } from "../../constants/Constants";
+import { NOTIFICATION, TOKEN_KEY } from "../../constants/Constants";
 
 export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth: () => void) {
     const {dispatch} = useContext(NotificationContext);
+    const {setIsAuthenticated} = useContext(AuthorizationContext);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
     const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
@@ -36,6 +38,7 @@ export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth:
         event.preventDefault();
     };
 
+    // FIXME: looks very awful
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
@@ -63,8 +66,9 @@ export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth:
             })
         } );
 
-        // const result =  await response.json();
-
+        setLoading(false);
+        
+        // FIXME: This should work with the error nowq
         switch (response.status) {
             case 201:
                 handleSuccessAuth();
@@ -73,13 +77,15 @@ export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth:
                 break;
             case 400:
                 dispatch({type: NOTIFICATION.EMAIL_ALREADY_EXIST});          
-                break;
+                return;
             default:
                 dispatch({type: NOTIFICATION.ERROR});            
-                break;
+                return;
         }
-        
-        setLoading(false);
+
+        const result =  await response.json();
+        localStorage.setItem(TOKEN_KEY, result.token);
+        setIsAuthenticated(true);
     };
 
     return {

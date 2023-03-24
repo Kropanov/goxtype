@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,16 +9,23 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import {SITE_NAME, PAGES} from "../../constants/Constants";
+import {SITE_NAME, PAGES, TOKEN_KEY} from "../../constants/Constants";
 import MediaQuery from 'react-responsive';
 import Logo from "../Common/Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
 import AuthModal from "../Modals/AuthModal/AuthModal";
 import {Link, NavLink} from "react-router-dom";
+import { AuthorizationContext } from '../Authorization/AuthorizationContext/AuthorizationContext';
 
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const [authorizationSuccess, setAuthorizationSuccess] = useState<boolean>(false);
+    const {isAuthenticated} = useContext(AuthorizationContext);
+    const [authorizationSuccess, setAuthorizationSuccess] = useState<boolean>(localStorage.getItem(TOKEN_KEY) ? true : false);
+
+    useEffect(() => {
+        setAuthorizationSuccess(isAuthenticated);
+    }, [isAuthenticated]);
+    
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -28,7 +35,7 @@ function Header() {
         setAnchorElNav(null);
     };
 
-    const AuthProps = {handleSuccessAuth: () => setAuthorizationSuccess(true)};
+    const AuthProps = {handleSuccessAuth: () => console.log("Magica is now connected")};
 
     return (
         <AppBar position="static">
