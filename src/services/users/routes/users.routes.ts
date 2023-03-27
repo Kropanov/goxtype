@@ -58,6 +58,8 @@ export class UserRoutes extends CommonRoutesConfig {
             UserController.patch
         ]);
 
+        // TODO: create routes for profile settings
+
         return this.app;
     }
 }
