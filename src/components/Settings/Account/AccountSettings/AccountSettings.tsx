@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { NotificationContext } from '../../../Notification/NotificationContext/NotificationContext';
-import { NOTIFICATION } from '../../../../constants/Constants';
+import { NOTIFICATION, TOKEN_KEY } from '../../../../constants/Constants';
 
 export default function AccountSettings() {
     const {dispatch} = useContext(NotificationContext);
@@ -28,13 +28,14 @@ export default function AccountSettings() {
     const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
+    // TODO: create loader
     // const [loading, setLoading] = useState(false);
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
-    const handleChangePassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleChangePassword =  async (event: React.MouseEvent<HTMLButtonElement>) => {
 
         if (emptyFeilds()) {
             dispatch({type: NOTIFICATION.EMPTY_FIELDS});
@@ -46,8 +47,29 @@ export default function AccountSettings() {
             return;
         }
 
+        // TODO: Old passwords should be the same
+
+        const response = await fetch("/profile", { 
+            method: "PATCH",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}`
+            },
+            body: JSON.stringify({
+                password: newPassword
+            })
+        } );
+
+        switch (response.status) {
+            case 200:
+                dispatch({type: NOTIFICATION.SUCCESS_UPDATE_PASSWORD});            
+                break;
+            default:
+                dispatch({type: NOTIFICATION.ERROR});            
+                return;
+        }
         event.preventDefault();
-        console.log("Password was changed!");
     };
 
     const emptyFeilds = () => password === "" || newPassword === "" || confirmNewPassword === "";

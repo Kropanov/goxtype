@@ -10,6 +10,12 @@ function reducer(state: any, action: any) {
                 severity: "info",
                 message: "It's your pofile avatar, Dear User!"
             };
+        case NOTIFICATION.SUCCESS_UPDATE_PASSWORD:
+            return {
+                open: true,
+                severity: "success",
+                message: "Your password has been updated"
+            };
         case NOTIFICATION.SUCCESS_AUTHORIZATION: 
             return {
                 open: true,
