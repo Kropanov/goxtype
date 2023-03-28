@@ -11,7 +11,7 @@ export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth:
     const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
     const [passwordTextFieldValue, setPasswordTextFieldValue] = useState("");
     const [confirmPasswordTextFieldValue, setConfirmPasswordTextFieldValue] = useState("");
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     const handleChangeEmailValue = (value: string) => {

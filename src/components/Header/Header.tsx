@@ -34,7 +34,7 @@ function Header() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
-
+    // FIXME: we don't use handleSuccessAuth, need to remove 
     const AuthProps = {handleSuccessAuth: () => console.log("Magica is now connected")};
 
     return (

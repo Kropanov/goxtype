@@ -58,6 +58,17 @@ export class UserRoutes extends CommonRoutesConfig {
             UserController.patch
         ]);
 
+        this.app.patch('/profile', [
+            body('newPassword')
+            .isLength({ min: 5 })
+            .withMessage('Password must be 5+ characters')
+            .optional(),
+            BodyValidationMiddleware.verifyBodyFieldsErrors,
+            AuthMiddleware.protectRoutes,
+            UserMiddleware.validateSamePasswordBelongToSameUser,
+            UserController.patch
+        ]);
+
         return this.app;
     }
 }

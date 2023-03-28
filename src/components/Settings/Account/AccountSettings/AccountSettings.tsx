@@ -1,18 +1,87 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Avatar,
     Button,
     Divider,
     FormControl,
+    FormGroup,
     FormHelperText,
     Grid,
+    IconButton,
+    InputAdornment,
     InputLabel,
     OutlinedInput,
-    TextField,
     Typography
 } from "@mui/material";
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { NotificationContext } from '../../../Notification/NotificationContext/NotificationContext';
+import { NOTIFICATION, TOKEN_KEY } from '../../../../constants/Constants';
 
 export default function AccountSettings() {
+    const {dispatch} = useContext(NotificationContext);
+
+    const [currentPassword, setCurrentPassword] = useState<string>("");
+    const [newPassword, setNewPassword] = useState<string>("");
+    const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
+
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+
+    // TODO: create loader
+    // const [loading, setLoading] = useState(false);
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+    };
+
+    const handleChangePassword =  async (event: React.MouseEvent<HTMLButtonElement>) => {
+
+        if (emptyFields()) {
+            dispatch({type: NOTIFICATION.EMPTY_FIELDS});
+            return;
+        }
+
+        if (differentPasswords()) {
+            dispatch({type: NOTIFICATION.FAIL_VALIDATION_PASSWORD});
+            return;
+        }
+
+        const response = await fetch("/profile", { 
+            method: "PATCH",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}`
+            },
+            body: JSON.stringify({
+                currentPassword,
+                newPassword
+            })
+        } );
+
+        switch (response.status) {
+            case 200:
+                dispatch({type: NOTIFICATION.SUCCESS_UPDATE_PASSWORD});            
+                break;
+            default:
+                dispatch({type: NOTIFICATION.ERROR});
+                return;
+        }
+
+        clearTextFields();
+        event.preventDefault();
+    };
+
+    const emptyFields = () => currentPassword === "" || newPassword === "" || confirmNewPassword === "";
+    const differentPasswords = () => newPassword !== confirmNewPassword;
+
+    const clearTextFields = () => {
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmNewPassword("");
+    };
+
     return (
         <>
             <Grid item sm={8} xs={12}>
@@ -36,20 +105,85 @@ export default function AccountSettings() {
                     <Button variant="text">
                         Update name
                     </Button>
+                </FormControl>
 
-                    <Typography sx={{mt: 1}} variant="subtitle1">
-                        Password
-                    </Typography>
-                    <Divider />
+                <Typography sx={{mt: 1}} variant="subtitle1">
+                    Password
+                </Typography>
+                <Divider />
 
-                    <TextField sx={{mb: 1, mt: 2}} id="password" label="Old password" variant="outlined" size="small" />
-                    <TextField sx={{mb: 1}} id="repeated-password" label="New password" variant="outlined" size="small" />
-                    <TextField sx={{mb: 1}} id="new-password" label="Confirm new password" variant="outlined" size="small" />
+                <FormGroup>
+                    <OutlinedInput 
+                        sx={{mb: 1, mt: 2}}
+                        type={showPassword ? 'text' : 'password'}
+                        value={currentPassword}
+                        autoComplete="current-password"
+                        onChange={(event) => setCurrentPassword(event.target.value)}
+                        id="old-password" 
+                        placeholder="Old password"
+                        size="small"
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle old password visibility"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                    
+                    <OutlinedInput 
+                        sx={{mb: 1}} 
+                        value={newPassword}
+                        onChange={(event) => setNewPassword(event.target.value)}
+                        type={showNewPassword ? 'text' : 'password'}
+                        id="new-password" 
+                        placeholder="New password"
+                        size="small" 
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle old password visibility"
+                                    onClick={() => setShowNewPassword((prev) => !prev)}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                    
+                    <OutlinedInput 
+                        sx={{mb: 1}} 
+                        value={confirmNewPassword} 
+                        onChange={(event) => setConfirmNewPassword(event.target.value)}
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        id="repeated-new-password" 
+                        placeholder="Confirm new password"
+                        size="small"
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle old password visibility"
+                                    onClick={() => setShowConfirmPassword((prev) => !prev)}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
 
-                    <Button variant="outlined">
+                    <Button onClick={handleChangePassword} variant="outlined">
                         Update password
                     </Button>
-                </FormControl>
+                </FormGroup>
             </Grid>
             <Grid item sm={4} xs={12}>
                 <Grid

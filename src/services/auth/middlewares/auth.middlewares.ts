@@ -39,14 +39,17 @@ class AuthMiddleware {
             return res.status(401).send({message: "Please login to get access!"});
         }
          
+        // FIXME: This should be at another middleware
         try {
             const {id} = JWTService.verifyJWT(token) as JWTPayload;
             const currentUser = await UserService.readById(id);
+            
             if (!currentUser) {
                 return res.status(401).send({message: "User was deleted!"});
             }
+            req.body.id = id;
         } catch (error) {
-            return res.status(401).send({message: "Please login again!"}); 
+            return res.status(401).send({error: error, message: "Please login again!"}); 
         }
 
         return next();

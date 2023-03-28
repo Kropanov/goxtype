@@ -1,5 +1,6 @@
 import express from "express";
 import UserService from "../service/users.service.js";
+import argon2 from "argon2";
 
 class UserMiddleware {
     async validateSameEmailDoesntExist(
@@ -66,6 +67,31 @@ class UserMiddleware {
     ) {
         req.body.id = req.params.userId;
         next();
+    }
+
+    async validateSamePasswordBelongToSameUser(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        let user = await UserService.readById(req.body.id);
+
+        if (!user?.email) {
+            return res.status(400).send({
+                message: "Invalid email!"
+            });
+        }
+
+        user = await UserService.getUserByEmail(user?.email || "");
+
+        if (await argon2.verify(user?.password || '', req.body.currentPassword)) {
+            req.body.password = req.body.newPassword;
+            return next();
+        }
+
+        res.status(400).send({
+            message: "Passwords don't match!"
+        });
     }
 }
 
