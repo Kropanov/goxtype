@@ -65,6 +65,7 @@ export class UserRoutes extends CommonRoutesConfig {
             .optional(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
             AuthMiddleware.protectRoutes,
+            UserMiddleware.validateSamePasswordBelongToSameUser,
             UserController.patch
         ]);
 

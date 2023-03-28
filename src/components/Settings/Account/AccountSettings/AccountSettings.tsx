@@ -47,8 +47,6 @@ export default function AccountSettings() {
             return;
         }
 
-        // TODO: Old passwords should be the same
-
         const response = await fetch("/profile", { 
             method: "PATCH",
             headers: {
@@ -57,6 +55,7 @@ export default function AccountSettings() {
                 'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}`
             },
             body: JSON.stringify({
+                currentPassword: password,
                 password: newPassword
             })
         } );
@@ -66,7 +65,7 @@ export default function AccountSettings() {
                 dispatch({type: NOTIFICATION.SUCCESS_UPDATE_PASSWORD});            
                 break;
             default:
-                dispatch({type: NOTIFICATION.ERROR});            
+                dispatch({type: NOTIFICATION.ERROR});
                 return;
         }
         event.preventDefault();
