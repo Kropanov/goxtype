@@ -59,7 +59,7 @@ export class UserRoutes extends CommonRoutesConfig {
         ]);
 
         this.app.patch('/profile', [
-            body('password')
+            body('newPassword')
             .isLength({ min: 5 })
             .withMessage('Password must be 5+ characters')
             .optional(),

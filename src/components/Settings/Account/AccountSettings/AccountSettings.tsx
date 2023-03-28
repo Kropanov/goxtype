@@ -20,7 +20,7 @@ import { NOTIFICATION, TOKEN_KEY } from '../../../../constants/Constants';
 export default function AccountSettings() {
     const {dispatch} = useContext(NotificationContext);
 
-    const [password, setPassword] = useState<string>("");
+    const [currentPassword, setCurrentPassword] = useState<string>("");
     const [newPassword, setNewPassword] = useState<string>("");
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
 
@@ -37,7 +37,7 @@ export default function AccountSettings() {
 
     const handleChangePassword =  async (event: React.MouseEvent<HTMLButtonElement>) => {
 
-        if (emptyFeilds()) {
+        if (emptyFields()) {
             dispatch({type: NOTIFICATION.EMPTY_FIELDS});
             return;
         }
@@ -55,8 +55,8 @@ export default function AccountSettings() {
                 'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}`
             },
             body: JSON.stringify({
-                currentPassword: password,
-                password: newPassword
+                currentPassword,
+                newPassword
             })
         } );
 
@@ -68,11 +68,19 @@ export default function AccountSettings() {
                 dispatch({type: NOTIFICATION.ERROR});
                 return;
         }
+
+        clearTextFields();
         event.preventDefault();
     };
 
-    const emptyFeilds = () => password === "" || newPassword === "" || confirmNewPassword === "";
+    const emptyFields = () => currentPassword === "" || newPassword === "" || confirmNewPassword === "";
     const differentPasswords = () => newPassword !== confirmNewPassword;
+
+    const clearTextFields = () => {
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmNewPassword("");
+    };
 
     return (
         <>
@@ -108,9 +116,9 @@ export default function AccountSettings() {
                     <OutlinedInput 
                         sx={{mb: 1, mt: 2}}
                         type={showPassword ? 'text' : 'password'}
-                        value={password}
+                        value={currentPassword}
                         autoComplete="current-password"
-                        onChange={(event) => setPassword(event.target.value)}
+                        onChange={(event) => setCurrentPassword(event.target.value)}
                         id="old-password" 
                         placeholder="Old password"
                         size="small"

@@ -69,13 +69,12 @@ class UserMiddleware {
         next();
     }
 
-    // FIXME: variable naming isn't good here
     async validateSamePasswordBelongToSameUser(
         req: express.Request,
         res: express.Response,
         next: express.NextFunction
     ) {
-        const user = await UserService.readById(req.body.id);
+        let user = await UserService.readById(req.body.id);
 
         if (!user?.email) {
             return res.status(400).send({
@@ -83,9 +82,10 @@ class UserMiddleware {
             });
         }
 
-        const currentUser = await UserService.getUserByEmail(user?.email || "");
+        user = await UserService.getUserByEmail(user?.email || "");
 
-        if (await argon2.verify(currentUser?.password || '', req.body.currentPassword)) {
+        if (await argon2.verify(user?.password || '', req.body.currentPassword)) {
+            req.body.password = req.body.newPassword;
             return next();
         }
 
