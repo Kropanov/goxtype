@@ -20,7 +20,7 @@ class AuthMiddleware {
                     userId: user._id,
                     name: user.name,
                     email: user.email,
-                    permissionLevel: user.permissionLevel,
+                    role: user.role,
                 };
                 return next();
             }

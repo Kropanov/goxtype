@@ -6,8 +6,7 @@ import User from "../models/users.models.js";
 class UserDao {
     async addUser(userFields: CreateUserDto) {
         const user = new User({
-            ...userFields,
-            permissionLevel: 1,
+            ...userFields
         });
         await user.save();
         return user;
