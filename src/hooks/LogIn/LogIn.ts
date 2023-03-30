@@ -4,7 +4,7 @@ import { NOTIFICATION, TOKEN_KEY } from "../../constants/Constants";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
 import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
 
-export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: () => void) {
+export default function useLogIn(AuthModalClose: () => void) {
     const router = useRouter();
     const {dispatch} = useContext(NotificationContext);
     const {setIsAuthenticated} = useContext(AuthorizationContext);
@@ -62,7 +62,6 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
         // FIXME: This shouldn work with the error nowq
         switch (response.status) {
             case 201:
-                handleSuccessAuth();
                 AuthModalClose();
                 dispatch({type: NOTIFICATION.SUCCESS_AUTHORIZATION});
                 break;

@@ -9,11 +9,10 @@ import TabPanel from "../../Common/TabPanel/TabPanel";
 type AuthorizationProps = {
     tab: number;
     authModalClose: () => void;
-    handleSuccessAuth: () => void;
 };
 
 export default function AuthorizationForm(props: AuthorizationProps) {
-    const {tab, authModalClose, handleSuccessAuth} = props;
+    const {tab, authModalClose} = props;
     const [value, setValue] = React.useState(tab);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -29,16 +28,10 @@ export default function AuthorizationForm(props: AuthorizationProps) {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <LogIn
-                    AuthModalClose={authModalClose}
-                    handleSuccessAuth={handleSuccessAuth}
-                />
+                <LogIn AuthModalClose={authModalClose} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <SignUp
-                    AuthModalClose={authModalClose}
-                    handleSuccessAuth={handleSuccessAuth}
-                />
+                <SignUp AuthModalClose={authModalClose} />
             </TabPanel>
         </>
     );

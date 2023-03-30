@@ -1,10 +1,10 @@
 import {Challenge} from "../components/Types/Types";
 
 export const PAGES = [
-    {name: "practice", uri: "practice-packs"},
-    {name: "blog", uri: "blog"},
-    {name: "contact", uri: "contact"},
-    {name: "support", uri: "support"},
+    {name: "practice", urn: "practice-packs"},
+    {name: "blog", urn: "blog"},
+    {name: "contact", urn: "contact"},
+    {name: "support", urn: "support"},
 ];
 // FIXME: naming the variable
 export const SETTINGS = ['Profile', 'Progress', 'Account', 'Logout'];

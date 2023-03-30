@@ -3,7 +3,7 @@ import { AuthorizationContext } from "../../components/Authorization/Authorizati
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
 import { NOTIFICATION, TOKEN_KEY } from "../../constants/Constants";
 
-export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth: () => void) {
+export default function useSignUp(AuthModalClose: () => void) {
     const {dispatch} = useContext(NotificationContext);
     const {setIsAuthenticated} = useContext(AuthorizationContext);
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -71,7 +71,6 @@ export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth:
         // FIXME: This should work with the error nowq
         switch (response.status) {
             case 201:
-                handleSuccessAuth();
                 AuthModalClose();
                 dispatch({type: NOTIFICATION.SUCCESS_REGISTRATION});            
                 break;

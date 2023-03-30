@@ -20,7 +20,7 @@ import { AuthorizationContext } from '../Authorization/AuthorizationContext/Auth
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const {isAuthenticated} = useContext(AuthorizationContext);
-    const [authorizationSuccess, setAuthorizationSuccess] = useState<boolean>(localStorage.getItem(TOKEN_KEY) ? true : false);
+    const [authorizationSuccess, setAuthorizationSuccess] = useState<boolean>(!!localStorage.getItem(TOKEN_KEY));
 
     useEffect(() => {
         setAuthorizationSuccess(isAuthenticated);
@@ -34,8 +34,6 @@ function Header() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
-    // FIXME: we don't use handleSuccessAuth, need to remove 
-    const AuthProps = {handleSuccessAuth: () => console.log("Magica is now connected")};
 
     return (
         <AppBar position="static">
@@ -94,7 +92,7 @@ function Header() {
                             }}
                         >
                             {PAGES.map((page, index) => (
-                                <NavLink key={index} to={`${page.uri}`}>
+                                <NavLink key={index} to={`${page.urn}`}>
                                     <MenuItem onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">
                                             {page.name[0].toUpperCase() + page.name.slice(1)}
@@ -130,7 +128,7 @@ function Header() {
                         {PAGES.map((page, index) => (
                             <Button
                                 key={index}
-                                to={`${page.uri}`}
+                                to={`${page.urn}`}
                                 component={NavLink}
                                 color="inherit"
                                 onClick={handleCloseNavMenu}
@@ -140,10 +138,7 @@ function Header() {
                             </Button>
                         ))}
                     </Box>
-                    { authorizationSuccess
-                        ?  <UserMenu/>
-                        :  <AuthModal {...AuthProps} />
-                    }
+                    { authorizationSuccess ?  <UserMenu/> :  <AuthModal /> }
                 </Toolbar>
             </Container>
         </AppBar>

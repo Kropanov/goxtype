@@ -13,11 +13,10 @@ import SocialLogin from "../SocialLogin/SocialLogin";
 
 type LogInProps = {
     AuthModalClose: () => void;
-    handleSuccessAuth: () => void;
 };
 
 export default function LogIn(props: LogInProps) {
-    const {AuthModalClose, handleSuccessAuth} = props;
+    const {AuthModalClose} = props;
 
     const {
         checked,
@@ -32,7 +31,7 @@ export default function LogIn(props: LogInProps) {
         handleClickShowForgotPassword,
         handleChangeEmailValue,
         handleChangePasswordValue,
-    } = useLogIn(AuthModalClose, handleSuccessAuth);
+    } = useLogIn(AuthModalClose);
 
     return (
         <>
