@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { NotificationContext } from '../../../Notification/NotificationContext/NotificationContext';
-import { NOTIFICATION, TOKEN_KEY } from '../../../../constants/Constants';
+import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from '../../../../constants/Constants';
 
 export default function AccountSettings() {
     const {dispatch} = useContext(NotificationContext);
@@ -47,7 +47,7 @@ export default function AccountSettings() {
             return;
         }
 
-        const response = await fetch("/profile", { 
+        const response = await fetch(API_ROUTES.PROFILE, {
             method: "PATCH",
             headers: {
                 'Accept': 'application/json',

@@ -40,4 +40,12 @@ export enum NOTIFICATION {
     SUCCESS_UPDATE_PASSWORD
 }
 
+export enum API_ROUTES {
+    LOGIN = "login",
+    SIGN_UP = "signup",
+    REFRESH_TOKEN = "refresh",
+    PRACTICE_PACKS = "practice-packs",
+    PROFILE = "profile"
+}
+
 export const TOKEN_KEY = 'token';

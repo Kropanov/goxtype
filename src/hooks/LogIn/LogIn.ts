@@ -1,6 +1,6 @@
 import {useRouter} from "../Router/Router";
 import React, {useContext, useState} from "react";
-import { NOTIFICATION, TOKEN_KEY } from "../../constants/Constants";
+import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from "../../constants/Constants";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
 import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
 
@@ -45,7 +45,7 @@ export default function useLogIn(AuthModalClose: () => void) {
 
         setLoading(true);
 
-        const response = await fetch("/login", { 
+        const response = await fetch(API_ROUTES.LOGIN, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
-import { NOTIFICATION, TOKEN_KEY } from "../../constants/Constants";
+import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from "../../constants/Constants";
 
 export default function useSignUp(AuthModalClose: () => void) {
     const {dispatch} = useContext(NotificationContext);
@@ -54,7 +54,7 @@ export default function useSignUp(AuthModalClose: () => void) {
 
         setLoading(true);
 
-        const response = await fetch("/signup", { 
+        const response = await fetch(API_ROUTES.SIGN_UP, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Container, Skeleton} from "@mui/material";
 import Pack from "../../components/Pack/Pack";
 import {PackType} from "../../components/Types/Types";
+import {API_ROUTES} from "../../constants/Constants";
 
 export default function PracticePacks() {
     const [packs, setPacks] = useState<PackType[]>([]);
@@ -9,7 +10,7 @@ export default function PracticePacks() {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch("/practice-packs");
+            const response = await fetch(API_ROUTES.PRACTICE_PACKS);
             const result = await response.json();
 
             if (response.ok) {
