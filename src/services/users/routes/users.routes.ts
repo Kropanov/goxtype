@@ -25,7 +25,7 @@ export class UserRoutes extends CommonRoutesConfig {
                 UserMiddleware.validateUserRole,
                 UserController.createUser);
 
-        // FIXME it's don't work because there is protectRoutes function
+        // FIXME it doesn't work because this is protectRoutes function
         this.app.param(`userId`, UserMiddleware.extractUserId);
         this.app
             .route(`/users/:userId`)
