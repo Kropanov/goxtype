@@ -65,7 +65,6 @@ export default function AuthModal() {
                         <Paper>
                             <AuthorizationForm
                                 tab={index}
-                                authModalClose={handleClose}
                             />
                         </Paper>
                     </Box>

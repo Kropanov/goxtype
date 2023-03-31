@@ -8,11 +8,7 @@ import {SIGN_UP} from "../../../../constants/Constants";
 import useSignUp from "../../../../hooks/SignUp/SignUp";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
-type SignUpProps = {
-    AuthModalClose: () => void;
-};
-
-export default function SignUp({AuthModalClose}: SignUpProps) {
+export default function SignUp() {
 
     const {
         loading,
@@ -28,7 +24,7 @@ export default function SignUp({AuthModalClose}: SignUpProps) {
         handleChangeEmailValue,
         handleChangePasswordValue,
         handleChangeConfirmPasswordValue,
-    } = useSignUp(AuthModalClose);
+    } = useSignUp();
 
     return (
         <>

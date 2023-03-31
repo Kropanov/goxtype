@@ -91,7 +91,7 @@ class UserMiddleware {
         }
 
         res.status(400).send({
-            message: "Passwords don't match!"
+            message: "Your current password don't match!"
         });
     }
 

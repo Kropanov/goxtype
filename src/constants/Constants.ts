@@ -6,7 +6,6 @@ export const PAGES = [
     {name: "contact", urn: "contact"},
     {name: "support", urn: "support"},
 ];
-// FIXME: naming the variable
 export const SETTINGS = ['Profile', 'Progress', 'Account', 'Logout'];
 export const SITE_NAME = "GOXTYPE";
 
@@ -30,7 +29,6 @@ export const MIDDLE_QUANTITY_CHAR = 5;
 export enum NOTIFICATION {
     HIDE,
     ERROR,
-    PROFILE_TEST,
     EMPTY_FIELDS,
     SUCCESS_REGISTRATION,
     SUCCESS_AUTHORIZATION,
