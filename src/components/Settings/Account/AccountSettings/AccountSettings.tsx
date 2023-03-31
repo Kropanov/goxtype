@@ -15,10 +15,12 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { NotificationContext } from '../../../Notification/NotificationContext/NotificationContext';
-import { NOTIFICATION, TOKEN_KEY } from '../../../../constants/Constants';
+import {API_ROUTES, NOTIFICATION} from '../../../../constants/Constants';
+import useHttp from "../../../../hooks/Http/Http";
 
 export default function AccountSettings() {
     const {dispatch} = useContext(NotificationContext);
+    const {request} = useHttp();
 
     const [currentPassword, setCurrentPassword] = useState<string>("");
     const [newPassword, setNewPassword] = useState<string>("");
@@ -27,9 +29,6 @@ export default function AccountSettings() {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
-
-    // TODO: create loader
-    // const [loading, setLoading] = useState(false);
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -47,30 +46,23 @@ export default function AccountSettings() {
             return;
         }
 
-        const response = await fetch("/profile", { 
+        const options = {
             method: "PATCH",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}`
-            },
             body: JSON.stringify({
                 currentPassword,
                 newPassword
             })
-        } );
+        };
 
-        switch (response.status) {
-            case 200:
-                dispatch({type: NOTIFICATION.SUCCESS_UPDATE_PASSWORD});            
-                break;
-            default:
-                dispatch({type: NOTIFICATION.ERROR});
-                return;
+        const result = await request(API_ROUTES.PROFILE, options);
+
+        if (!result) {
+            return;
         }
 
-        clearTextFields();
+        dispatch({type: NOTIFICATION.SUCCESS_UPDATE_PASSWORD});
         event.preventDefault();
+        clearTextFields();
     };
 
     const emptyFields = () => currentPassword === "" || newPassword === "" || confirmNewPassword === "";

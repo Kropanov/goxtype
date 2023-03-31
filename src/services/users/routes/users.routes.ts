@@ -22,8 +22,10 @@ export class UserRoutes extends CommonRoutesConfig {
                 .withMessage('Must include password (5+ characters)'),
                 BodyValidationMiddleware.verifyBodyFieldsErrors,
                 UserMiddleware.validateSameEmailDoesntExist,
+                UserMiddleware.validateUserRole,
                 UserController.createUser);
 
+        // FIXME it doesn't work because this is protectRoutes function
         this.app.param(`userId`, UserMiddleware.extractUserId);
         this.app
             .route(`/users/:userId`)
@@ -38,7 +40,7 @@ export class UserRoutes extends CommonRoutesConfig {
             .withMessage('Must include password (5+ characters)'),
             body('firstName').isString(),
             body('lastName').isString(),
-            body('permissionLevel').isInt(),
+            body('role').isString(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
             UserMiddleware.validateSameEmailBelongToSameUser,
             UserController.put,
@@ -52,7 +54,7 @@ export class UserRoutes extends CommonRoutesConfig {
             .optional(),
             body('firstName').isString().optional(),
             body('lastName').isString().optional(),
-            body('permissionLevel').isInt().optional(),
+            body('role').isString().optional(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
             UserMiddleware.validatePatchEmail,
             UserController.patch

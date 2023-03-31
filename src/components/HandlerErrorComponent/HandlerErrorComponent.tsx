@@ -2,7 +2,6 @@ import { Box, Typography } from '@mui/material';
 import { Container } from '@mui/material';
 import React from 'react';
 
-// FIXME: This component has been created only for presentation
 export default function HandlerErrorComponent() {
     return (
         <Container maxWidth="md">

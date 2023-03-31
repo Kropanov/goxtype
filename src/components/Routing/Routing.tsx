@@ -19,7 +19,7 @@ export default function Routing() {
                     <UserProfile />
                 </PrivateRoute>
             }/>
-            <Route path="/Logout" element={
+            <Route path="/logout" element={
                 <PrivateRoute>
                     <Logout />
                 </PrivateRoute>

@@ -11,14 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import SocialLogin from "../SocialLogin/SocialLogin";
 
-type LogInProps = {
-    AuthModalClose: () => void;
-    handleSuccessAuth: () => void;
-};
-
-export default function LogIn(props: LogInProps) {
-    const {AuthModalClose, handleSuccessAuth} = props;
-
+export default function LogIn() {
     const {
         checked,
         loading,
@@ -32,7 +25,7 @@ export default function LogIn(props: LogInProps) {
         handleClickShowForgotPassword,
         handleChangeEmailValue,
         handleChangePasswordValue,
-    } = useLogIn(AuthModalClose, handleSuccessAuth);
+    } = useLogIn();
 
     return (
         <>

@@ -36,3 +36,5 @@ export type PackType = {
 };
 
 type Text = {text: string};
+
+export type Role = 'user' | 'admin' | 'manager' | 'subscriber' | 'guest';

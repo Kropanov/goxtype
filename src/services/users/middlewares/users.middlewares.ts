@@ -1,6 +1,7 @@
 import express from "express";
 import UserService from "../service/users.service.js";
 import argon2 from "argon2";
+import {UserRole} from "../../common/constants/constants.js";
 
 class UserMiddleware {
     async validateSameEmailDoesntExist(
@@ -90,8 +91,19 @@ class UserMiddleware {
         }
 
         res.status(400).send({
-            message: "Passwords don't match!"
+            message: "Your current password don't match!"
         });
+    }
+
+    async validateUserRole(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        if (!req.body.role) {
+            req.body.role = UserRole.USER;
+        }
+        next();
     }
 }
 

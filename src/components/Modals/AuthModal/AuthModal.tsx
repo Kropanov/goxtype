@@ -16,12 +16,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
 };
 
-type AuthModalProps = {
-    handleSuccessAuth: () => void;
-};
-
-export default function AuthModal(props: AuthModalProps) {
-    const {handleSuccessAuth} = props;
+export default function AuthModal() {
     const [open, setOpen] = useState(false);
     const [index, setIndex] = useState(FORM_TABS.AUTH);
 
@@ -70,8 +65,6 @@ export default function AuthModal(props: AuthModalProps) {
                         <Paper>
                             <AuthorizationForm
                                 tab={index}
-                                authModalClose={handleClose}
-                                handleSuccessAuth={handleSuccessAuth}
                             />
                         </Paper>
                     </Box>

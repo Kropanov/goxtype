@@ -1,12 +1,11 @@
 import {Challenge} from "../components/Types/Types";
 
 export const PAGES = [
-    {name: "practice", uri: "practice-packs"},
-    {name: "blog", uri: "blog"},
-    {name: "contact", uri: "contact"},
-    {name: "support", uri: "support"},
+    {name: "practice", urn: "practice-packs"},
+    {name: "blog", urn: "blog"},
+    {name: "contact", urn: "contact"},
+    {name: "support", urn: "support"},
 ];
-// FIXME: naming the variable
 export const SETTINGS = ['Profile', 'Progress', 'Account', 'Logout'];
 export const SITE_NAME = "GOXTYPE";
 
@@ -30,7 +29,6 @@ export const MIDDLE_QUANTITY_CHAR = 5;
 export enum NOTIFICATION {
     HIDE,
     ERROR,
-    PROFILE_TEST,
     EMPTY_FIELDS,
     SUCCESS_REGISTRATION,
     SUCCESS_AUTHORIZATION,
@@ -38,6 +36,14 @@ export enum NOTIFICATION {
     FAIL_VALIDATION_PASSWORD,
     EMAIL_ALREADY_EXIST,
     SUCCESS_UPDATE_PASSWORD
+}
+
+export enum API_ROUTES {
+    LOGIN = "login",
+    SIGN_UP = "signup",
+    REFRESH_TOKEN = "refresh",
+    PRACTICE_PACKS = "practice-packs",
+    PROFILE = "profile"
 }
 
 export const TOKEN_KEY = 'token';

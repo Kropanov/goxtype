@@ -1,14 +1,13 @@
 import {NOTIFICATION} from "../../../constants/Constants";
 
-// FIXME: refactor this 
 // eslint-disable-next-line
 function reducer(state: any, action: any) {
     switch (action.type) {
-        case NOTIFICATION.PROFILE_TEST:
+        case NOTIFICATION.ERROR:
             return {
                 open: true,
-                severity: "info",
-                message: "It's your pofile avatar, Dear User!"
+                severity: "error",
+                message: action.payload
             };
         case NOTIFICATION.SUCCESS_UPDATE_PASSWORD:
             return {
@@ -33,12 +32,6 @@ function reducer(state: any, action: any) {
                 open: true,
                 severity: "warning",
                 message: "User email already exists!"
-            };
-        case NOTIFICATION.ERROR:
-            return {
-                open: true,
-                severity: "error",
-                message: "Ops! Something went wrong!"
             };
         case NOTIFICATION.FAIL_VALIDATION_PASSWORD:
             return {
