@@ -47,7 +47,7 @@ class AuthMiddleware {
             if (!currentUser) {
                 return res.status(401).send({message: "User was deleted!"});
             }
-            req.body.id = id;
+
         } catch (error) {
             return res.status(401).send({error: error, message: "Please login again!"}); 
         }
