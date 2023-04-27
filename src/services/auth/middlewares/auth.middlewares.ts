@@ -28,6 +28,7 @@ class AuthMiddleware {
         res.status(401).send({message: "Invalid email and/or password!"});
     }
 
+    // FIXME: protectRoute seems better than is
     async protectRoutes(
         req: express.Request,
         res: express.Response,

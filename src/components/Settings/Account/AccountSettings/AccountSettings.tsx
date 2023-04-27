@@ -15,8 +15,9 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { NotificationContext } from '../../../Notification/NotificationContext/NotificationContext';
-import {API_ROUTES, NOTIFICATION} from '../../../../constants/Constants';
+import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from '../../../../constants/Constants';
 import useHttp from "../../../../hooks/Http/Http";
+import {parseToken} from "../../../../func";
 
 export default function AccountSettings() {
     const {dispatch} = useContext(NotificationContext);
@@ -46,13 +47,23 @@ export default function AccountSettings() {
             return;
         }
 
+        const token = localStorage.getItem(TOKEN_KEY);
+
+        if (!token) {
+            return;
+        }
+
+        const payload = parseToken(token);
+
         const options = {
             method: "PATCH",
             body: JSON.stringify({
                 currentPassword,
-                newPassword
+                newPassword,
+                id: payload.id
             })
         };
+
 
         const result = await request(API_ROUTES.PROFILE, options);
 
