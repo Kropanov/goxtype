@@ -25,7 +25,6 @@ export class UserRoutes extends CommonRoutesConfig {
                 UserMiddleware.validateUserRole,
                 UserController.createUser);
 
-        // FIXME it doesn't work because this is protectRoutes function
         this.app.param(`userId`, UserMiddleware.extractUserId);
         this.app
             .route(`/users/:userId`)
@@ -67,7 +66,7 @@ export class UserRoutes extends CommonRoutesConfig {
             .optional(),
             BodyValidationMiddleware.verifyBodyFieldsErrors,
             AuthMiddleware.protectRoutes,
-            UserMiddleware.validateSamePasswordBelongToSameUser,
+            UserMiddleware.validateUserSettings,
             UserController.patch
         ]);
 
