@@ -85,6 +85,10 @@ export default function AccountSettings() {
         setConfirmNewPassword("");
     };
 
+    // const handleChangeName = () => {
+    //   return;
+    // };
+
     return (
         <>
             <Grid item sm={8} xs={12}>

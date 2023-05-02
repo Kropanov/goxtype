@@ -106,6 +106,7 @@ class UserMiddleware {
         next();
     }
 
+    // FIXME: split the middleware
     validateUserSettings = async (
         req: express.Request,
         res: express.Response,
@@ -113,7 +114,7 @@ class UserMiddleware {
     )  => {
         if (!req.body.id) {
             return res.status(400).send({
-                message: "Something went wrong!"
+                message: "User id wasn't found"
             });
         }
 
