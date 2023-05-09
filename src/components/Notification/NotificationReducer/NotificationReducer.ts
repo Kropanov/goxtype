@@ -33,6 +33,12 @@ function reducer(state: any, action: any) {
                 severity: "warning",
                 message: "User email already exists!"
             };
+        case NOTIFICATION.SUCCESS_UPDATE_USERNAME:
+            return {
+                open: true,
+                severity: "success",
+                message: "User name was updated!"
+            };
         case NOTIFICATION.FAIL_VALIDATION_PASSWORD:
             return {
                 open: true,

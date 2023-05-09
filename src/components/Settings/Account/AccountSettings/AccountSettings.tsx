@@ -27,6 +27,8 @@ export default function AccountSettings() {
     const [newPassword, setNewPassword] = useState<string>("");
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
 
+    const [userName, setUserName] = useState<string>("");
+
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
@@ -37,7 +39,7 @@ export default function AccountSettings() {
 
     const handleChangePassword =  async (event: React.MouseEvent<HTMLButtonElement>) => {
 
-        if (emptyFields()) {
+        if (emptyPasswordFields()) {
             dispatch({type: NOTIFICATION.EMPTY_FIELDS});
             return;
         }
@@ -64,7 +66,6 @@ export default function AccountSettings() {
             })
         };
 
-
         const result = await request(API_ROUTES.PROFILE, options);
 
         if (!result) {
@@ -76,7 +77,8 @@ export default function AccountSettings() {
         clearTextFields();
     };
 
-    const emptyFields = () => currentPassword === "" || newPassword === "" || confirmNewPassword === "";
+    const emptyPasswordFields = () => currentPassword === "" || newPassword === "" || confirmNewPassword === "";
+    const emptyNameField = () => userName === "";
     const differentPasswords = () => newPassword !== confirmNewPassword;
 
     const clearTextFields = () => {
@@ -85,9 +87,36 @@ export default function AccountSettings() {
         setConfirmNewPassword("");
     };
 
-    // const handleChangeName = () => {
-    //   return;
-    // };
+    const handleChangeName = async () => {
+        if (emptyNameField()) {
+            dispatch({type: NOTIFICATION.EMPTY_FIELDS});
+            return;
+        }
+
+        const token = localStorage.getItem(TOKEN_KEY);
+
+        if (!token) {
+            return;
+        }
+
+        const payload = parseToken(token);
+
+        const options = {
+            method: "PATCH",
+            body: JSON.stringify({
+                name: userName,
+                id: payload.id
+            })
+        };
+
+        const result = await request(API_ROUTES.PROFILE, options);
+
+        if (!result) {
+            return;
+        }
+
+        dispatch({type: NOTIFICATION.SUCCESS_UPDATE_USERNAME});
+    };
 
     return (
         <>
@@ -102,14 +131,17 @@ export default function AccountSettings() {
                     </InputLabel>
                     <OutlinedInput
                         id="component-name"
-                        defaultValue="Brave Heart"
+                        value={userName}
+                        onChange={(event) => setUserName(event.target.value)}
+                        defaultValue={userName}
                         label="Name"
                         size="small"
+                        autoComplete="off"
                     />
                     <FormHelperText id="component-name-helper-text" variant="filled">
                         Your name may appear around on site where you win round or complete pack
                     </FormHelperText>
-                    <Button variant="text">
+                    <Button onClick={handleChangeName} variant="text">
                         Update name
                     </Button>
                 </FormControl>
