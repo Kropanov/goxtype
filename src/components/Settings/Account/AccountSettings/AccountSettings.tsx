@@ -20,8 +20,8 @@ import useHttp from "../../../../hooks/Http/Http";
 import {parseToken} from "../../../../func";
 
 export default function AccountSettings() {
-    const {dispatch} = useContext(NotificationContext);
     const {request} = useHttp();
+    const {dispatch} = useContext(NotificationContext);
 
     const [currentPassword, setCurrentPassword] = useState<string>("");
     const [newPassword, setNewPassword] = useState<string>("");
@@ -131,12 +131,12 @@ export default function AccountSettings() {
                     </InputLabel>
                     <OutlinedInput
                         id="component-name"
+                        type="text"
                         value={userName}
                         onChange={(event) => setUserName(event.target.value)}
-                        defaultValue={userName}
+                        autoComplete="off"
                         label="Name"
                         size="small"
-                        autoComplete="off"
                     />
                     <FormHelperText id="component-name-helper-text" variant="filled">
                         Your name may appear around on site where you win round or complete pack
