@@ -15,16 +15,19 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { NotificationContext } from '../../../Notification/NotificationContext/NotificationContext';
-import {API_ROUTES, NOTIFICATION} from '../../../../constants/Constants';
+import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from '../../../../constants/Constants';
 import useHttp from "../../../../hooks/Http/Http";
+import {parseToken} from "../../../../func";
 
 export default function AccountSettings() {
-    const {dispatch} = useContext(NotificationContext);
     const {request} = useHttp();
+    const {dispatch} = useContext(NotificationContext);
 
     const [currentPassword, setCurrentPassword] = useState<string>("");
     const [newPassword, setNewPassword] = useState<string>("");
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
+
+    const [userName, setUserName] = useState<string>("");
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
@@ -36,7 +39,7 @@ export default function AccountSettings() {
 
     const handleChangePassword =  async (event: React.MouseEvent<HTMLButtonElement>) => {
 
-        if (emptyFields()) {
+        if (emptyPasswordFields()) {
             dispatch({type: NOTIFICATION.EMPTY_FIELDS});
             return;
         }
@@ -46,11 +49,20 @@ export default function AccountSettings() {
             return;
         }
 
+        const token = localStorage.getItem(TOKEN_KEY);
+
+        if (!token) {
+            return;
+        }
+
+        const payload = parseToken(token);
+
         const options = {
             method: "PATCH",
             body: JSON.stringify({
                 currentPassword,
-                newPassword
+                newPassword,
+                id: payload.id
             })
         };
 
@@ -65,13 +77,45 @@ export default function AccountSettings() {
         clearTextFields();
     };
 
-    const emptyFields = () => currentPassword === "" || newPassword === "" || confirmNewPassword === "";
+    const emptyPasswordFields = () => currentPassword === "" || newPassword === "" || confirmNewPassword === "";
+    const emptyNameField = () => userName === "";
     const differentPasswords = () => newPassword !== confirmNewPassword;
 
     const clearTextFields = () => {
         setCurrentPassword("");
         setNewPassword("");
         setConfirmNewPassword("");
+    };
+
+    const handleChangeName = async () => {
+        if (emptyNameField()) {
+            dispatch({type: NOTIFICATION.EMPTY_FIELDS});
+            return;
+        }
+
+        const token = localStorage.getItem(TOKEN_KEY);
+
+        if (!token) {
+            return;
+        }
+
+        const payload = parseToken(token);
+
+        const options = {
+            method: "PATCH",
+            body: JSON.stringify({
+                name: userName,
+                id: payload.id
+            })
+        };
+
+        const result = await request(API_ROUTES.PROFILE, options);
+
+        if (!result) {
+            return;
+        }
+
+        dispatch({type: NOTIFICATION.SUCCESS_UPDATE_USERNAME});
     };
 
     return (
@@ -87,14 +131,17 @@ export default function AccountSettings() {
                     </InputLabel>
                     <OutlinedInput
                         id="component-name"
-                        defaultValue="Brave Heart"
+                        type="text"
+                        value={userName}
+                        onChange={(event) => setUserName(event.target.value)}
+                        autoComplete="off"
                         label="Name"
                         size="small"
                     />
                     <FormHelperText id="component-name-helper-text" variant="filled">
                         Your name may appear around on site where you win round or complete pack
                     </FormHelperText>
-                    <Button variant="text">
+                    <Button onClick={handleChangeName} variant="text">
                         Update name
                     </Button>
                 </FormControl>

@@ -105,6 +105,31 @@ class UserMiddleware {
         }
         next();
     }
+
+    // FIXME: split the middleware
+    validateUserSettings = async (
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    )  => {
+        if (!req.body.id) {
+            return res.status(400).send({
+                message: "User id wasn't found"
+            });
+        }
+
+        if (req.body.currentPassword && req.body.newPassword) {
+            return await this.validateSamePasswordBelongToSameUser(req, res, next);
+        }
+
+        if (req.body.name) {
+            return next();
+        }
+
+        res.status(400).send({
+            message: "Something went wrong!"
+        });
+    };
 }
 
 export default new UserMiddleware();
