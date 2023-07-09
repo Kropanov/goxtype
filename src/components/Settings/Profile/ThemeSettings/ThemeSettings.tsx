@@ -6,10 +6,15 @@ import {
     Grid,
     Radio,
     RadioGroup,
-    Typography
+    Typography, useTheme
 } from "@mui/material";
+import {ColorModeContext} from "../../../../App";
 
 export default function ThemeSettings() {
+
+    const theme = useTheme();
+    const colorMode = React.useContext(ColorModeContext);
+
     return (
         <Grid item sm={8} xs={12}>
             <Typography variant="h6">
@@ -20,11 +25,11 @@ export default function ThemeSettings() {
                 <RadioGroup
                     row
                     aria-labelledby="theme-label-group"
+                    defaultValue="Light"
                     name="theme-label-group"
-                    value="Dark"
                 >
-                    <FormControlLabel value="Dark" control={<Radio />} label="Dark" />
-                    <FormControlLabel value="Light" control={<Radio />} label="Light" />
+                    <FormControlLabel value="Dark" checked={theme.palette.mode === 'dark'} onClick={colorMode.toggleColorMode} control={<Radio />} label="Dark" />
+                    <FormControlLabel value="Light" checked={theme.palette.mode === 'light'} onClick={colorMode.toggleColorMode} control={<Radio />} label="Light" />
                 </RadioGroup>
             </FormControl>
         </Grid>
