@@ -1,5 +1,5 @@
 import React from 'react';
-import useMediaQuery from "@mui/material/useMediaQuery";
+import {useTheme} from "@mui/material";
 
 type LogoProps = {
     width?: number,
@@ -9,10 +9,9 @@ type LogoProps = {
 
 function Logo(props: LogoProps) {
 
+    const theme = useTheme();
     const {width, height, blackLogo} = props;
-    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-    // TODO: we need to change some logic in this piece of code
-    const mode =  prefersDarkMode ? "Logo.png" : "BlackLogo.png";
+    const mode =  theme.palette.mode === 'dark' ? "Logo.png" : "BlackLogo.png";
 
     return (
         <img
