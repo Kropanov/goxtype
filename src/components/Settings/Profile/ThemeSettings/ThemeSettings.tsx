@@ -8,7 +8,7 @@ import {
     RadioGroup,
     Typography, useTheme
 } from "@mui/material";
-import {ColorModeContext} from "../../../../App";
+import { ColorModeContext } from '../../../../hooks/Theme/Theme';
 
 export default function ThemeSettings() {
 
