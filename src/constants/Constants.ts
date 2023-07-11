@@ -43,6 +43,7 @@ export enum API_ROUTES {
     LOGIN = "login",
     SIGN_UP = "signup",
     REFRESH_TOKEN = "refresh",
+    USERS = "users/",
     PRACTICE_PACKS = "practice-packs",
     PROFILE = "profile"
 }
