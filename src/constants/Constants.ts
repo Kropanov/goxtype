@@ -48,4 +48,9 @@ export enum API_ROUTES {
     PROFILE = "profile"
 }
 
+// export enum KEY {
+//
+// }
+
 export const TOKEN_KEY = 'token';
+export const IMAGE_KEY = 'image';

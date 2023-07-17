@@ -1,9 +1,10 @@
 import {useRouter} from "../Router/Router";
 import React, {useContext, useState} from "react";
-import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from "../../constants/Constants";
+import {API_ROUTES, IMAGE_KEY, NOTIFICATION, TOKEN_KEY} from "../../constants/Constants";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
 import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
 import useHttp from "../Http/Http";
+import {parseToken} from "../../func";
 
 export default function useLogIn() {
     const router = useRouter();
@@ -64,6 +65,17 @@ export default function useLogIn() {
 
         dispatch({type: NOTIFICATION.SUCCESS_AUTHORIZATION});
         localStorage.setItem(TOKEN_KEY, result.token);
+
+        // TODO: move that to another file
+        // ------------
+        const sameOptions = { method: "GET" };
+        const payload = parseToken(result.token);
+        const user = await request(API_ROUTES.USERS + payload.id, sameOptions);
+
+        localStorage.setItem(IMAGE_KEY, user.data.image);
+        localStorage.setItem("userName", user.data.name);
+        // -------------
+
         setIsAuthenticated(true);
     };
 

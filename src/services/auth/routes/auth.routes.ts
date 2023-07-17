@@ -26,6 +26,7 @@ export class AuthRoutes extends CommonRoutesConfig {
             BodyValidationMiddleware.verifyBodyFieldsErrors,
             UserMiddleware.validateSameEmailDoesntExist,
             UserMiddleware.validateUserRole,
+            UserMiddleware.validateUserAvatar,
             AuthController.signup
         ]);
 

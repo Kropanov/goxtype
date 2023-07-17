@@ -3,7 +3,7 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
-import {SETTINGS} from "../../constants/Constants";
+import {IMAGE_KEY, SETTINGS} from "../../constants/Constants";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -24,7 +24,7 @@ export default function UserMenu() {
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" />
+                    <Avatar alt="Remy Sharp" src={localStorage.getItem(IMAGE_KEY) ?? undefined} />
                 </IconButton>
             </Tooltip>
             <Menu

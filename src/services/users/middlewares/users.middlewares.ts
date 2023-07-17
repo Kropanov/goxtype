@@ -106,6 +106,16 @@ class UserMiddleware {
         next();
     }
 
+    // FIXME: when it will be completed, then remove this piece of code
+    async validateUserAvatar(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        req.body.image = "avatar.jpg";
+        next();
+    }
+
     // FIXME: split the middleware
     validateUserSettings = async (
         req: express.Request,
