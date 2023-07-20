@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import { TOKEN_KEY } from '../../../constants/Constants';
+import { KEY } from '../../../constants/Constants';
 import { AuthorizationContext } from '../AuthorizationContext/AuthorizationContext';
 
 type AuthorizationProviderProps = {
@@ -8,7 +8,7 @@ type AuthorizationProviderProps = {
 
 function AuthorizationProvider(props: AuthorizationProviderProps) {
 
-    const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem(TOKEN_KEY) ? true : false);
+    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem(KEY.TOKEN));
 
     const value = useMemo(() => ({isAuthenticated, setIsAuthenticated}), [isAuthenticated]);
 

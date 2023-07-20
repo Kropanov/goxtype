@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { NotificationContext } from '../../../Notification/NotificationContext/NotificationContext';
-import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from '../../../../constants/Constants';
+import {API_ROUTES, NOTIFICATION, KEY} from '../../../../constants/Constants';
 import useHttp from "../../../../hooks/Http/Http";
 import {parseToken} from "../../../../func";
 
@@ -49,7 +49,7 @@ export default function AccountSettings() {
             return;
         }
 
-        const token = localStorage.getItem(TOKEN_KEY);
+        const token = localStorage.getItem(KEY.TOKEN);
 
         if (!token) {
             return;
@@ -93,7 +93,7 @@ export default function AccountSettings() {
             return;
         }
 
-        const token = localStorage.getItem(TOKEN_KEY);
+        const token = localStorage.getItem(KEY.TOKEN);
 
         if (!token) {
             return;
@@ -232,8 +232,8 @@ export default function AccountSettings() {
                     direction={{xs: "column"}}
                 >
                     <Avatar
-                        alt="Remy Sharp"
-                        src="https://source.unsplash.com/random"
+                        alt="Avatar"
+                        src={localStorage.getItem(KEY.IMAGE) ?? undefined}
                         sx={{
                             width: {lg: 200, md: 160, sm: 100, xs: 200},
                             height: {lg: 200, md: 160, sm: 100, xs: 200},

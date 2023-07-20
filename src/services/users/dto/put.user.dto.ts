@@ -4,5 +4,6 @@ export interface PutUserDto {
     email: string;
     password: string;
     name: string;
+    image?: string;
     role: Role;
 }

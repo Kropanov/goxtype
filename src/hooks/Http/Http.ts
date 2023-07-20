@@ -1,5 +1,5 @@
 import {useContext, useState} from 'react';
-import {NOTIFICATION, TOKEN_KEY} from "../../constants/Constants";
+import {NOTIFICATION, KEY} from "../../constants/Constants";
 import {NotificationContext} from "../../components/Notification/NotificationContext/NotificationContext";
 
 export default function useHttp() {
@@ -43,7 +43,8 @@ function insertHeaders(options?: RequestInit | undefined) {
         'Content-Type': 'application/json;charset=utf-8',
     };
 
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = localStorage.getItem(KEY.TOKEN);
+
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }

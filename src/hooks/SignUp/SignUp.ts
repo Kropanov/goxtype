@@ -1,11 +1,13 @@
 import React, {useContext, useState} from "react";
 import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
-import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from "../../constants/Constants";
+import {API_ROUTES, NOTIFICATION, KEY} from "../../constants/Constants";
 import useHttp from "../Http/Http";
+import useUserData from "../UserData/UserData";
 
 export default function useSignUp() {
     const {dispatch} = useContext(NotificationContext);
+    const {LoadUserDataToClient} = useUserData();
     const {loading, request} = useHttp();
     const {setIsAuthenticated} = useContext(AuthorizationContext);
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -13,7 +15,6 @@ export default function useSignUp() {
     const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
     const [passwordTextFieldValue, setPasswordTextFieldValue] = useState("");
     const [confirmPasswordTextFieldValue, setConfirmPasswordTextFieldValue] = useState("");
-
 
     const handleChangeEmailValue = (value: string) => {
         setEmailTextFieldValue(value);
@@ -67,7 +68,10 @@ export default function useSignUp() {
         }
 
         dispatch({type: NOTIFICATION.SUCCESS_REGISTRATION});
-        localStorage.setItem(TOKEN_KEY, result.token);
+        localStorage.setItem(KEY.TOKEN, result.token);
+
+        await LoadUserDataToClient(result.token);
+
         setIsAuthenticated(true);
     };
 

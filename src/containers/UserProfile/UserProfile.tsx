@@ -11,6 +11,7 @@ import TabPanel from "../../components/Common/TabPanel/TabPanel";
 import Typography from "@mui/material/Typography";
 import {scrollPageUp} from "../../func";
 import Settings from "../../components/Settings/Settings";
+import {KEY} from "../../constants/Constants";
 
 export default function UserProfile() {
 
@@ -35,8 +36,8 @@ export default function UserProfile() {
                         direction={{xs: "column"}}
                     >
                         <Avatar
-                            alt="Remy Sharp"
-                            src="https://source.unsplash.com/random"
+                            alt="Avatar"
+                            src={localStorage.getItem(KEY.IMAGE) ?? undefined}
                             sx={{
                                 width: {lg: 296, md: 216, sm: 165, xs: 120},
                                 height: {lg: 296, md: 216, sm: 165, xs: 120},
@@ -56,7 +57,7 @@ export default function UserProfile() {
                                 textDecoration: 'none',
                             }}
                         >
-                            Brave Heart
+                            {localStorage.getItem(KEY.NAME) ?? "Player-1583923"}
                         </Typography>
                     </Grid>
                 </Grid>

@@ -1,13 +1,15 @@
 import {useRouter} from "../Router/Router";
 import React, {useContext, useState} from "react";
-import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from "../../constants/Constants";
+import {API_ROUTES, NOTIFICATION, KEY} from "../../constants/Constants";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
 import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
 import useHttp from "../Http/Http";
+import useUserData from "../UserData/UserData";
 
 export default function useLogIn() {
-    const router = useRouter();
+    const {LoadUserDataToClient} = useUserData();
     const {loading, request} = useHttp();
+    const router = useRouter();
     const {dispatch} = useContext(NotificationContext);
     const {setIsAuthenticated} = useContext(AuthorizationContext);
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
@@ -63,7 +65,10 @@ export default function useLogIn() {
         }
 
         dispatch({type: NOTIFICATION.SUCCESS_AUTHORIZATION});
-        localStorage.setItem(TOKEN_KEY, result.token);
+        localStorage.setItem(KEY.TOKEN, result.token);
+
+        await LoadUserDataToClient(result.token);
+
         setIsAuthenticated(true);
     };
 
