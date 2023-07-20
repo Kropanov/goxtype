@@ -232,8 +232,8 @@ export default function AccountSettings() {
                     direction={{xs: "column"}}
                 >
                     <Avatar
-                        alt="Remy Sharp"
-                        src="https://source.unsplash.com/random"
+                        alt="Avatar"
+                        src={localStorage.getItem(KEY.IMAGE) ?? undefined}
                         sx={{
                             width: {lg: 200, md: 160, sm: 100, xs: 200},
                             height: {lg: 200, md: 160, sm: 100, xs: 200},

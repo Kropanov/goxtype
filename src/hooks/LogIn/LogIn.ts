@@ -73,7 +73,7 @@ export default function useLogIn() {
         const user = await request(API_ROUTES.USERS + payload.id, sameOptions);
 
         localStorage.setItem(KEY.IMAGE, user.data.image);
-        localStorage.setItem("userName", user.data.name);
+        localStorage.setItem(KEY.NAME, user.data.name);
         // -------------
 
         setIsAuthenticated(true);

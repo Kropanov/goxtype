@@ -24,7 +24,7 @@ export default function UserMenu() {
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src={localStorage.getItem(KEY.IMAGE) ?? undefined} />
+                    <Avatar src={localStorage.getItem(KEY.IMAGE) ?? undefined} />
                 </IconButton>
             </Tooltip>
             <Menu
