@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
 import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
-import {API_ROUTES, NOTIFICATION, TOKEN_KEY} from "../../constants/Constants";
+import {API_ROUTES, NOTIFICATION, KEY} from "../../constants/Constants";
 import useHttp from "../Http/Http";
 
 export default function useSignUp() {
@@ -67,7 +67,7 @@ export default function useSignUp() {
         }
 
         dispatch({type: NOTIFICATION.SUCCESS_REGISTRATION});
-        localStorage.setItem(TOKEN_KEY, result.token);
+        localStorage.setItem(KEY.TOKEN, result.token);
         setIsAuthenticated(true);
     };
 

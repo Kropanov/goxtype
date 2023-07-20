@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Grid, Typography} from "@mui/material";
 import { useRouter } from '../../../../hooks/Router/Router';
-import {API_ROUTES, TOKEN_KEY} from "../../../../constants/Constants";
+import {API_ROUTES, KEY} from "../../../../constants/Constants";
 import useHttp from "../../../../hooks/Http/Http";
 import {parseToken} from "../../../../func";
 
@@ -12,7 +12,7 @@ export default function CrucialSection() {
 
     const handleDeleteUserAccount = async () => {
 
-        const token = localStorage.getItem(TOKEN_KEY);
+        const token = localStorage.getItem(KEY.TOKEN);
 
         if (!token) {
             return;

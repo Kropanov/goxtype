@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import {SITE_NAME, PAGES, TOKEN_KEY} from "../../constants/Constants";
+import {SITE_NAME, PAGES, KEY} from "../../constants/Constants";
 import MediaQuery from 'react-responsive';
 import Logo from "../Common/Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
@@ -20,7 +20,7 @@ import { AuthorizationContext } from '../Authorization/AuthorizationContext/Auth
 function Header() {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const {isAuthenticated} = useContext(AuthorizationContext);
-    const [authorizationSuccess, setAuthorizationSuccess] = useState<boolean>(!!localStorage.getItem(TOKEN_KEY));
+    const [authorizationSuccess, setAuthorizationSuccess] = useState<boolean>(!!localStorage.getItem(KEY.TOKEN));
 
     useEffect(() => {
         setAuthorizationSuccess(isAuthenticated);
