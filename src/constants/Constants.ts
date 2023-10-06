@@ -51,5 +51,6 @@ export enum API_ROUTES {
 export enum KEY {
     TOKEN = "token",
     IMAGE = "image",
-    NAME = "name"
+    NAME = "name",
+    THEME = "theme"
 }
