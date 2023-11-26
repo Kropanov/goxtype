@@ -1,9 +1,5 @@
-import { useMemo } from "react";
-import {
-    useParams,
-    useLocation,
-    useNavigate,
-} from "react-router-dom";
+import { useMemo } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 export function useRouter() {
     const params = useParams();

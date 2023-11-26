@@ -5,7 +5,7 @@ import React from 'react';
 export default function HandlerErrorComponent() {
     return (
         <Container maxWidth="md">
-            <Box sx={{m: 5}}>
+            <Box sx={{ m: 5 }}>
                 <Typography
                     variant="h2"
                     component="h2"

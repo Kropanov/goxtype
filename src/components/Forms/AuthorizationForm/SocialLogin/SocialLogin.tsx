@@ -1,7 +1,8 @@
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import React from 'react';
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import SocialIcons from "../../../Icons/SocialIcons/SocialIcons";
+
+import SocialIcons from '../../../Icons/SocialIcons/SocialIcons';
 
 export default function SocialLogin() {
     return (
@@ -12,7 +13,8 @@ export default function SocialLogin() {
                     borderColor: 'divider',
                 }}
                 variant="subtitle2"
-                gutterBottom component="div"
+                gutterBottom
+                component="div"
             >
                 or connect with
             </Typography>

@@ -1,15 +1,15 @@
-import Box from '@mui/material/Box';
-import React from 'react';
-import {Button, Fade, IconButton, InputAdornment, LinearProgress, OutlinedInput, TextField} from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Title from "../Title/Title";
-import {SIGN_UP} from "../../../../constants/Constants";
-import useSignUp from "../../../../hooks/SignUp/SignUp";
-import SocialLogin from "../SocialLogin/SocialLogin";
+import { Button, Fade, IconButton, InputAdornment, LinearProgress, OutlinedInput, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import React from 'react';
+
+import { SIGN_UP } from '../../../../constants/Constants';
+import useSignUp from '../../../../hooks/SignUp/SignUp';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import Title from '../Title/Title';
 
 export default function SignUp() {
-
     const {
         loading,
         showPassword,
@@ -28,9 +28,9 @@ export default function SignUp() {
 
     return (
         <>
-            <Title message={"Please sign up to use platform"} stage={SIGN_UP} />
+            <Title message={'Please sign up to use platform'} stage={SIGN_UP} />
             <form onSubmit={handleSubmit}>
-                <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <TextField
                         id="login"
                         label="Email / Login"
@@ -39,7 +39,7 @@ export default function SignUp() {
                         onChange={(event) => handleChangeEmailValue(event.target.value)}
                     />
                     <OutlinedInput
-                        sx={{ marginTop: '20px'}}
+                        sx={{ marginTop: '20px' }}
                         type={showPassword ? 'text' : 'password'}
                         id="password"
                         autoComplete="current-password"
@@ -60,7 +60,7 @@ export default function SignUp() {
                         }
                     />
                     <OutlinedInput
-                        sx={{ marginTop: '20px'}}
+                        sx={{ marginTop: '20px' }}
                         type={showConfirmPassword ? 'text' : 'password'}
                         id="password-repeat"
                         autoComplete="current-password"
@@ -81,12 +81,8 @@ export default function SignUp() {
                         }
                     />
                 </Box>
-                <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button
-                        sx={{ margin: '10px 0'}}
-                        variant="outlined"
-                        type="submit"
-                    >
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button sx={{ margin: '10px 0' }} variant="outlined" type="submit">
                         Create An Account
                     </Button>
                 </Box>

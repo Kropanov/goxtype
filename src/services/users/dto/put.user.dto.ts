@@ -1,4 +1,4 @@
-import {Role} from "./create.user.dto";
+import { Role } from './create.user.dto';
 
 export interface PutUserDto {
     email: string;

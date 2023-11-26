@@ -1,6 +1,6 @@
-import {CRUD} from "../../common/interfaces/crud.interface.js";
-import PackDao from "../dao/packs.dao.js";
-import {CreatePackDto} from "../dto/create.packs.dto.js";
+import { CRUD } from '../../common/interfaces/crud.interface.js';
+import PackDao from '../dao/packs.dao.js';
+import { CreatePackDto } from '../dto/create.packs.dto.js';
 
 class PackService implements CRUD {
     create(resource: CreatePackDto): Promise<any> {
@@ -16,17 +16,16 @@ class PackService implements CRUD {
     }
 
     patchById(id: string, resource: any): Promise<string> {
-        return Promise.resolve("");
+        return Promise.resolve('');
     }
 
     putById(id: string, resource: any): Promise<string> {
-        return Promise.resolve("");
+        return Promise.resolve('');
     }
 
     readById(id: string) {
         return PackDao.readPackById(id);
     }
-
 }
 
 export default new PackService();

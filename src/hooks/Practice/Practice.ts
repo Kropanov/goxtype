@@ -1,9 +1,9 @@
-import {useEffect, useState} from "react";
-import {MIDDLE_QUANTITY_CHAR, MINUTE} from "../../constants/Constants";
-import {scrollPageUp} from "../../func";
+import { useEffect, useState } from 'react';
+
+import { MIDDLE_QUANTITY_CHAR, MINUTE } from '../../constants/Constants';
+import { scrollPageUp } from '../../func';
 
 export default function usePractice() {
-
     const [charactersPerMinute, setCharactersPerMinute] = useState(0);
     const [wordsPerMinute, setWordsPerMinute] = useState(0);
 
@@ -23,22 +23,22 @@ export default function usePractice() {
         };
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         calculateCharactersPerMinute();
         calculateWordsPerMinute();
         calculateAccuracy();
     }, [timeInSeconds]);
 
     const calculateCharactersPerMinute = () => {
-        setCharactersPerMinute( Math.floor(currentCharCount / (timeInSeconds / MINUTE)) );
+        setCharactersPerMinute(Math.floor(currentCharCount / (timeInSeconds / MINUTE)));
     };
 
     const calculateWordsPerMinute = () => {
-        setWordsPerMinute( Math.floor( (currentCharCount / MIDDLE_QUANTITY_CHAR) / (timeInSeconds / MINUTE) ) );
+        setWordsPerMinute(Math.floor(currentCharCount / MIDDLE_QUANTITY_CHAR / (timeInSeconds / MINUTE)));
     };
 
     const calculateAccuracy = () => {
-        setAccuracy( Math.floor((1 - textErrorCount / currentCharCount) * 100) );
+        setAccuracy(Math.floor((1 - textErrorCount / currentCharCount) * 100));
     };
 
     const handleChangeCurrentCharCount = () => {

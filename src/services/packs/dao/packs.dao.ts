@@ -1,5 +1,5 @@
-import {CreatePackDto} from "../dto/create.packs.dto.js";
-import Pack from "../models/packs.models.js";
+import { CreatePackDto } from '../dto/create.packs.dto.js';
+import Pack from '../models/packs.models.js';
 
 class PackDao {
     async addPack(data: CreatePackDto) {
@@ -17,7 +17,7 @@ class PackDao {
 
     async removePackById(packId: string) {
         await Pack.deleteOne({ _id: packId }).exec();
-        return "Pack was removed!";
+        return 'Pack was removed!';
     }
 
     async readPackById(packId: string) {

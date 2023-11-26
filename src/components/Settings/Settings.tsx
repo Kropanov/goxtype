@@ -1,9 +1,10 @@
+import { Grid } from '@mui/material';
 import React from 'react';
-import {Grid} from "@mui/material";
-import ThemeSettings from "./Profile/ThemeSettings/ThemeSettings";
-import ProfileSettings from "./Profile/ProfileSettings/ProfileSettings";
-import CrucialSection from "./Account/CrucialSection/CrucialSection";
-import AccountSettings from "./Account/AccountSettings/AccountSettings";
+
+import AccountSettings from './Account/AccountSettings/AccountSettings';
+import CrucialSection from './Account/CrucialSection/CrucialSection';
+import ProfileSettings from './Profile/ProfileSettings/ProfileSettings';
+import ThemeSettings from './Profile/ThemeSettings/ThemeSettings';
 
 export default function Settings() {
     return (

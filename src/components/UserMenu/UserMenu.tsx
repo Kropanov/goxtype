@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import {KEY, SETTINGS} from "../../constants/Constants";
-import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import {Link} from "react-router-dom";
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { KEY, SETTINGS } from '../../constants/Constants';
 
 export default function UserMenu() {
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

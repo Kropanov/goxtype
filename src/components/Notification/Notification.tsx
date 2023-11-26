@@ -1,14 +1,15 @@
-import {useContext} from 'react';
-import {Alert, Snackbar} from "@mui/material";
-import {NotificationContext} from "./NotificationContext/NotificationContext";
+import { Alert, Snackbar } from '@mui/material';
+import { useContext } from 'react';
+
 import { NOTIFICATION } from '../../constants/Constants';
+import { NotificationContext } from './NotificationContext/NotificationContext';
 
 function Notification() {
-    const {state, dispatch} = useContext(NotificationContext);
-    const {open, severity, message} = state;
+    const { state, dispatch } = useContext(NotificationContext);
+    const { open, severity, message } = state;
 
     const handleClose = () => {
-        dispatch({type: NOTIFICATION.HIDE});
+        dispatch({ type: NOTIFICATION.HIDE });
     };
 
     return (
@@ -21,12 +22,7 @@ function Notification() {
             onClose={handleClose}
             autoHideDuration={5000}
         >
-            <Alert 
-                variant="filled" 
-                onClose={handleClose}
-                severity={severity} 
-                sx={{ width: '100%' }}
-            >
+            <Alert variant="filled" onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
                 {message}
             </Alert>
         </Snackbar>

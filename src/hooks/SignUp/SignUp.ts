@@ -1,20 +1,21 @@
-import React, {useContext, useState} from "react";
-import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
-import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
-import {API_ROUTES, NOTIFICATION, KEY} from "../../constants/Constants";
-import useHttp from "../Http/Http";
-import useUserData from "../UserData/UserData";
+import React, { useContext, useState } from 'react';
+
+import { AuthorizationContext } from '../../components/Authorization/AuthorizationContext/AuthorizationContext';
+import { NotificationContext } from '../../components/Notification/NotificationContext/NotificationContext';
+import { API_ROUTES, KEY, NOTIFICATION } from '../../constants/Constants';
+import useHttp from '../Http/Http';
+import useUserData from '../UserData/UserData';
 
 export default function useSignUp() {
-    const {dispatch} = useContext(NotificationContext);
-    const {LoadUserDataToClient} = useUserData();
-    const {loading, request} = useHttp();
-    const {setIsAuthenticated} = useContext(AuthorizationContext);
+    const { dispatch } = useContext(NotificationContext);
+    const { LoadUserDataToClient } = useUserData();
+    const { loading, request } = useHttp();
+    const { setIsAuthenticated } = useContext(AuthorizationContext);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
-    const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
-    const [passwordTextFieldValue, setPasswordTextFieldValue] = useState("");
-    const [confirmPasswordTextFieldValue, setConfirmPasswordTextFieldValue] = useState("");
+    const [emailTextFieldValue, setEmailTextFieldValue] = useState('');
+    const [passwordTextFieldValue, setPasswordTextFieldValue] = useState('');
+    const [confirmPasswordTextFieldValue, setConfirmPasswordTextFieldValue] = useState('');
 
     const handleChangeEmailValue = (value: string) => {
         setEmailTextFieldValue(value);
@@ -29,36 +30,36 @@ export default function useSignUp() {
     };
 
     const handleClickShowPassword = () => {
-        setShowPassword((prev) => (!prev));
+        setShowPassword((prev) => !prev);
     };
 
     const handleClickShowConfirmPassword = () => {
-        setShowConfirmPassword((prev) => (!prev));
+        setShowConfirmPassword((prev) => !prev);
     };
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
 
         if (emptyTextFields()) {
-            dispatch({type: NOTIFICATION.EMPTY_FIELDS});            
+            dispatch({ type: NOTIFICATION.EMPTY_FIELDS });
             return;
         }
 
         if (passwordsDontMatch()) {
-            dispatch({type: NOTIFICATION.FAIL_VALIDATION_PASSWORD});  
+            dispatch({ type: NOTIFICATION.FAIL_VALIDATION_PASSWORD });
             return;
         }
 
         const options = {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify({
                 email: emailTextFieldValue,
-                password: passwordTextFieldValue
-            })
+                password: passwordTextFieldValue,
+            }),
         };
 
         const result = await request(API_ROUTES.SIGN_UP, options);
@@ -67,7 +68,7 @@ export default function useSignUp() {
             return;
         }
 
-        dispatch({type: NOTIFICATION.SUCCESS_REGISTRATION});
+        dispatch({ type: NOTIFICATION.SUCCESS_REGISTRATION });
         localStorage.setItem(KEY.TOKEN, result.token);
 
         await LoadUserDataToClient(result.token);
@@ -76,11 +77,11 @@ export default function useSignUp() {
     };
 
     const emptyTextFields = () => {
-        return passwordTextFieldValue === "" || confirmPasswordTextFieldValue === "";
+        return passwordTextFieldValue === '' || confirmPasswordTextFieldValue === '';
     };
 
     const passwordsDontMatch = () => {
-        return  passwordTextFieldValue !== confirmPasswordTextFieldValue;
+        return passwordTextFieldValue !== confirmPasswordTextFieldValue;
     };
 
     return {
@@ -96,6 +97,6 @@ export default function useSignUp() {
         handleMouseDownPassword,
         handleChangeEmailValue,
         handleChangePasswordValue,
-        handleChangeConfirmPasswordValue
+        handleChangeConfirmPasswordValue,
     };
 }
