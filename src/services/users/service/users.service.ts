@@ -1,8 +1,8 @@
-import {CRUD} from "../../common/interfaces/crud.interface.js";
-import UserDao from "../dao/users.dao.js";
-import {CreateUserDto} from "../dto/create.user.dto.js";
-import {PatchUserDto} from "../dto/patch.user.dto.js";
-import {PutUserDto} from "../dto/put.user.dto.js";
+import { CRUD } from '../../common/interfaces/crud.interface.js';
+import UserDao from '../dao/users.dao.js';
+import { CreateUserDto } from '../dto/create.user.dto.js';
+import { PatchUserDto } from '../dto/patch.user.dto.js';
+import { PutUserDto } from '../dto/put.user.dto.js';
 
 // TODO: fix any types
 class UserService implements CRUD {

@@ -1,17 +1,16 @@
+import { Button, Grid, Typography } from '@mui/material';
 import React from 'react';
-import {Button, Grid, Typography} from "@mui/material";
+
+import { API_ROUTES, KEY } from '../../../../constants/Constants';
+import { parseToken } from '../../../../func';
+import useHttp from '../../../../hooks/Http/Http';
 import { useRouter } from '../../../../hooks/Router/Router';
-import {API_ROUTES, KEY} from "../../../../constants/Constants";
-import useHttp from "../../../../hooks/Http/Http";
-import {parseToken} from "../../../../func";
 
 export default function CrucialSection() {
-
     const router = useRouter();
-    const {request} = useHttp();
+    const { request } = useHttp();
 
     const handleDeleteUserAccount = async () => {
-
         const token = localStorage.getItem(KEY.TOKEN);
 
         if (!token) {
@@ -19,7 +18,7 @@ export default function CrucialSection() {
         }
 
         const payload = parseToken(token);
-        const options = { method: "DELETE" };
+        const options = { method: 'DELETE' };
 
         const result = await request(API_ROUTES.USERS + payload.id, options);
 
@@ -27,17 +26,12 @@ export default function CrucialSection() {
             return;
         }
 
-        router.push("/logout");
+        router.push('/logout');
     };
 
     return (
         <Grid item sm={4} xs={12}>
-            <Grid
-                container
-                justifyContent={{xs: 'space-around'}}
-                alignItems="center"
-                direction={{xs: "column"}}
-            >
+            <Grid container justifyContent={{ xs: 'space-around' }} alignItems="center" direction={{ xs: 'column' }}>
                 <Typography variant="h6" gutterBottom>
                     Dangerous zone
                 </Typography>

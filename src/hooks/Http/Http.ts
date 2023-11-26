@@ -1,11 +1,11 @@
-import {useContext, useState} from 'react';
-import {NOTIFICATION, KEY} from "../../constants/Constants";
-import {NotificationContext} from "../../components/Notification/NotificationContext/NotificationContext";
+import { useContext, useState } from 'react';
+
+import { NotificationContext } from '../../components/Notification/NotificationContext/NotificationContext';
+import { KEY, NOTIFICATION } from '../../constants/Constants';
 
 export default function useHttp() {
-
-    const [loading, setLoading]  = useState(false);
-    const {dispatch} = useContext(NotificationContext);
+    const [loading, setLoading] = useState(false);
+    const { dispatch } = useContext(NotificationContext);
 
     // FIXME: Function should be done with useCallback
     const request = async (url: string, options?: RequestInit | undefined) => {
@@ -22,10 +22,10 @@ export default function useHttp() {
             if (response.ok) {
                 return result;
             } else {
-                dispatch({type: NOTIFICATION.ERROR, payload: result.message});
+                dispatch({ type: NOTIFICATION.ERROR, payload: result.message });
                 return;
             }
-        } catch (e){
+        } catch (e) {
             console.log((e as Error).message);
         }
     };
@@ -39,7 +39,7 @@ function insertHeaders(options?: RequestInit | undefined) {
     }
 
     const headers: HeadersInit | undefined = {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json;charset=utf-8',
     };
 

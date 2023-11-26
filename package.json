@@ -19,7 +19,6 @@
     "argon2": "^0.31.2",
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
-    "eslint": "8.53.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
@@ -48,6 +47,9 @@
       "react-app/jest"
     ]
   },
+  "lint": "eslint .",
+  "lint:fix": "eslint --fix",
+  "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -66,7 +68,12 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.9.0",
     "concurrently": "^8.2.2",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "nodemon": "^3.0.1",
+    "prettier": "^3.1.0",
     "ts-node": "^10.9.1"
   },
   "proxy": "http://localhost:3001"

@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import { Paper } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
-import {FORM_TABS, LOG_IN, SIGN_UP} from "../../../constants/Constants";
-import AuthorizationForm from "../../Forms/AuthorizationForm/AuthorizationForm";
-import {Paper} from "@mui/material";
+import Fade from '@mui/material/Fade';
+import Modal from '@mui/material/Modal';
+import React, { useState } from 'react';
+
+import { FORM_TABS, LOG_IN, SIGN_UP } from '../../../constants/Constants';
+import AuthorizationForm from '../../Forms/AuthorizationForm/AuthorizationForm';
 
 const style = {
     position: 'absolute',
@@ -23,10 +24,10 @@ export default function AuthModal() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-     const handleOpenLogIn = () => {
-         handleOpen();
-         setIndex(FORM_TABS.AUTH);
-     };
+    const handleOpenLogIn = () => {
+        handleOpen();
+        setIndex(FORM_TABS.AUTH);
+    };
 
     const handleOpenSignUp = () => {
         handleOpen();
@@ -35,18 +36,10 @@ export default function AuthModal() {
 
     return (
         <div>
-            <Button
-                color="inherit"
-                sx={{mr: 1}}
-                onClick={handleOpenLogIn}
-            >
+            <Button color="inherit" sx={{ mr: 1 }} onClick={handleOpenLogIn}>
                 {LOG_IN}
             </Button>
-            <Button
-                color="inherit"
-                variant="outlined"
-                onClick={handleOpenSignUp}
-            >
+            <Button color="inherit" variant="outlined" onClick={handleOpenSignUp}>
                 {SIGN_UP}
             </Button>
             <Modal
@@ -63,9 +56,7 @@ export default function AuthModal() {
                 <Fade in={open}>
                     <Box sx={style}>
                         <Paper>
-                            <AuthorizationForm
-                                tab={index}
-                            />
+                            <AuthorizationForm tab={index} />
                         </Paper>
                     </Box>
                 </Fade>

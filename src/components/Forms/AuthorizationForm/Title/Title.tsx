@@ -1,14 +1,15 @@
+import Typography from '@mui/material/Typography';
 import React from 'react';
-import Typography from "@mui/material/Typography";
-import CompanyLogo from "../../../Common/CompanyLogo/CompanyLogo";
+
+import CompanyLogo from '../../../Common/CompanyLogo/CompanyLogo';
 
 type TitleProps = {
-    message: string,
-    stage: string,
+    message: string;
+    stage: string;
 };
 
 export default function Title(props: TitleProps) {
-    const {message, stage} = props;
+    const { message, stage } = props;
 
     return (
         <>

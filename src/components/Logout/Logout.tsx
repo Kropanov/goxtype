@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
+
 import { AuthorizationContext } from '../Authorization/AuthorizationContext/AuthorizationContext';
 
 export default function Logout() {
-    const {setIsAuthenticated} = useContext(AuthorizationContext);
+    const { setIsAuthenticated } = useContext(AuthorizationContext);
 
     useEffect(() => {
         return () => {
@@ -12,7 +13,5 @@ export default function Logout() {
         };
     }, []);
 
-    return (
-        <Navigate to="/" />
-    );
+    return <Navigate to="/" />;
 }

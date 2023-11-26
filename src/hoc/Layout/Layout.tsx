@@ -1,14 +1,15 @@
-import React, {ReactElement} from 'react';
-import Header from "../../components/Header/Header";
-import {Footer} from "../../components/Footer/Footer";
+import React, { ReactElement } from 'react';
 
-type LayoutProps = { children: ReactElement; };
+import { Footer } from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
+
+type LayoutProps = { children: ReactElement };
 
 export default function Layout(props: LayoutProps) {
     return (
         <>
             <Header />
-                {props.children}
+            {props.children}
             <Footer />
         </>
     );
