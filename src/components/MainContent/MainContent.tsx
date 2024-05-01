@@ -1,8 +1,9 @@
-import React from "react";
-import Layout from "../../hoc/Layout/Layout";
-import Routing from "../Routing/Routing";
-import NotificationProvider from "../Notification/NotificationProvider/NotificationProvider";
-import AuthorizationProvider from "../Authorization/AuthorizationProvider/AuthorizationProvider";
+import React from 'react';
+
+import Layout from '../../hoc/Layout/Layout';
+import AuthorizationProvider from '../Authorization/AuthorizationProvider/AuthorizationProvider';
+import NotificationProvider from '../Notification/NotificationProvider/NotificationProvider';
+import Routing from '../Routing/Routing';
 
 export default function MainContent() {
     return (

@@ -1,8 +1,9 @@
-import React from "react";
-import Logo from "../Logo/Logo";
-import Typography from "@mui/material/Typography";
-import {SITE_NAME} from "../../../constants/Constants";
-import Box from "@mui/material/Box";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import React from 'react';
+
+import { SITE_NAME } from '../../../constants/Constants';
+import Logo from '../Logo/Logo';
 
 export default function CompanyLogo() {
     return (

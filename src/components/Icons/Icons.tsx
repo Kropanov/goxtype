@@ -1,22 +1,19 @@
 import React from 'react';
+
+import { IconsType } from '../Types/Types';
 import Icon from './Icon/Icon';
-import {IconsType} from '../Types/Types';
 
 type IconsProps = {
     data: IconsType;
 };
 
 export default function Icons(props: IconsProps) {
-    const {data} = props;
+    const { data } = props;
     return (
         <>
-            { data.map((item, index) => (
-                <Icon
-                    key={index}
-                    element={item.element}
-                    label={item.label}
-                />
-            ) )}
+            {data.map((item, index) => (
+                <Icon key={index} element={item.element} label={item.label} />
+            ))}
         </>
     );
 }

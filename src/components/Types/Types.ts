@@ -9,14 +9,14 @@ export type Char = {
     colored: boolean;
 };
 
-export type TextFieldColor = "error" | "primary" | "secondary" | "info" | "success" | "warning" | undefined;
+export type TextFieldColor = 'error' | 'primary' | 'secondary' | 'info' | 'success' | 'warning' | undefined;
 
 export type IconType = {
     element: JSX.Element;
     label: string;
 };
 
-export type Severity = "error" | "info" | "success" | "warning";
+export type Severity = 'error' | 'info' | 'success' | 'warning';
 
 export type IconsType = IconType[];
 
@@ -35,4 +35,6 @@ export type PackType = {
     data: Text[];
 };
 
-type Text = {text: string};
+type Text = { text: string };
+
+export type Role = 'user' | 'admin' | 'manager' | 'subscriber' | 'guest';

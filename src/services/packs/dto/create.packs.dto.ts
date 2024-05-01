@@ -1,4 +1,4 @@
-import {Text} from "./packs.dto";
+import { Text } from './packs.dto';
 
 export interface CreatePackDto {
     name: string;

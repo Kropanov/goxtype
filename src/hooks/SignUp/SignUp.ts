@@ -1,18 +1,21 @@
-import React, {useContext, useState} from "react";
-import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
-import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
-import { NOTIFICATION, TOKEN_KEY } from "../../constants/Constants";
+import React, { useContext, useState } from 'react';
 
-export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth: () => void) {
-    const {dispatch} = useContext(NotificationContext);
-    const {setIsAuthenticated} = useContext(AuthorizationContext);
+import { AuthorizationContext } from '../../components/Authorization/AuthorizationContext/AuthorizationContext';
+import { NotificationContext } from '../../components/Notification/NotificationContext/NotificationContext';
+import { API_ROUTES, KEY, NOTIFICATION } from '../../constants/Constants';
+import useHttp from '../Http/Http';
+import useUserData from '../UserData/UserData';
+
+export default function useSignUp() {
+    const { dispatch } = useContext(NotificationContext);
+    const { LoadUserDataToClient } = useUserData();
+    const { loading, request } = useHttp();
+    const { setIsAuthenticated } = useContext(AuthorizationContext);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
-    const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
-    const [passwordTextFieldValue, setPasswordTextFieldValue] = useState("");
-    const [confirmPasswordTextFieldValue, setConfirmPasswordTextFieldValue] = useState("");
-    const [loading, setLoading] = useState(false);
-
+    const [emailTextFieldValue, setEmailTextFieldValue] = useState('');
+    const [passwordTextFieldValue, setPasswordTextFieldValue] = useState('');
+    const [confirmPasswordTextFieldValue, setConfirmPasswordTextFieldValue] = useState('');
 
     const handleChangeEmailValue = (value: string) => {
         setEmailTextFieldValue(value);
@@ -27,65 +30,58 @@ export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth:
     };
 
     const handleClickShowPassword = () => {
-        setShowPassword((prev) => (!prev));
+        setShowPassword((prev) => !prev);
     };
 
     const handleClickShowConfirmPassword = () => {
-        setShowConfirmPassword((prev) => (!prev));
+        setShowConfirmPassword((prev) => !prev);
     };
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
-    // FIXME: looks very awful
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
 
-        if (passwordTextFieldValue === "" || confirmPasswordTextFieldValue === "") {
-            dispatch({type: NOTIFICATION.EMPTY_FIELDS});            
+        if (emptyTextFields()) {
+            dispatch({ type: NOTIFICATION.EMPTY_FIELDS });
             return;
         }
 
-        if (passwordTextFieldValue !== confirmPasswordTextFieldValue) {
-            dispatch({type: NOTIFICATION.FAIL_VALIDATION_PASSWORD});  
+        if (passwordsDontMatch()) {
+            dispatch({ type: NOTIFICATION.FAIL_VALIDATION_PASSWORD });
             return;
         }
 
-        setLoading(true);
-
-        const response = await fetch("/signup", { 
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+        const options = {
+            method: 'POST',
             body: JSON.stringify({
                 email: emailTextFieldValue,
-                password: passwordTextFieldValue
-            })
-        } );
+                password: passwordTextFieldValue,
+            }),
+        };
 
-        setLoading(false);
-        
-        // FIXME: This should work with the error nowq
-        switch (response.status) {
-            case 201:
-                handleSuccessAuth();
-                AuthModalClose();
-                dispatch({type: NOTIFICATION.SUCCESS_REGISTRATION});            
-                break;
-            case 400:
-                dispatch({type: NOTIFICATION.EMAIL_ALREADY_EXIST});          
-                return;
-            default:
-                dispatch({type: NOTIFICATION.ERROR});            
-                return;
+        const result = await request(API_ROUTES.SIGN_UP, options);
+
+        if (!result) {
+            return;
         }
 
-        const result =  await response.json();
-        localStorage.setItem(TOKEN_KEY, result.token);
+        dispatch({ type: NOTIFICATION.SUCCESS_REGISTRATION });
+        localStorage.setItem(KEY.TOKEN, result.token);
+
+        await LoadUserDataToClient(result.token);
+
         setIsAuthenticated(true);
+    };
+
+    const emptyTextFields = () => {
+        return passwordTextFieldValue === '' || confirmPasswordTextFieldValue === '';
+    };
+
+    const passwordsDontMatch = () => {
+        return passwordTextFieldValue !== confirmPasswordTextFieldValue;
     };
 
     return {
@@ -101,6 +97,6 @@ export default function useSignUp(AuthModalClose: () => void, handleSuccessAuth:
         handleMouseDownPassword,
         handleChangeEmailValue,
         handleChangePasswordValue,
-        handleChangeConfirmPasswordValue
+        handleChangeConfirmPasswordValue,
     };
 }

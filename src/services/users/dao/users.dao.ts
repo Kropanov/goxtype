@@ -1,13 +1,12 @@
-import {CreateUserDto} from "../dto/create.user.dto";
-import {PutUserDto} from "../dto/put.user.dto";
-import {PatchUserDto} from "../dto/patch.user.dto";
-import User from "../models/users.models.js";
+import { CreateUserDto } from '../dto/create.user.dto';
+import { PatchUserDto } from '../dto/patch.user.dto';
+import { PutUserDto } from '../dto/put.user.dto';
+import User from '../models/users.models.js';
 
 class UserDao {
     async addUser(userFields: CreateUserDto) {
         const user = new User({
             ...userFields,
-            permissionLevel: 1,
         });
         await user.save();
         return user;
@@ -24,15 +23,8 @@ class UserDao {
         return User.findOne({ _id: userId }).exec();
     }
 
-    async updateUserById(
-        userId: string,
-        userFields: PatchUserDto | PutUserDto
-    ) {
-        return await User.findOneAndUpdate(
-            {_id: userId},
-            {$set: userFields},
-            {new: true}
-        ).exec();
+    async updateUserById(userId: string, userFields: PatchUserDto | PutUserDto) {
+        return await User.findOneAndUpdate({ _id: userId }, { $set: userFields }, { new: true }).exec();
     }
 
     async removeUserById(userId: string) {
@@ -40,7 +32,7 @@ class UserDao {
     }
 
     async getUserByEmail(email: string) {
-        return User.findOne({ email: email }).select("+password").exec();
+        return User.findOne({ email: email }).select('+password').exec();
     }
 }
 

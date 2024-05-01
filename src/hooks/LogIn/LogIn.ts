@@ -1,19 +1,22 @@
-import {useRouter} from "../Router/Router";
-import React, {useContext, useState} from "react";
-import { NOTIFICATION, TOKEN_KEY } from "../../constants/Constants";
-import { NotificationContext } from "../../components/Notification/NotificationContext/NotificationContext";
-import { AuthorizationContext } from "../../components/Authorization/AuthorizationContext/AuthorizationContext";
+import React, { useContext, useState } from 'react';
 
-export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: () => void) {
+import { AuthorizationContext } from '../../components/Authorization/AuthorizationContext/AuthorizationContext';
+import { NotificationContext } from '../../components/Notification/NotificationContext/NotificationContext';
+import { API_ROUTES, KEY, NOTIFICATION } from '../../constants/Constants';
+import useHttp from '../Http/Http';
+import { useRouter } from '../Router/Router';
+import useUserData from '../UserData/UserData';
+
+export default function useLogIn() {
+    const { LoadUserDataToClient } = useUserData();
+    const { loading, request } = useHttp();
     const router = useRouter();
-    const {dispatch} = useContext(NotificationContext);
-    const {setIsAuthenticated} = useContext(AuthorizationContext);
+    const { dispatch } = useContext(NotificationContext);
+    const { setIsAuthenticated } = useContext(AuthorizationContext);
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
     const [checked, setChecked] = React.useState(true);
-    const [emailTextFieldValue, setEmailTextFieldValue] = useState("");
-    const [passwordTextFieldValue, setPasswordTextFieldValue] = useState("");
-    const [loading, setLoading] = React.useState(false);
-
+    const [emailTextFieldValue, setEmailTextFieldValue] = useState('');
+    const [passwordTextFieldValue, setPasswordTextFieldValue] = useState('');
     const handleChangeEmailValue = (value: string) => {
         setEmailTextFieldValue(value);
     };
@@ -27,62 +30,50 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
     };
 
     const handleClickShowPassword = () => {
-        setShowPassword((prev) => (!prev));
+        setShowPassword((prev) => !prev);
+    };
+
+    const handleClickShowForgotPassword = (e: { preventDefault: () => void }) => {
+        router.push('/auth/forgot_password');
+        e.preventDefault();
     };
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
-    // TODO: refactor this
-    const handleSubmitLoginForm = async (e: { preventDefault: () => void; }) => {
+    const handleSubmitLoginForm = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
 
-        if (passwordTextFieldValue === "") {
-            dispatch({type: NOTIFICATION.EMPTY_FIELDS});
+        if (emptyTextField()) {
+            dispatch({ type: NOTIFICATION.EMPTY_FIELDS });
             return;
         }
 
-        setLoading(true);
-
-        const response = await fetch("/login", { 
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+        const options = {
+            method: 'POST',
             body: JSON.stringify({
                 email: emailTextFieldValue,
-                password: passwordTextFieldValue
-            })
-        } );
-        
-        setLoading(false);
-        
-        // FIXME: This shouldn work with the error nowq
-        switch (response.status) {
-            case 201:
-                handleSuccessAuth();
-                AuthModalClose();
-                dispatch({type: NOTIFICATION.SUCCESS_AUTHORIZATION});
-                break;
-            case 401:
-                dispatch({type: NOTIFICATION.INVALID_EMAIL_PASSWORD});
-                return;
-            default:
-                dispatch({type: NOTIFICATION.ERROR});
-                break;
+                password: passwordTextFieldValue,
+            }),
+        };
+
+        const result = await request(API_ROUTES.LOGIN, options);
+
+        if (!result) {
+            return;
         }
-        
-        const result =  await response.json();
-        localStorage.setItem(TOKEN_KEY, result.token);
+
+        dispatch({ type: NOTIFICATION.SUCCESS_AUTHORIZATION });
+        localStorage.setItem(KEY.TOKEN, result.token);
+
+        await LoadUserDataToClient(result.token);
+
         setIsAuthenticated(true);
     };
 
-    const handleClickShowForgotPassword = (e: { preventDefault: () => void; }) => {
-        router.push('/auth/forgot_password');
-        AuthModalClose();
-        e.preventDefault();
+    const emptyTextField = () => {
+        return passwordTextFieldValue === '';
     };
 
     return {
@@ -97,6 +88,6 @@ export default function useLogIn(AuthModalClose: () => void, handleSuccessAuth: 
         handleSubmitLoginForm,
         handleClickShowForgotPassword,
         handleChangeEmailValue,
-        handleChangePasswordValue
+        handleChangePasswordValue,
     };
 }

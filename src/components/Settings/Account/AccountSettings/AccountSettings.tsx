@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
     Avatar,
     Button,
@@ -11,115 +11,150 @@ import {
     InputAdornment,
     InputLabel,
     OutlinedInput,
-    Typography
-} from "@mui/material";
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+    Typography,
+} from '@mui/material';
+import React, { useContext, useState } from 'react';
+
+import { API_ROUTES, KEY, NOTIFICATION } from '../../../../constants/Constants';
+import { parseToken } from '../../../../func';
+import useHttp from '../../../../hooks/Http/Http';
 import { NotificationContext } from '../../../Notification/NotificationContext/NotificationContext';
-import { NOTIFICATION, TOKEN_KEY } from '../../../../constants/Constants';
 
 export default function AccountSettings() {
-    const {dispatch} = useContext(NotificationContext);
+    const { request } = useHttp();
+    const { dispatch } = useContext(NotificationContext);
 
-    const [currentPassword, setCurrentPassword] = useState<string>("");
-    const [newPassword, setNewPassword] = useState<string>("");
-    const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
+    const [currentPassword, setCurrentPassword] = useState<string>('');
+    const [newPassword, setNewPassword] = useState<string>('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
+
+    const [userName, setUserName] = useState<string>('');
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
-    // TODO: create loader
-    // const [loading, setLoading] = useState(false);
-
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
-    const handleChangePassword =  async (event: React.MouseEvent<HTMLButtonElement>) => {
-
-        if (emptyFields()) {
-            dispatch({type: NOTIFICATION.EMPTY_FIELDS});
+    const handleChangePassword = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (emptyPasswordFields()) {
+            dispatch({ type: NOTIFICATION.EMPTY_FIELDS });
             return;
         }
 
         if (differentPasswords()) {
-            dispatch({type: NOTIFICATION.FAIL_VALIDATION_PASSWORD});
+            dispatch({ type: NOTIFICATION.FAIL_VALIDATION_PASSWORD });
             return;
         }
 
-        const response = await fetch("/profile", { 
-            method: "PATCH",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}`
-            },
-            body: JSON.stringify({
-                currentPassword,
-                newPassword
-            })
-        } );
+        const token = localStorage.getItem(KEY.TOKEN);
 
-        switch (response.status) {
-            case 200:
-                dispatch({type: NOTIFICATION.SUCCESS_UPDATE_PASSWORD});            
-                break;
-            default:
-                dispatch({type: NOTIFICATION.ERROR});
-                return;
+        if (!token) {
+            return;
         }
 
-        clearTextFields();
+        const payload = parseToken(token);
+
+        const options = {
+            method: 'PATCH',
+            body: JSON.stringify({
+                currentPassword,
+                newPassword,
+                id: payload.id,
+            }),
+        };
+
+        const result = await request(API_ROUTES.PROFILE, options);
+
+        if (!result) {
+            return;
+        }
+
+        dispatch({ type: NOTIFICATION.SUCCESS_UPDATE_PASSWORD });
         event.preventDefault();
+        clearTextFields();
     };
 
-    const emptyFields = () => currentPassword === "" || newPassword === "" || confirmNewPassword === "";
+    const emptyPasswordFields = () => currentPassword === '' || newPassword === '' || confirmNewPassword === '';
+    const emptyNameField = () => userName === '';
     const differentPasswords = () => newPassword !== confirmNewPassword;
 
     const clearTextFields = () => {
-        setCurrentPassword("");
-        setNewPassword("");
-        setConfirmNewPassword("");
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmNewPassword('');
+    };
+
+    const handleChangeName = async () => {
+        if (emptyNameField()) {
+            dispatch({ type: NOTIFICATION.EMPTY_FIELDS });
+            return;
+        }
+
+        const token = localStorage.getItem(KEY.TOKEN);
+
+        if (!token) {
+            return;
+        }
+
+        const payload = parseToken(token);
+
+        const options = {
+            method: 'PATCH',
+            body: JSON.stringify({
+                name: userName,
+                id: payload.id,
+            }),
+        };
+
+        const result = await request(API_ROUTES.PROFILE, options);
+
+        if (!result) {
+            return;
+        }
+
+        dispatch({ type: NOTIFICATION.SUCCESS_UPDATE_USERNAME });
     };
 
     return (
         <>
             <Grid item sm={8} xs={12}>
                 <FormControl variant="standard">
-                    <InputLabel
-                        htmlFor="component-name"
-                        variant="outlined"
-                        size="small"
-                    >
+                    <InputLabel htmlFor="component-name" variant="outlined" size="small">
                         Name
                     </InputLabel>
                     <OutlinedInput
                         id="component-name"
-                        defaultValue="Brave Heart"
+                        type="text"
+                        value={userName}
+                        onChange={(event) => setUserName(event.target.value)}
+                        autoComplete="off"
                         label="Name"
                         size="small"
                     />
                     <FormHelperText id="component-name-helper-text" variant="filled">
                         Your name may appear around on site where you win round or complete pack
                     </FormHelperText>
-                    <Button variant="text">
+                    <Button onClick={handleChangeName} variant="text">
                         Update name
                     </Button>
                 </FormControl>
 
-                <Typography sx={{mt: 1}} variant="subtitle1">
+                <Typography sx={{ mt: 1 }} variant="subtitle1">
                     Password
                 </Typography>
                 <Divider />
 
                 <FormGroup>
-                    <OutlinedInput 
-                        sx={{mb: 1, mt: 2}}
+                    <OutlinedInput
+                        sx={{ mb: 1, mt: 2 }}
                         type={showPassword ? 'text' : 'password'}
                         value={currentPassword}
                         autoComplete="current-password"
                         onChange={(event) => setCurrentPassword(event.target.value)}
-                        id="old-password" 
+                        id="old-password"
                         placeholder="Old password"
                         size="small"
                         endAdornment={
@@ -135,15 +170,15 @@ export default function AccountSettings() {
                             </InputAdornment>
                         }
                     />
-                    
-                    <OutlinedInput 
-                        sx={{mb: 1}} 
+
+                    <OutlinedInput
+                        sx={{ mb: 1 }}
                         value={newPassword}
                         onChange={(event) => setNewPassword(event.target.value)}
                         type={showNewPassword ? 'text' : 'password'}
-                        id="new-password" 
+                        id="new-password"
                         placeholder="New password"
-                        size="small" 
+                        size="small"
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
@@ -157,13 +192,13 @@ export default function AccountSettings() {
                             </InputAdornment>
                         }
                     />
-                    
-                    <OutlinedInput 
-                        sx={{mb: 1}} 
-                        value={confirmNewPassword} 
+
+                    <OutlinedInput
+                        sx={{ mb: 1 }}
+                        value={confirmNewPassword}
                         onChange={(event) => setConfirmNewPassword(event.target.value)}
                         type={showConfirmPassword ? 'text' : 'password'}
-                        id="repeated-new-password" 
+                        id="repeated-new-password"
                         placeholder="Confirm new password"
                         size="small"
                         endAdornment={
@@ -188,19 +223,19 @@ export default function AccountSettings() {
             <Grid item sm={4} xs={12}>
                 <Grid
                     container
-                    justifyContent={{xs: 'space-around'}}
+                    justifyContent={{ xs: 'space-around' }}
                     alignItems="center"
-                    direction={{xs: "column"}}
+                    direction={{ xs: 'column' }}
                 >
                     <Avatar
-                        alt="Remy Sharp"
-                        src="https://source.unsplash.com/random"
+                        alt="Avatar"
+                        src={localStorage.getItem(KEY.IMAGE) ?? undefined}
                         sx={{
-                            width: {lg: 200, md: 160, sm: 100, xs: 200},
-                            height: {lg: 200, md: 160, sm: 100, xs: 200},
+                            width: { lg: 200, md: 160, sm: 100, xs: 200 },
+                            height: { lg: 200, md: 160, sm: 100, xs: 200 },
                         }}
                     />
-                    <Button sx={{mt: 1}} variant="text">
+                    <Button sx={{ mt: 1 }} variant="text">
                         Upload a photo
                     </Button>
                 </Grid>

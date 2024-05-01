@@ -1,14 +1,11 @@
 import dotenv from 'dotenv';
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: './config.env' });
 import mongoose from 'mongoose';
 
-const DATABASE = process.env.DATABASE || "";
-const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || "";
+const DATABASE = process.env.DATABASE || '';
+const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || '';
 
-const DB = DATABASE.replace(
-    "<password>",
-    DATABASE_PASSWORD
-);
+const DB = DATABASE.replace('<password>', DATABASE_PASSWORD);
 
 class MongooseService {
     private count = 0;
@@ -34,9 +31,8 @@ class MongooseService {
             .catch((err) => {
                 const retrySeconds = 5;
                 console.log(
-                    `MongoDB connection unsuccessful (will retry #${++this
-                        .count} after ${retrySeconds} seconds):`,
-                    err
+                    `MongoDB connection unsuccessful (will retry #${++this.count} after ${retrySeconds} seconds):`,
+                    err,
                 );
                 setTimeout(this.connectWithRetry, retrySeconds * 1000);
             });

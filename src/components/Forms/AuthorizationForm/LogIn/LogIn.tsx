@@ -1,24 +1,27 @@
-import Box from '@mui/material/Box';
-import React from 'react';
-import {Button, Fade, IconButton, InputAdornment, LinearProgress, Link, OutlinedInput, TextField} from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {LOG_IN} from "../../../../constants/Constants";
-import Title from "../Title/Title";
-import useLogIn from "../../../../hooks/LogIn/LogIn";
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import {
+    Button,
+    Fade,
+    IconButton,
+    InputAdornment,
+    LinearProgress,
+    Link,
+    OutlinedInput,
+    TextField,
+} from '@mui/material';
+import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
-import SocialLogin from "../SocialLogin/SocialLogin";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import React from 'react';
 
-type LogInProps = {
-    AuthModalClose: () => void;
-    handleSuccessAuth: () => void;
-};
+import { LOG_IN } from '../../../../constants/Constants';
+import useLogIn from '../../../../hooks/LogIn/LogIn';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import Title from '../Title/Title';
 
-export default function LogIn(props: LogInProps) {
-    const {AuthModalClose, handleSuccessAuth} = props;
-
+export default function LogIn() {
     const {
         checked,
         loading,
@@ -32,13 +35,13 @@ export default function LogIn(props: LogInProps) {
         handleClickShowForgotPassword,
         handleChangeEmailValue,
         handleChangePasswordValue,
-    } = useLogIn(AuthModalClose, handleSuccessAuth);
+    } = useLogIn();
 
     return (
         <>
-            <Title message={"Please log in to use platform"} stage={LOG_IN} />
+            <Title message={'Please log in to use platform'} stage={LOG_IN} />
             <form onSubmit={handleSubmitLoginForm}>
-                <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <TextField
                         id="login"
                         label="Email / Login"
@@ -47,7 +50,7 @@ export default function LogIn(props: LogInProps) {
                         onChange={(event) => handleChangeEmailValue(event.target.value)}
                     />
                     <OutlinedInput
-                        sx={{ marginTop: '20px'}}
+                        sx={{ marginTop: '20px' }}
                         type={showPassword ? 'text' : 'password'}
                         id="password"
                         value={passwordTextFieldValue}
@@ -68,7 +71,7 @@ export default function LogIn(props: LogInProps) {
                         }
                     />
                 </Box>
-                <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <FormGroup>
                         <FormControlLabel
                             control={
@@ -82,20 +85,12 @@ export default function LogIn(props: LogInProps) {
                             label="Remember me"
                         />
                     </FormGroup>
-                    <Link
-                        component="button"
-                        variant="body2"
-                        onClick={handleClickShowForgotPassword}
-                    >
+                    <Link component="button" variant="body2" onClick={handleClickShowForgotPassword}>
                         Forgot your password?
                     </Link>
                 </Box>
-                <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button
-                        sx={{ margin: '10px 0'}}
-                        variant="outlined"
-                        type="submit"
-                    >
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button sx={{ margin: '10px 0' }} variant="outlined" type="submit">
                         Log In
                     </Button>
                 </Box>
