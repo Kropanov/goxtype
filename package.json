@@ -16,7 +16,7 @@
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
-    "argon2": "^0.31.2",
+    "argon2": "^0.40.1",
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
